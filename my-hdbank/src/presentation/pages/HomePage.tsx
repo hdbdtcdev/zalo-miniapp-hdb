@@ -1,7 +1,8 @@
 import { FC, useEffect, useState } from "react";
-import { Page, Header, Box, Swiper, useNavigate, Text } from "zmp-ui";
+import { Page, Header, Box, Swiper, useNavigate, Button } from "zmp-ui";
 import { MoveLeft } from "lucide-react";
 import { useDispatch } from "@/lib/redux";
+import '@/presentation/styles/swiper.css';
 
 // mock data sản phẩm
 const products = [
@@ -44,7 +45,7 @@ const products = [
 function useCardListAvailable() {
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => { }, [dispatch]);
 }
 
 // Component hiển thị 1 card
@@ -92,7 +93,7 @@ const HomePage: FC = () => {
   const handleSelect = () => {
     const selected = products[active];
     console.log("Chọn sản phẩm:", selected.id);
-    navigate("/dop-intro");
+    navigate("/CreditCardPreview");
   };
 
   return (
@@ -106,6 +107,10 @@ const HomePage: FC = () => {
           boxShadow: "none",
           borderBottom: "none",
           color: "#fff",
+          display: 'flex',
+          alignItems: 'center',
+          textAlign: 'center',
+          justifyContent: 'space-between'
         }}
       />
 
@@ -117,6 +122,7 @@ const HomePage: FC = () => {
         </Box>
 
         <Box
+          className="m-6"
           style={{
             position: "relative",
             paddingBottom: 40,
@@ -138,13 +144,20 @@ const HomePage: FC = () => {
           </Swiper>
 
           {/* Button */}
-          <Box className="px-2 mt-8 pb-8 sticky bottom-4">
-            <button
+          <Box className="fixed bottom-0 left-0 right-0 p-6">
+            <Button
+              fullWidth
+              style={{
+                background: "linear-gradient(90deg, #e02424 0%, #ff6a00 50%, #ffd166 100%)",
+                color: "#fff",
+                fontWeight: 600,
+                borderRadius: 999,
+                height: 52,
+              }}
               onClick={handleSelect}
-              className="w-full h-14 rounded-full text-white font-bold text-base shadow-md bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400"
             >
               Chọn sản phẩm này
-            </button>
+            </Button>
           </Box>
         </Box>
       </div>
