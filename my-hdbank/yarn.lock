@@ -1795,9 +1795,9 @@ minimatch@^9.0.4:
   integrity sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==
 
 motion-dom@^12.23.12:
-  version "12.23.12"
-  resolved "https://registry.yarnpkg.com/motion-dom/-/motion-dom-12.23.12.tgz#87974046e7e61bc4932f36d35e8eab6bb6f3e434"
-  integrity sha512-RcR4fvMCTESQBD/uKQe49D5RUeDOokkGRmz4ceaJKDBgHYtZtntC/s2vLvY38gqGaytinij/yi3hMcWVcEF5Kw==
+  version "12.23.18"
+  resolved "https://registry.yarnpkg.com/motion-dom/-/motion-dom-12.23.18.tgz#5a0965010f7378762be32a06a91ba108bb3bdce7"
+  integrity sha512-9piw3uOcP6DpS0qpnDF95bLDzmgMxLOg/jghLnHwYJ0YFizzuvbH/L8106dy39JNgHYmXFUTztoP9JQvUqlBwQ==
   dependencies:
     motion-utils "^12.23.6"
 
@@ -2935,9 +2935,9 @@ yargs@^16.0.0:
     yargs-parser "^20.2.2"
 
 zmp-sdk@latest:
-  version "2.47.2"
-  resolved "https://registry.yarnpkg.com/zmp-sdk/-/zmp-sdk-2.47.2.tgz#9cb6aeeeaf3cb2d6c777cf699c7734bf3f982cff"
-  integrity sha512-s5XZwCWtRnTjTqyzFA/eCbgdBgDfv5AH8w1j6B92dYs3Sg7mLxH+hzpedojLD0CrgzHD78nje9fuWYUNkcgXNg==
+  version "2.48.0"
+  resolved "https://registry.yarnpkg.com/zmp-sdk/-/zmp-sdk-2.48.0.tgz#7d8f84dfcba7efa660f415dee159fafae33a5ac0"
+  integrity sha512-F+kgRwlNf1U9dKI2gviPcDfxm4O7IHHjIKEsxh7vZTlYZuU20CpaHWigigZexosON4hgFm3eUCVoFWfd1KzNrg==
   dependencies:
     "@babel/cli" "^7.17.6"
     "@sentry/browser" "^6.9.0"
