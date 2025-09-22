@@ -11,7 +11,7 @@ const StepLineView = () => {
       style={{
         width: 2,
         height: 16,
-        marginLeft: 12,
+        marginLeft: 11,
         background:
           "linear-gradient(180deg, #FFCA7F 0%, #F2C482 47.92%, #FFCA7F 100%)",
       }}
@@ -114,7 +114,7 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
       <div className="min-h-screen bg-black relative overflow-hidden">
         {/* Header */}
         <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/50 to-transparent">
-          <div className="flex items-center justify-between p-4 pt-12 text-white">
+          <div className="flex items-center justify-between p-4 pt-7 text-white">
             <button
               onClick={() => setIsScanning(false)}
               className="p-2 hover:bg-white/20 rounded-full transition-colors"
@@ -122,9 +122,10 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
               <ArrowLeft size={24} />
             </button>
             <h1 className="text-lg font-medium">Chụp thẻ tín dụng</h1>
-            <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
+            <div style={{ width: 24 }}></div>
+            {/* <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
               <X size={24} />
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -188,7 +189,7 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
-        <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white p-4 pt-12">
+        <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white p-4 pt-7">
           <div className="flex items-center justify-between">
             <button
               onClick={() => setCapturedImage(null)}
@@ -197,14 +198,7 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
               <ArrowLeft size={24} />
             </button>
             <h1 className="text-lg font-medium">Phát hiện thẻ tín dụng</h1>
-            <div className="flex space-x-2">
-              <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
-                <MoreHorizontal size={24} />
-              </button>
-              <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
-                <X size={24} />
-              </button>
-            </div>
+            <div style={{ width: 24 }}></div>
           </div>
         </div>
 
@@ -279,20 +273,16 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white p-4 pt-12">
+      <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white p-4 pt-7">
         <div className="flex items-center justify-between">
           <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
             <ArrowLeft size={24} />
           </button>
           <h1 className="text-lg font-medium">Phát hiện thẻ tín dụng</h1>
-          <div className="flex space-x-2">
-            {/* <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
-              <MoreHorizontal size={24} />
-            </button>
-            <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
-              <X size={24} />
-            </button> */}
-          </div>
+          <div
+            className="p-2 hover:bg-white/20 rounded-full transition-colors"
+            style={{ width: 24 }}
+          ></div>
         </div>
       </div>
 
@@ -340,7 +330,7 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
               <div style={{ color: "white", alignSelf: "center" }}>2</div>
             </div>
             <p className="text-gray-700 text-sm leading-relaxed">
-              Chụp rõ nét chụp đúng các mộnh đành tính
+              Chụp ảnh chân dung xác minh danh tính
             </p>
           </div>
 
@@ -351,7 +341,7 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
               <div style={{ color: "white", alignSelf: "center" }}>3</div>
             </div>
             <p className="text-gray-700 text-sm leading-relaxed">
-              Xác thực CCCD với góp thức NFC
+              Xác thực CCCD với giao thức NFC
             </p>
           </div>
         </div>
