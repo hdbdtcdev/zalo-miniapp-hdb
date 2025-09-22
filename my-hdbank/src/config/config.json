@@ -1,0 +1,14 @@
+{
+  "tags": {},
+  "BASE_URL": "http://localhost:4000",
+  
+  "GOOGLE_TTS_URL": "https://texttospeech.googleapis.com/v1",
+  "enableScriptCache": false,
+  "environment": "uat",
+  "appleAppStoreUrl": "https://testflight.apple.com/join/ptkHgx3D",
+  "googlePlayStoreUrl": "https://appdistribution.firebase.google.com",
+  "superAppWebAdminApiUrl": "https://api-super-app-admin.hdbank.com.vn",
+  "appConfigUrl": "https://microapp-uat-dihdbank.hdbank.com.vn/main_app/hdb_host/configs/config.json",
+  "chatbotUrl":"https://integrate-web-uat.hdbank.com.vn/hdb-portal/customer-chatbot?integrate_channel=DIKHCN"
+}
+
