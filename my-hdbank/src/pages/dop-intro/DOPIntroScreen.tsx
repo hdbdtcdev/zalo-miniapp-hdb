@@ -1,8 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Camera, ArrowLeft, MoreHorizontal, X } from "lucide-react";
 import scannerIllustratorImg from "@/asset/scanner_illustrator.gif";
+import { openMediaPicker } from "zmp-sdk/apis";
 
 interface CreditCardScannerProps {}
+
+const StepLineView = () => {
+  return (
+    <div
+      style={{
+        width: 2,
+        height: 16,
+        marginLeft: 12,
+        background:
+          "linear-gradient(180deg, #FFCA7F 0%, #F2C482 47.92%, #FFCA7F 100%)",
+      }}
+    ></div>
+  );
+};
 
 export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
   const [isScanning, setIsScanning] = useState(false);
@@ -114,13 +129,9 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
         </div>
 
         {/* Camera View */}
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          muted
-          className="w-full h-full object-cover"
-        />
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          <video ref={videoRef} autoPlay playsInline muted />
+        </div>
 
         {/* Card Frame Overlay */}
         <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -130,15 +141,16 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
               <div className="absolute -top-2 -right-2 w-6 h-6 border-t-4 border-r-4 border-white rounded-tr-lg"></div>
               <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-4 border-l-4 border-white rounded-bl-lg"></div>
               <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-white rounded-br-lg"></div>
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-4 border-r-4 border-white rounded-br-lg"></div>
             </div>
-            <p className="text-white text-center mt-4 text-sm">
-              Đặt thẻ tín dụng vào trong khung
-            </p>
           </div>
         </div>
 
         {/* Bottom Controls */}
         <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/50 to-transparent pb-8">
+          <p className="text-white text-center mt-4 text-sm">
+            Đặt thẻ tín dụng vào trong khung
+          </p>
           <div className="flex items-center justify-center space-x-12 p-6">
             <button
               onClick={selectFromGallery}
@@ -214,28 +226,32 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
           </div>
 
           {/* Instructions */}
-          <div className="space-y-4">
+          <div>
             <div className="flex items-start space-x-3">
               <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div style={{ color: "white", alignSelf: "center" }}>1</div>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
                 Chụp mặt trước, mặt sau của CCCD gắn chip
               </p>
             </div>
 
+            <StepLineView />
+
             <div className="flex items-start space-x-3">
               <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div style={{ color: "white", alignSelf: "center" }}>2</div>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
                 Chụp rõ nét chụp đúng các mộnh đành tính
               </p>
             </div>
 
+            <StepLineView />
+
             <div className="flex items-start space-x-3">
               <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div style={{ color: "white", alignSelf: "center" }}>3</div>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
                 Xác thực CCCD với góp thức NFC
@@ -259,20 +275,6 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
     );
   }
 
-  const StepLineView = () => {
-    return (
-      <div
-        style={{
-          width: 2,
-          height: 16,
-          marginLeft: 12,
-          background:
-            "linear-gradient(180deg, #FFCA7F 0%, #F2C482 47.92%, #FFCA7F 100%)",
-        }}
-      ></div>
-    );
-  };
-
   // Main Screen
   return (
     <div className="min-h-screen bg-white">
@@ -284,12 +286,12 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
           </button>
           <h1 className="text-lg font-medium">Phát hiện thẻ tín dụng</h1>
           <div className="flex space-x-2">
-            <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
+            {/* <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
               <MoreHorizontal size={24} />
             </button>
             <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
               <X size={24} />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
