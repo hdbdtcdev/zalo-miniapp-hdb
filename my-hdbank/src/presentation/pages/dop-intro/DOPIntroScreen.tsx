@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Camera, ArrowLeft, MoreHorizontal, X } from "lucide-react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { Camera, ArrowLeft } from "lucide-react";
 import scannerIllustratorImg from "@/asset/scanner_illustrator.gif";
-import { openMediaPicker } from "zmp-sdk/apis";
+import useNavigate from "zmp-ui/useNavigate";
 
 interface CreditCardScannerProps {}
 
@@ -20,11 +20,15 @@ const StepLineView = () => {
 };
 
 export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
+  const navigate = useNavigate();
   const [isScanning, setIsScanning] = useState(false);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const goBack = useCallback(() => {
+    navigate(-1);
+  }, [navigate]);
 
   useEffect(() => {
     if (isScanning) {
@@ -275,7 +279,10 @@ export const DOPIntroScreen: React.FC<CreditCardScannerProps> = () => {
       {/* Header */}
       <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white p-4 pt-7">
         <div className="flex items-center justify-between">
-          <button className="p-2 hover:bg-white/20 rounded-full transition-colors">
+          <button
+            className="p-2 hover:bg-white/20 rounded-full transition-colors"
+            onClick={goBack}
+          >
             <ArrowLeft size={24} />
           </button>
           <h1 className="text-lg font-medium">Phát hiện thẻ tín dụng</h1>
