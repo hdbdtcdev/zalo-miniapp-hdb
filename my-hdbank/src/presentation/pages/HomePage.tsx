@@ -2,15 +2,6 @@ import { FC, useEffect, useState } from "react";
 import { Page, Header, Box, Swiper, useNavigate, Text } from "zmp-ui";
 import { MoveLeft } from "lucide-react";
 import { useDispatch } from "@/lib/redux";
-import { fetchCardListAvailable } from './card/thunk';
-import {
-  CardDOPBaseRequest,
-  CardDOPBaseResponse,
-} from "@/domain/entities/common/cardDOPBaseApi";
-import {
-  CardListAvailableDataReq,
-  CardListAvailableDataRes,
-} from "@/domain/entities/cardListAvailable";
 
 // mock data sản phẩm
 const products = [
@@ -48,16 +39,6 @@ function useCardListAvailable() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCardListAvailable({} as CardDOPBaseRequest<CardListAvailableDataReq>["data"]))
-      .then((res) => {
-        const resp = res.payload as CardDOPBaseResponse<CardListAvailableDataRes>;
-        if (resp?.resultCode !== "00") {
-          console.warn("API error:", resp?.resultMessage);
-        }
-      })
-      .catch((e) => {
-        console.error("API exception:", e);
-      });
   }, [dispatch]);
 }
 
