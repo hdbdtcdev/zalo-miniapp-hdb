@@ -1,6 +1,6 @@
 import {inject} from 'inversify';
 import { TYPES } from '@/di/types/types';
-import { Query } from '@/domain/model/query';
+import { Query } from '@/domain/models/query';
 import { CardDOPBaseRequest } from '@/domain/entities/common/cardDOPBaseApi';
 import { CardListAvailableDataReq } from '@/domain/entities/cardListAvailable';
 import { ICardListAvailableRepository } from '@/infra/interface/cardListAvailable';
