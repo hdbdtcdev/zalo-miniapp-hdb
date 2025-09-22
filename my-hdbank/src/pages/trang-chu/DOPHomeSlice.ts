@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCardListAvailable } from './thunk';
+import { fetchCardListAvailable } from '../../presentation/pages/card/thunk';
 import { CardListAvailableDataRes } from '@/domain/entities/cardListAvailable';
 
 export interface IState {

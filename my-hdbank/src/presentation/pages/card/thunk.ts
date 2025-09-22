@@ -4,7 +4,7 @@ import { CardListAvailableHandler } from '@/application/card/cardListAvailable_h
 import { container } from '@/di/inversify.config';
 import { CardDOPBaseRequest } from '@/domain/entities/common/cardDOPBaseApi';
 import { TYPES } from '@/di/types/types';
-import { Query } from '@/domain/model/query';
+import { Query } from '@/domain/models/query';
 import { commonService } from '@/infra/network/networkService';
 
 export const fetchCardListAvailable = createAsyncThunk('cardListAvailable/fetch', async (payload: CardDOPBaseRequest<CardListAvailableDataReq>['data']) => {

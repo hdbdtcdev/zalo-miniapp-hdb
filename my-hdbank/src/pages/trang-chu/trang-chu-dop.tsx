@@ -12,13 +12,14 @@ import { MoveLeft } from "lucide-react";
 import { Swiper } from "zmp-ui";
 import { SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { fetchCardListAvailable } from "./thunk";
+import { fetchCardListAvailable } from "../../presentation/pages/card/thunk";
 import { CardDOPBaseRequest, CardDOPBaseResponse } from "@/domain/entities/common/cardDOPBaseApi";
 import { CardListAvailableDataReq, CardListAvailableDataRes } from "@/domain/entities/cardListAvailable";
 import { useDispatch } from "@/lib/redux";
 
 export default function CreditCardIssueScreen() {
     const dispatch = useDispatch();
+
     useEffect(() => {
         console.log('--- NamPH7 ------')
         dispatch(fetchCardListAvailable({} as CardDOPBaseRequest<CardListAvailableDataReq>['data']))
@@ -33,6 +34,7 @@ export default function CreditCardIssueScreen() {
                 })
 
     }, [])
+
     const products = [
         {
             id: "vietjet-platinum",
@@ -57,7 +59,6 @@ export default function CreditCardIssueScreen() {
     const [active, setActive] = useState(0);
 
     return (
-
         <ZMPRouter>
             <AnimationRoutes>
                 <Route
@@ -211,6 +212,7 @@ export default function CreditCardIssueScreen() {
                                             onClick={() => {
                                                 const selected = products[active];
                                                 console.log("Chọn sản phẩm:", selected.id);
+                                                
                                             }}
                                         >
                                             Chọn sản phẩm này
@@ -223,6 +225,5 @@ export default function CreditCardIssueScreen() {
                 />
             </AnimationRoutes>
         </ZMPRouter>
-
     );
 }
