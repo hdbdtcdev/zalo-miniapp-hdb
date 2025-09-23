@@ -18,22 +18,27 @@
     "login": "zmp login",
     "start": "zmp start",
     "deploy": "zmp deploy",
-    "dev": "vite",                   
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.9.0",
     "axios": "^1.12.2",
+    "dayjs": "1.11.13",
     "framer-motion": "^12.23.16",
+    "i18next": "24.2.1",
     "inversify": "^7.10.0",
     "jotai": "^2.12.1",
     "lodash": "^4.17.21",
     "lucide-react": "^0.544.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-i18next": "15.4.0",
+    "react-native-uuid": "^2.0.3",
     "react-redux": "^9.2.0",
     "redux-logger": "^3.0.6",
+    "redux-persist": "6.0.0",
     "reflect-metadata": "^0.2.2",
     "swiper": "^12.0.2",
     "uuid": "^13.0.0",
@@ -41,8 +46,10 @@
     "zmp-ui": "latest"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.20",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
+    "@types/uuid": "^11.0.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
     "cross-env": "^7.0.3",
@@ -51,6 +58,7 @@
     "postcss-preset-env": "^6.7.0",
     "sass": "^1.76.0",
     "tailwindcss": "^3.4.3",
+    "typescript": "^5.9.2",
     "vite": "^5.2.13",
     "zmp-vite-plugin": "latest"
   }
