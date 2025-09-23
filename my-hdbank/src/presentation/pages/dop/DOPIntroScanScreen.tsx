@@ -29,6 +29,7 @@ export const DOPIntroScanScreen: React.FC<IProps> = () => {
   // Main Screen
   return (
     <Page className="bg-transparent" style={{ background: "white", flex: 1 }}>
+      <Box></Box>
       <Header
         backIcon={<MoveLeft color="#fff" />}
         title="Phát hành thẻ tín dụng"
@@ -41,10 +42,18 @@ export const DOPIntroScanScreen: React.FC<IProps> = () => {
         }}
       />
 
-      <Box className="p-4 mt-16">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-          Hướng dẫn chụp mặt trước, mặt sau CCCD gắn chip
-        </h2>
+      <Box className="p-4 pt-[calc(env(safe-area-inset-top,0px)+60px)]">
+        <Box>
+          <Text className="text-[#333333] text-2xl font-semibold">
+            Hướng dẫn chụp
+          </Text>
+          <Text className="text-transparent bg-clip-text bg-gradient-to-r from-[#EA1D25] to-[#FACB0D] text-2xl font-bold">
+            mặt trước, mặt sau
+          </Text>
+          <Text className="text-[#333333] text-2xl font-semibold">
+            CCCD gắn chip
+          </Text>
+        </Box>
         {/* Content */}
         <Box className="p-6 space-y-6">
           <Box>

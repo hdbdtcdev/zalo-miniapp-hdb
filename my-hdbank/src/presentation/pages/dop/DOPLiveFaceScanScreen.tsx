@@ -143,7 +143,7 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
       />
 
       {/* Title */}
-      <div className="px-4 py-6 text-center mt-20">
+      <div className="px-4 py-6 text-center pt-[calc(env(safe-area-inset-top,0px)+60px)]">
         <h1 className="text-xl font-bold text-black">
           Giữ mặt ở giữa khung hình
         </h1>

@@ -31,7 +31,7 @@ export const DOPLiveFacePreScanScreen: React.FC<IProps> = ({}) => {
         }}
       />
 
-      <Box className="p-4 mt-16">
+      <Box className="p-4 pt-[calc(env(safe-area-inset-top,0px)+60px)]">
         {/* Content */}
         <Text className="text-[#333333] text-2xl font-semibold inline-block">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#EA1D25] to-[#FACB0D] text-2xl font-bold">
@@ -73,7 +73,7 @@ export const DOPLiveFacePreScanScreen: React.FC<IProps> = ({}) => {
           <Box className="flex flex-row py-3 px-4">
             <Icon icon="zi-warning-circle-solid" className="text-[#FAA61A]" />
             <Text className="text-[#333333] text-xs font-medium ml-4 self-center">
-              Không đội mũ, đeo kính hoặc khẩu trang.
+              Quý khách vui lòng mặc trang phục lịch sự khi chụp ảnh nhé.
             </Text>
           </Box>
         </Box>

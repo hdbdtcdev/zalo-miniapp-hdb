@@ -139,7 +139,7 @@ export const DOPIDRearScanScreen: React.FC<IProps> = () => {
       />
 
       {/* Title */}
-      <Box className="px-4 py-4 mt-16 mb-24">
+      <Box className="px-4 py-4 pt-[calc(env(safe-area-inset-top,0px)+60px)]">
         <h1 className="text-xl font-bold text-black mb-2">
           Chụp mặt sau của CCCD gắn chip
         </h1>

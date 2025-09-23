@@ -32,7 +32,7 @@ export const DOPIDResultScanScreen: React.FC<IProps> = ({}) => {
         }}
       />
 
-      <Box className="p-4 mt-16">
+      <Box className="p-4 pt-[calc(env(safe-area-inset-top,0px)+60px)]">
         {/* Content */}
         <Text className="text-[#333333] text-2xl font-semibold inline-block">
           Tuyệt! Thông tin
