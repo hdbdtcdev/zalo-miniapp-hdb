@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MoveLeft, RotateCcw } from "lucide-react";
-import { Header, Page } from "zmp-ui";
+import { Header, Page, useNavigate } from "zmp-ui";
 import { icCaptureButton } from "@/asset";
 
 interface IProps {
@@ -14,6 +14,7 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
   onBack,
   onPhotoCapture,
 }) => {
+  const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -131,6 +132,7 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
     if (capturedImage) {
       console.log("Use photo:", capturedImage);
       // Process the captured image here
+      navigate("/dop-nfc-scan");
     }
   };
 

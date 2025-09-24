@@ -12,6 +12,7 @@ import { DOPIDRearScanScreen } from "../pages/dop/DOPIDRearScanScreen";
 import { DOPIDResultScanScreen } from "../pages/dop/DOPIDResultScanScreen";
 import { DOPLiveFacePreScanScreen } from "../pages/dop/DOPLiveFacePreScanScreen";
 import { DOPLiveFaceScanScreen } from "../pages/dop/DOPLiveFaceScanScreen";
+import { DOPNFCScanScreen } from "../pages/dop/DOPNFCScanScreen";
 
 const AppRoutes: React.FC = () => (
   <AppProvider>
@@ -29,6 +30,7 @@ const AppRoutes: React.FC = () => (
             Component={DOPLiveFacePreScanScreen}
           />
           <Route path="/dop-live-face-scan" Component={DOPLiveFaceScanScreen} />
+          <Route path="/dop-nfc-scan" Component={DOPNFCScanScreen} />
         </AnimationRoutes>
       </ZMPRouter>
     </ZMPApp>

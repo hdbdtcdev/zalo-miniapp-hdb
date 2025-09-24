@@ -4,6 +4,7 @@ import { animateCaptureId } from "@/asset";
 import useNavigate from "zmp-ui/useNavigate";
 import { Page, Header, Box, Text } from "zmp-ui";
 import Lottie from "lottie-react-web";
+import { StepLineView } from "@/presentation/components";
 
 interface IProps {}
 
@@ -16,24 +17,11 @@ const defaultOptions = {
   },
 };
 
-const StepLineView = () => {
-  return (
-    <Box
-      style={{
-        width: 2,
-        height: 16,
-        marginLeft: 11,
-        background:
-          "linear-gradient(180deg, #FFCA7F 0%, #F2C482 47.92%, #FFCA7F 100%)",
-      }}
-    ></Box>
-  );
-};
-
 export const DOPIntroScanScreen: React.FC<IProps> = () => {
   const navigate = useNavigate();
   const startCapture = () => {
     navigate("/dop-id-front-scan");
+    // navigate("/dop-nfc-scan");
   };
 
   // Main Screen
