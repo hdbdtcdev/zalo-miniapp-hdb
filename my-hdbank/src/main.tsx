@@ -1,0 +1,28 @@
+import "reflect-metadata";
+
+// ZaUI stylesheet
+import "zmp-ui/zaui.css";
+// Tailwind stylesheet
+import "@/css/tailwind.scss";
+// Your stylesheet
+import "@/css/app.scss";
+
+// React core
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+// Expose app configuration
+import appConfig from "../app-config.json";
+import App from "./App";
+
+if (!window.APP_CONFIG) {
+  window.APP_CONFIG = appConfig as any;
+}
+
+// Mount app vào div#app (index.html phải có <div id="app"></div>)
+const root = createRoot(document.getElementById("app")!);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

@@ -37,3 +37,4 @@ export const NFC_ERROR_CODE: Record<string, string> = {
 export const FACE_NOT_MATCH = '004';
 export const EPASS_CODE = 'DOPEPA';
 export const DOP_SIGNATURE_SERVICE_CODE = `DOP_ACTIVE_CARD`;
+export * from './ConfigContext';

@@ -1,0 +1,15 @@
+.zaui-swiper .zaui-swiper-dots {
+  background-color:  transparent !important
+}
+
+.zaui-swiper .zaui-swiper-dots .zaui-swiper-dots-item {
+  width: 8px;
+  height: 8px;
+  background-color: #7b0c0c !important;
+}
+
+.zaui-swiper .zaui-swiper-dots .zaui-swiper-dots-item-active {
+  width: 8px;
+  height: 8px;
+  background-color: #BE1128 !important;
+}
