@@ -1,10 +1,20 @@
 import React from "react";
 import { MoveLeft } from "lucide-react";
-import { scannerIllustratorImg } from "@/asset";
+import { animateCaptureId } from "@/asset";
 import useNavigate from "zmp-ui/useNavigate";
 import { Page, Header, Box, Text } from "zmp-ui";
+import Lottie from "lottie-react-web";
 
 interface IProps {}
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animateCaptureId,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
 const StepLineView = () => {
   return (
@@ -64,15 +74,7 @@ export const DOPIntroScanScreen: React.FC<IProps> = () => {
             </div>
           </div> */}
             <div style={{ flex: 1 }}>
-              <img
-                src={scannerIllustratorImg}
-                style={{
-                  alignSelf: "center",
-                  width: "100%",
-                  objectFit: "contain",
-                  backgroundColor: "transparent",
-                }}
-              />
+              <Lottie options={defaultOptions} width={"100%"} />
             </div>
           </Box>
 

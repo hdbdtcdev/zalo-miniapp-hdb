@@ -1,9 +1,19 @@
 import React, { useEffect } from "react";
 import { MoveLeft } from "lucide-react";
 import { useNavigate, Page, Header, Text, Box } from "zmp-ui";
-import { scannerIllustratorImg } from "@/asset";
+import { animateCaptureId } from "@/asset";
+import Lottie from "lottie-react-web";
 
 interface IProps {}
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animateCaptureId,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
 export const DOPIDResultScanScreen: React.FC<IProps> = ({}) => {
   const navigate = useNavigate();
@@ -48,15 +58,7 @@ export const DOPIDResultScanScreen: React.FC<IProps> = ({}) => {
         <Box className="p-6 space-y-6">
           <Box>
             <div style={{ flex: 1 }}>
-              <img
-                src={scannerIllustratorImg}
-                style={{
-                  alignSelf: "center",
-                  width: "100%",
-                  objectFit: "contain",
-                  backgroundColor: "transparent",
-                }}
-              />
+              <Lottie options={defaultOptions} width={"100%"} />
             </div>
           </Box>
         </Box>

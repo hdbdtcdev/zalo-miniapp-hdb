@@ -203,21 +203,21 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
           </div>
 
           {/* Guide overlay for face positioning */}
-          {!capturedImage && (
+          {/* {!capturedImage && (
             <div className="absolute inset-0 pointer-events-none">
-              {/* Face guide outline */}
+              Face guide outline
               <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-40 h-48 border-2 border-white border-opacity-40 rounded-full"></div>
 
-              {/* Eye guides */}
+              Eye guides
               <div className="absolute top-24 left-1/2 transform -translate-x-1/2 flex justify-between w-20">
                 <div className="w-2 h-2 border border-white border-opacity-60 rounded-full"></div>
                 <div className="w-2 h-2 border border-white border-opacity-60 rounded-full"></div>
               </div>
 
-              {/* Mouth guide */}
+              Mouth guide
               <div className="absolute top-36 left-1/2 transform -translate-x-1/2 w-8 h-1 border-b border-white border-opacity-60 rounded-full"></div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 
