@@ -1,11 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Page, Header, Box, Swiper, useNavigate, Button } from "zmp-ui";
 import { MoveLeft } from "lucide-react";
-import { useDispatch, useSelector } from "@/lib/redux";
-import { selectCardList } from "./card/HomeSelector";
+import { useSelector } from "@/lib/redux";
 
 import '@/presentation/styles/swiper.css';
 import { useCardAvailable } from "./home/hooks";
+import { selectCardList } from "./home/redux";
+import { useTranslation } from "react-i18next";
 
 // mock data sản phẩm
 const products = [
@@ -83,12 +84,12 @@ function CardProduct({ product }: { product: (typeof products)[number] }) {
 const HomePage: FC = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState(0);
-
+  const { t } = useTranslation(['ns']);
+  
   // Selector
   const cardList = useSelector(selectCardList);
-  
   const { cardListStatus } = useCardAvailable();
-  
+
   const handleSelect = () => {
     const selected = products[active];
     console.log("Chọn sản phẩm:", selected.id);

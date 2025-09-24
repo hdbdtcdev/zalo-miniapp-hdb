@@ -1,4 +1,4 @@
-import uuid from 'react-native-uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { merge } from 'lodash';
 import {
   AxiosService,
@@ -40,7 +40,7 @@ const createBaseHeaders = (headers: RequestHeaders): RequestHeaders => {
     result['x-session-id'] = userAuth.sessionId;
   }
 
-  result['X-Request-ID'] = uuid.v4().toString();
+  result['X-Request-ID'] = uuidv4();
 
   return result;
 };

@@ -8,8 +8,6 @@ const PORT = 4000;
 // ✅ Cấu hình CORS
 app.use(cors({
   origin: "*", // hoặc chỉ định domain FE của bạn: ["http://localhost:5173", "https://myapp.com"]
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization", "x-request-id", "x-api-key"],
 }));
 app.use(express.json());
 

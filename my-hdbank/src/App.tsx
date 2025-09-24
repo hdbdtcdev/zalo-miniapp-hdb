@@ -19,7 +19,7 @@ const App: React.FC = () => {
 
     // 👉 Patch cho môi trường dev (không có SDK thật)
     if (import.meta.env.DEV) {
-      console.warn("Dev mode: giả lập ZMP SDK ready");
+      console.log("Dev mode: giả lập ZMP SDK ready");
       setTimeout(handleReady, 300); // mock "ready" sau 300ms
     }
 

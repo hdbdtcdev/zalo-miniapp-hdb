@@ -41,8 +41,6 @@ class AxiosService {
   ): Promise<ApiResponse<T>> {
     try {
       const response = await this.client.post(url, data, config);
-      
-
       return {
         data: response.data,
       };

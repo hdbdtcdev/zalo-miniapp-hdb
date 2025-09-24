@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { initialCardAvailableState } from './type';
 import { fetchCardAvailableListThunk } from '../thunk';
 
-const cardAvailableSlice = createSlice({
-  name: 'cardAvailableSlice',
+export const cardAvailableSlice = createSlice({
+  name: 'home/card_available',
   initialState: initialCardAvailableState,
   reducers: {
     setError: (state, { payload }) => {
@@ -16,13 +16,7 @@ const cardAvailableSlice = createSlice({
       // state.cardActive = payload;
       state.cardActive = { ...payload, productCode: payload?.productCode };
     },
-    resetCardState: (state) => {
-      state.status = 'idle';
-      state.responseStatus = null;
-      state.error = null;
-      state.cardList = [];
-      state.cardActive = null;
-    }
+    resetCardState: () => initialCardAvailableState,
   },
   extraReducers: (builder) => {
     builder
@@ -57,5 +51,4 @@ const cardAvailableSlice = createSlice({
 });
 
 export const { setCardActive } = cardAvailableSlice.actions;
-
-export default cardAvailableSlice;
+export default cardAvailableSlice.reducer;
