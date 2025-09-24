@@ -4,11 +4,17 @@ import {
 } from '@/domain/entities/cardAvailableList';
 import { ICardAvailableListRepository } from '@/domain/interfaces/card-available-list';
 import { Command } from '@/domain/models';
-import { ApiResponse, HttpService } from '@/infrastructure/network';
+import { ApiResponse } from '@/infrastructure/network';
+import { BaseService } from '@/infrastructure/services/base-service';
 import { injectable } from 'inversify';
 
 @injectable()
-export class CardAvailableListRepository extends HttpService implements ICardAvailableListRepository {
+export class CardAvailableListRepository extends BaseService implements ICardAvailableListRepository {
+
+    constructor() {
+        // super('http://localhost:4000/api/sdk/v1' || '');
+        super('https://di-bank-uat.hdbank.com.vn/api/sdk/v1' || '');
+    }
 
     async fetchAvailableCards<TParameter>(
         command: Command<TParameter>
@@ -21,6 +27,8 @@ export class CardAvailableListRepository extends HttpService implements ICardAva
             request
         )
 
+        console.log(`KhanhNHB Response ===> ${JSON.stringify(response)}`);
+        
         return response?.data as ApiResponse<CardAvailableListDataRes[]>;
     }
 }
