@@ -8,17 +8,18 @@
 // import { EsignSlice } from '@src/presentation/card_activation/redux/slice';
 // import { EsignEasycaSlice } from '@src/presentation/esign_easy_ca/redux/slice';
 
+import cardSlice from "@/pages/them-thong-tin/redux/cardSlice";
 import DOPHomeSlice from "@/pages/trang-chu/DOPHomeSlice";
 
 export const reducer = {
-    // address: addressSlice.reducer,
-    // ocr: OCRSlice.reducer,
-    // card: cardSlice.reducer,
-    // cvp: CVPSlice.reducer,
-    // dop: DOPSlice.reducer,
-    // dopPassword: DOPPasswordSlice.reducer,
-    // dopLogin: DOPLoginSlice.reducer,
-    home: DOPHomeSlice.reducer,
-    // esign: EsignSlice.reducer,
-    // esignEasyca: EsignEasycaSlice.reducer,
+  // address: addressSlice.reducer,
+  // ocr: OCRSlice.reducer,
+  card: cardSlice.reducer,
+  // cvp: CVPSlice.reducer,
+  // dop: DOPSlice.reducer,
+  // dopPassword: DOPPasswordSlice.reducer,
+  // dopLogin: DOPLoginSlice.reducer,
+  home: DOPHomeSlice.reducer,
+  // esign: EsignSlice.reducer,
+  // esignEasyca: EsignEasycaSlice.reducer,
 };
