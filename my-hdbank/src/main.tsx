@@ -23,6 +23,8 @@ import en from '@/locales/en.json';
 import vi from '@/locales/vi.json';
 import { initializeI18nFromStorage } from "./services/i18n/initializeI18n";
 import { LanguageProvider } from "@/services/i18n";
+import { App as ZmpApp } from "zmp-ui"; // 👈 App wrapper từ zmp-ui
+import { AppProvider } from "./lib/redux/provider";
 
 if (!window.APP_CONFIG) {
   window.APP_CONFIG = appConfig as any;
@@ -45,7 +47,11 @@ root.render(
   <React.StrictMode>
     <LanguageProvider initOptions={{ resources }}>
       <ReduxProvider store={store}>
-        <App />
+        <ZmpApp>
+          <AppProvider>
+            <App />
+          </AppProvider>
+        </ZmpApp>
       </ReduxProvider>
     </LanguageProvider>
   </React.StrictMode>

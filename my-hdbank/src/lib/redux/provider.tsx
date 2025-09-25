@@ -1,22 +1,26 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { store } from './store';
-import App from 'zmp-ui/app';
+import { Provider } from 'react-redux';
+import { App, useTheme } from 'zmp-ui';
 import bg from '@/asset/app-background.svg'
 
-export const AppProvider = ({ children }: React.PropsWithChildren) => (
-  <Provider store={store}>
-    <App theme="light">
+export const AppProvider = ({ children }: React.PropsWithChildren) => {
+  const [theme] = useTheme();
 
-      <div
-        style={{
-          minHeight: "100vh",
-          backgroundImage: `url(${bg})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-      >{children}</div>
-
-    </App>
-  </Provider>
-);
+  return (
+    <Provider store={store}>
+      <App theme={theme}>
+        <div
+          style={{
+            minHeight: "100vh",
+            backgroundImage: `url(${bg})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          {children}
+        </div>
+      </App>
+    </Provider>
+  );
+}
