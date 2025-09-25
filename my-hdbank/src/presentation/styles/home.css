@@ -1,0 +1,121 @@
+/* Transparent header */
+.transparent-header {
+  background: transparent !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  color: #fff !important;
+}
+
+.transparent-header::after {
+  height: 0 !important;
+}
+
+/* Padding top theo safe-area + header */
+.pt-header {
+  padding-top: calc(env(safe-area-inset-top, 0px) + 56px);
+}
+
+/* Card wrapper */
+.card-wrapper {
+  width: 100%;
+  max-width: 32rem;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 6rem;
+}
+
+/* Banner nổi */
+.card-banner {
+  position: absolute;
+  inset-inline: 5%;
+  top: 0;
+  height: 10rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+  background: linear-gradient(to right, #facc15, #fb923c, #facc15);
+}
+
+.card-visual {
+  width: 90%;
+  height: 75%;
+  margin: 1.25rem auto 0;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+
+/* Card body */
+.card-body {
+  position: relative;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+  padding-top: 7rem;
+  z-index: 10;
+}
+
+.card-title {
+  color: #b91c1c;
+  font-weight: 800;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+/* Perks */
+.perk-dot {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  background: linear-gradient(to right, #ef4444, #facc15);
+}
+
+.perk-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.perk-desc {
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+/* Intro text */
+.intro-text {
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.375;
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+/* Swiper wrapper */
+.swiper-wrapper {
+  margin: 1.5rem;
+  position: relative;
+  padding-bottom: 40px;
+}
+
+/* Button */
+.btn-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+}
+
+.btn-select {
+  background: linear-gradient(90deg, #e02424 0%, #ff6a00 50%, #ffd166 100%) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  border-radius: 9999px !important;
+  height: 52px !important;
+}
