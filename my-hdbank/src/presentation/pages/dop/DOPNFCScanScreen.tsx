@@ -63,21 +63,14 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
 
   // Main Screen
   return (
-    <Page className="bg-transparent" style={{ background: "white", flex: 1 }}>
-      <Box></Box>
+    <Page className="bg-transparent flex flex-1">
       <Header
         backIcon={<MoveLeft color="#fff" />}
         title="Phát hành thẻ tín dụng"
-        className="transparent-header"
-        style={{
-          background: "linear-gradient(to right, red, yellow)",
-          boxShadow: "none",
-          borderBottom: "none",
-          color: "#fff",
-        }}
+        className="bg-transparent border-none shadow-none text-[#fff]"
       />
 
-      <Box className="p-4 pt-[calc(env(safe-area-inset-top,0px)+60px)]">
+      <Box className="flex-1 p-4 mt-[calc(env(safe-area-inset-top,0px)+68px)] bg-white rounded-tl-2xl rounded-tr-2xl">
         <Box>
           <Text className="text-[#333333] text-2xl font-semibold">
             Xác thực
@@ -161,7 +154,7 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
         <Box className="fixed bottom-0 left-0 right-0 p-6 bg-white">
           <button
             onClick={startScan}
-            className="w-full py-4 bg-gradient-to-r from-red-500 to-yellow-500 text-white rounded-full font-medium text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200"
+            className="w-full h-14 rounded-full text-white font-bold text-base shadow-md bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400"
           >
             Bắt đầu chụp
           </button>
