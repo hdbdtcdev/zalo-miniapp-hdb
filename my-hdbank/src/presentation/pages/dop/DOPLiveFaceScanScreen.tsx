@@ -155,7 +155,7 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
       <div className="flex-1 flex items-center justify-center px-8">
         <div className="relative">
           {/* Main circular frame */}
-          <div className="w-80 h-80 rounded-full border-4 border-red-500 overflow-hidden bg-black relative">
+          <div className="w-80 h-80 rounded-full border-4 border-red-500 overflow-hidden bg-black">
             {isLoading && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-white text-center">
@@ -184,12 +184,14 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
                 playsInline
                 muted
                 className="w-full h-full object-cover scale-110" // Scale up slightly to fill circle better
-                style={{
-                  transform:
+                style={
+                  {
+                    /*transform:
                     facingMode === "user"
                       ? "scaleX(-1) scale(1.1)"
-                      : "scale(1.1)", // Mirror front camera
-                }}
+                      : "scale(1.1)", // Mirror front camera*/
+                  }
+                }
               />
             )}
 
@@ -197,7 +199,7 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
             {!capturedImage && !isLoading && !error && (
               <button
                 onClick={switchCamera}
-                className="absolute top-4 right-4 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-opacity"
+                className="hidden absolute top-4 right-4 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-opacity"
               >
                 <RotateCcw size={20} />
               </button>
@@ -226,7 +228,7 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
       {/* Bottom Actions */}
       <div className="flex justify-center pb-12">
         {capturedImage ? (
-          <div className="flex space-x-6">
+          <div className="flex space-x-6 h-86">
             <button
               onClick={retakePhoto}
               className="px-8 py-3 bg-gray-200 text-gray-700 rounded-full font-medium hover:bg-gray-300 transition-colors"
