@@ -1,43 +1,34 @@
-import React, { useEffect, useState } from "react";
-import zmp from "zmp-sdk";
-import AppRoutes from "./presentation/routes";
+import React from "react";
 
-const App: React.FC = () => {
-  const [ready, setReady] = useState(false);
+import { ZMPRouter, Route, AnimationRoutes } from "zmp-ui";
 
-  useEffect(() => {
-    const handleReady = () => {
-      console.log("ZMP SDK sẵn sàng");
-      setReady(true);
-    };
-    const handleError = (err: any) => {
-      console.error("ZMP SDK error:", err);
-    };
+import HomePage from "@/presentation/pages/HomePage";
+import CreditCardPreview from "@/presentation/pages/card/CreditCardPreview";
+import { DOPIDFrontScanScreen } from "./presentation/pages/dop/DOPIDFrontScanScreen";
+import { DOPIDRearScanScreen } from "./presentation/pages/dop/DOPIDRearScanScreen";
+import { DOPIDResultScanScreen } from "./presentation/pages/dop/DOPIDResultScanScreen";
+import { DOPIntroScanScreen } from "./presentation/pages/dop/DOPIntroScanScreen";
+import { DOPLiveFacePreScanScreen } from "./presentation/pages/dop/DOPLiveFacePreScanScreen";
+import { DOPLiveFaceScanScreen } from "./presentation/pages/dop/DOPLiveFaceScanScreen";
+import { DOPNFCScanScreen } from "./presentation/pages/dop/DOPNFCScanScreen";
 
-    zmp.events.on("ready", handleReady);
-    zmp.events.on("error", handleError);
-
-    // 👉 Patch cho môi trường dev (không có SDK thật)
-    if (import.meta.env.DEV) {
-      console.warn("Dev mode: giả lập ZMP SDK ready");
-      setTimeout(handleReady, 300); // mock "ready" sau 300ms
-    }
-
-    return () => {
-      zmp.events.off("ready", handleReady);
-      zmp.events.off("error", handleError);
-    };
-  }, []);
-
-  if (!ready) {
-    return (
-      <div className="flex items-center justify-center h-screen text-gray-500">
-        Đang khởi động ứng dụng...
-      </div>
-    );
-  }
-
-  return <AppRoutes />
-};
+const App: React.FC = () => (
+  <ZMPRouter>
+    <AnimationRoutes>
+      <Route path="/" Component={HomePage} />
+      <Route path="/CreditCardPreview" Component={CreditCardPreview} />
+      <Route path="/dop-intro" Component={DOPIntroScanScreen} />
+      <Route path="/dop-id-front-scan" Component={DOPIDFrontScanScreen} />
+      <Route path="/dop-id-rear-scan" Component={DOPIDRearScanScreen} />
+      <Route path="/dop-id-result-scan" Component={DOPIDResultScanScreen} />
+      <Route
+        path="/dop-live-face-pre-scan"
+        Component={DOPLiveFacePreScanScreen}
+      />
+      <Route path="/dop-live-face-scan" Component={DOPLiveFaceScanScreen} />
+      <Route path="/dop-nfc-scan" Component={DOPNFCScanScreen} />
+    </AnimationRoutes>
+  </ZMPRouter>
+);
 
 export default App;

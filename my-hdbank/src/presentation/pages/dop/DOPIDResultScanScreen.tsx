@@ -33,7 +33,7 @@ export const DOPIDResultScanScreen: React.FC<IProps> = ({}) => {
       <Header
         backIcon={<MoveLeft color="#fff" />}
         title="Phát hành thẻ tín dụng"
-        className="bg-transparent border-none shadow-none text-[#fff]"
+        className="transparent-header border-none shadow-none text-[#fff]"
       />
 
       <Box className="flex-1 p-4 mt-[calc(env(safe-area-inset-top,0px)+68px)] bg-white rounded-tl-2xl rounded-tr-2xl">

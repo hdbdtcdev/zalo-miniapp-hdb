@@ -1,18 +1,29 @@
 import { MoveLeft } from "lucide-react";
-import { Page, Header, Box, Button, Icon, Text, Checkbox, Cluster } from "zmp-ui";
+import { useCallback } from "react";
+import { Page, Header, Box, Button, Icon, Text, Checkbox, Cluster, useNavigate } from "zmp-ui";
 
 export default function CreditCardPreview() {
+  const navigate = useNavigate();
+
+  const handleSelect = useCallback(() => {
+    navigate("/dop-intro");
+  }, [useNavigate])
+
   return (
     <Page className="bg-transparent">
       <Header
         backIcon={<MoveLeft color="#fff" />}
         title="Phát hành thẻ tín dụng"
-        className="transparent-header"
+        className="transparent-header flex items-center justify-between"
         style={{
           background: "transparent",
           boxShadow: "none",
           borderBottom: "none",
           color: "#fff",
+          display: 'flex',
+          alignItems: 'center',
+          textAlign: 'center',
+          justifyContent: 'space-between'
         }}
       />
 
@@ -54,21 +65,20 @@ export default function CreditCardPreview() {
           </Cluster>
         </Box>
 
-        {/* Checkbox & Chính sách */}
-        <Box className="mt-4">
-          <Checkbox value=''>
-            <span style={{ fontSize: 12 }}>
-              Tôi đã đọc, hiểu rõ và đồng ý toàn bộ nội dung{" "}
-              <a style={{ color: "#e02424", textDecoration: "underline" }}>
-                Chính sách bảo vệ, xử lý dữ liệu cá nhân
-              </a>{" "}
-              của HDBank.
-            </span>
-          </Checkbox>
-        </Box>
-
         {/* Button CTA */}
-        <Box className="px mt-8 pb-8 sticky bottom-4" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+        <Box className="fixed bottom-0 left-0 right-0 p-6">
+          {/* Checkbox & Chính sách */}
+          <Box className="mt-4 mb-4">
+            <Checkbox value=''>
+              <span style={{ fontSize: 12 }}>
+                Tôi đã đọc, hiểu rõ và đồng ý toàn bộ nội dung{" "}
+                <a style={{ color: "#e02424", textDecoration: "underline" }}>
+                  Chính sách bảo vệ, xử lý dữ liệu cá nhân
+                </a>{" "}
+                của HDBank.
+              </span>
+            </Checkbox>
+          </Box>
           <Button
             fullWidth
             style={{
@@ -78,6 +88,7 @@ export default function CreditCardPreview() {
               borderRadius: 999,
               height: 52,
             }}
+            onClick={handleSelect}
           >
             Mở thẻ ngay
           </Button>

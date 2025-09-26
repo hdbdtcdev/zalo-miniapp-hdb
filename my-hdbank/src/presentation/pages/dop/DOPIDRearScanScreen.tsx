@@ -135,7 +135,7 @@ export const DOPIDRearScanScreen: React.FC<IProps> = () => {
       {/* Status Bar */}
       <Header
         backIcon={<MoveLeft className="text-black" />}
-        className="shadow-none border-b-0 bg-transparent text-white"
+        className="shadow-none border-b-0 transparent-header text-white"
       />
 
       {/* Title */}

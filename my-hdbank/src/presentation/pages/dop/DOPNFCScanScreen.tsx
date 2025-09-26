@@ -13,22 +13,6 @@ import { Sheet } from "zmp-ui";
 import { StepLineView, StepperLoadingView } from "@/presentation/components";
 import { scanNFC } from "zmp-sdk/apis";
 
-const scanDeviceNFC = async (mrz: string) => {
-  try {
-    return await scanNFC({
-      data: {
-        mrz,
-      },
-      type: "cccd",
-    });
-    // xử lý khi gọi api thành công
-  } catch (error) {
-    // xử lý khi gọi api thất bại
-    console.log(error);
-  }
-  return undefined;
-};
-
 interface IProps {}
 
 export const DOPNFCScanScreen: React.FC<IProps> = () => {
@@ -36,8 +20,8 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
   const [scanInfoVisible, setScanInfoVisible] = React.useState(false);
   const [scanStep, setScanStep] = React.useState(1);
 
-  const startScan = async () => {
-    setScanInfoVisible(true);
+  const startScan = () => {
+    /*setScanInfoVisible(true);
     setScanStep(1);
     var ret = await scanDeviceNFC("MRZ_SAMPLE_1234567890");
     alert("Kết quả quét NFC: " + JSON.stringify(ret));
@@ -46,8 +30,21 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setScanStep(3);
     await new Promise((resolve) => setTimeout(resolve, 3000));
-    setScanInfoVisible(false);
-    navigate("/CreditCardPreview");
+    setScanInfoVisible(false);*/
+    scanNFC({
+      data: {
+        mrz: "MRZ_SAMPLE_1234567890",
+      },
+      type: "cccd",
+      success: (data) => {
+        navigate("/CreditCardPreview");
+      },
+      fail: (err) => {
+        // xử lý khi gọi api thất bại
+        console.log(err);
+        alert("Lỗi quét NFC: " + JSON.stringify(err));
+      },
+    });
   };
 
   const getStepTile = (step: number) => {
@@ -67,7 +64,7 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
       <Header
         backIcon={<MoveLeft color="#fff" />}
         title="Phát hành thẻ tín dụng"
-        className="bg-transparent border-none shadow-none text-[#fff]"
+        className="transparent-header border-none shadow-none text-[#fff]"
       />
 
       <Box className="flex-1 p-4 mt-[calc(env(safe-area-inset-top,0px)+68px)] bg-white rounded-tl-2xl rounded-tr-2xl">

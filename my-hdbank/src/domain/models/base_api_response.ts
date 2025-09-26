@@ -1,25 +1,31 @@
-// ✅ Legacy API response (internal)
-interface LegacyResponse {
-  responseId: string;
-  responseCode: string;
-  responseMessage: string;
-  responseTime: string;
+// RESPONSE
+
+export interface BaseApiResponse<T> {
+  data: T;
+
+  // Trường hợp dùng cho HDB API
+  resultCode?: string;
+  resultMessage?: string;
+
+  // Trường hợp dùng cho V1 API
+  status?: Status;
+  metaData?: MetaData;
 }
 
-// ✅ V1 API response (internal)
-interface Status {
+export interface Status {
   code: string;
   message: string;
 }
-interface MetaData {
+export interface MetaData {
   requestId: string;
   signature: string;
   timestamp: number | string;
 }
 
-// ✅ Common abstract response
-export interface BaseApiResponse<T> {
-  status: Record<string, any>; // generic structure, có thể là LegacyResponse hoặc Status
-  data: T;
-  metaData?: Record<string, any>; // optional, chỉ có với V1
+// Reject value in createAsyncThunk
+export interface BaseError<T = any> extends Status {
+  data?: T;
+}
+export interface RejectValue<T = any> {
+  rejectValue: BaseError<T>;
 }
