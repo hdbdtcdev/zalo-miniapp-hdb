@@ -1,12 +1,24 @@
-import { Container } from 'inversify';
-import { TYPES } from './types/types';
-import { CardAvailableListHandler } from '@/application/card/card_available_list_handler';
-import { ICardAvailableListRepository } from '@/domain/interfaces/card-available-list';
-import { CardAvailableListRepository } from '@/infrastructure/persistent/card/cardAvailableList.repository';
+import { Container } from "inversify";
+import { TYPES } from "./types/types";
+import { CardAvailableListHandler } from "@/application/card/card_available_list_handler";
+import { ICardAvailableListRepository } from "@/domain/interfaces/card-available-list";
+import { CardAvailableListRepository } from "@/infrastructure/persistent/card/cardAvailableList.repository";
+import { IDOPRepository } from "@/domain/interfaces";
+import { DOPRepository } from "@/infrastructure/persistent/dop/dop.repository";
+import { DOPGetAuthHandler } from "@/application/dop/dop-get-auth-handler";
 
 const container = new Container();
 
-container.bind<ICardAvailableListRepository>(TYPES.ICardAvailableListRepository).to(CardAvailableListRepository);
-container.bind<CardAvailableListHandler>(TYPES.CardAvailableListHandler).to(CardAvailableListHandler);
+container
+  .bind<ICardAvailableListRepository>(TYPES.ICardAvailableListRepository)
+  .to(CardAvailableListRepository);
+container
+  .bind<CardAvailableListHandler>(TYPES.CardAvailableListHandler)
+  .to(CardAvailableListHandler);
+
+container.bind<IDOPRepository>(TYPES.IDOPRepository).to(DOPRepository);
+container
+  .bind<DOPGetAuthHandler>(TYPES.DOPGetAuthHandler)
+  .to(DOPGetAuthHandler);
 
 export { container };
