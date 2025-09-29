@@ -1,9 +1,19 @@
 import { MoveLeft } from "lucide-react";
 import { useState } from "react";
-import { Box, Checkbox, Header, Input, Page, Radio, Text } from "zmp-ui";
+import {
+  Box,
+  Checkbox,
+  Header,
+  Input,
+  Page,
+  Radio,
+  Text,
+  useNavigate,
+} from "zmp-ui";
 
 export const CreatePasswordPage = () => {
   const [disabledButton, setDisableButton] = useState(false);
+  const navigate = useNavigate();
   return (
     <Page>
       <Box style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 56px)" }}>
@@ -138,7 +148,9 @@ export const CreatePasswordPage = () => {
                   fontSize: 16,
                   boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
                 }}
-                onClick={() => {}}
+                onClick={() => {
+                  navigate("/CreatePin");
+                }}
               >
                 Chọn sản phẩm này
               </button>

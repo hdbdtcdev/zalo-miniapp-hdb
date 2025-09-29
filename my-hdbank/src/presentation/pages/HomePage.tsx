@@ -4,7 +4,7 @@ import { MoveLeft } from "lucide-react";
 import { useDispatch, useSelector } from "@/lib/redux";
 import { selectCardList } from "./card/HomeSelector";
 
-import '@/presentation/styles/swiper.css';
+import "@/presentation/styles/swiper.css";
 import { useCardAvailable } from "./home/hooks";
 
 // mock data sản phẩm
@@ -86,13 +86,13 @@ const HomePage: FC = () => {
 
   // Selector
   const cardList = useSelector(selectCardList);
-  
+
   const { cardListStatus } = useCardAvailable();
-  
+
   const handleSelect = () => {
     const selected = products[active];
     console.log("Chọn sản phẩm:", selected.id);
-    navigate("/CreditCardPreview");
+    navigate("/CustomerInfo");
   };
 
   return (
@@ -106,10 +106,10 @@ const HomePage: FC = () => {
           boxShadow: "none",
           borderBottom: "none",
           color: "#fff",
-          display: 'flex',
-          alignItems: 'center',
-          textAlign: 'center',
-          justifyContent: 'space-between'
+          display: "flex",
+          alignItems: "center",
+          textAlign: "center",
+          justifyContent: "space-between",
         }}
       />
 
@@ -147,7 +147,8 @@ const HomePage: FC = () => {
             <Button
               fullWidth
               style={{
-                background: "linear-gradient(90deg, #e02424 0%, #ff6a00 50%, #ffd166 100%)",
+                background:
+                  "linear-gradient(90deg, #e02424 0%, #ff6a00 50%, #ffd166 100%)",
                 color: "#fff",
                 fontWeight: 600,
                 borderRadius: 999,

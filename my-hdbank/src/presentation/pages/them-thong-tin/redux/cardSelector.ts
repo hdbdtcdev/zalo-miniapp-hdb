@@ -14,7 +14,10 @@ export const selectCompanyName = (state: ReduxState) =>
 export const selectIncome = (state: ReduxState) =>
   state?.card?.dataPayload?.income;
 
-// export const selectAddressType = (state: ReduxState) => state.card.addressType;
+export const selectAddressType = (state: ReduxState) => state.card.addressType;
+export const selectAddressTypeList = (state: ReduxState) =>
+  state.card.addressTypeList;
+
 export const selectAddrDetail = (state: ReduxState) => state?.card?.addrDetail;
 
 export const selectCompanyAddressDetail = (state: ReduxState) =>

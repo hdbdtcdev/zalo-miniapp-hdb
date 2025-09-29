@@ -1,13 +1,24 @@
 import { useRef, useState } from "react";
 import { ArrowRight, MoveLeft } from "lucide-react";
-import { Button, Text, Page, Header, Box, Switch } from "zmp-ui";
+import {
+  Button,
+  Text,
+  Page,
+  Header,
+  Box,
+  Switch,
+  useNavigate,
+  useLocation,
+} from "zmp-ui";
 import ic_notice from "@/asset/icon-notice.svg";
 import ic_scan_face from "@/asset/icon-face-scan.svg";
-type CreatePinPageProps = {
-  type: "CREATE_PIN" | "CONFIRM_PIN";
-  pin?: string;
-};
-export const CreatePinPage = (prop: CreatePinPageProps) => {
+
+export const CreatePinPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state as { type?: string; pin?: string };
+  const type = state?.type || "CREATE_PIN";
+  const pin = state?.pin || "";
   const length = 6;
   const [enabled, setEnabled] = useState(true);
   const [otp, setOtp] = useState(Array(length).fill(""));
@@ -34,6 +45,11 @@ export const CreatePinPage = (prop: CreatePinPageProps) => {
   };
 
   const handleSubmit = () => {
+    if (type === "CONFIRM_PIN") {
+      navigate("/AddInfoCustomer");
+      return;
+    }
+    navigate("/CreatePin", { state: { type: "CONFIRM_PIN", pin: otp.join() } });
     if (otp.length === 6) {
       console.log("PIN:", otp.join());
     }
@@ -167,7 +183,7 @@ export const CreatePinPage = (prop: CreatePinPageProps) => {
               <ArrowRight size={20} color="#fff" />
             </Button>
           </Box>
-          {prop.type === "CONFIRM_PIN" && (
+          {type === "CONFIRM_PIN" && (
             <Box
               flex
               flexDirection="row"

@@ -17,6 +17,10 @@ export interface CustomerInfoV2DataReq {
   averageAmountEpass?: string;
   companyName?: string;
 }
+interface IAddressType {
+  type: string;
+  name: string;
+}
 export interface IStateCardSlice {
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string;
@@ -27,7 +31,8 @@ export interface IStateCardSlice {
   districtName: string;
   wardId: string;
   wardName: string;
-
+  addressTypeList: IAddressType[];
+  addressType: IAddressType;
   companyAddressDetail?: string;
   companyProvinceId?: string;
   companyProvinceName?: string;
@@ -35,7 +40,6 @@ export interface IStateCardSlice {
   companyDistrictName?: string;
   companyWardId?: string;
   companyWardName?: string;
-
   dataPayload: CustomerInfoV2DataReq;
   queue: Record<string, string>;
 }
@@ -43,12 +47,12 @@ export interface IStateCardSlice {
 const initialState: IStateCardSlice = {
   status: "idle",
   error: "",
-  //   addressTypeList: [
-  //     { type: "01", name: "Địa chỉ liên hệ" },
-  //     { type: "02", name: "Nơi làm việc" },
-  //     { type: "03", name: "Khác" }, //Nơi thường trú
-  //   ],
-  //   addressType: { type: "01", name: "Địa chỉ liên hệ" },
+  addressTypeList: [
+    { type: "01", name: "Địa chỉ liên hệ" },
+    { type: "02", name: "Nơi làm việc" },
+    { type: "03", name: "Địa chỉ khác" },
+  ],
+  addressType: { type: "01", name: "Địa chỉ liên hệ" },
   addrDetail: "",
   provinceId: "",
   provinceName: "",
@@ -121,7 +125,9 @@ const cardSlice = createSlice({
     setAddrDetail: (state, { payload }) => {
       state.addrDetail = payload;
     },
-
+    setAddressType: (state, { payload }) => {
+      state.addressType = payload;
+    },
     setCompanyAddressDetail: (state, { payload }) => {
       state.companyAddressDetail = payload;
     },
@@ -151,5 +157,5 @@ const cardSlice = createSlice({
   },
   extraReducers: (builder) => {},
 });
-export const { resetCard, setDataPayload } = cardSlice.actions;
+export const { resetCard, setDataPayload, setAddressType } = cardSlice.actions;
 export default cardSlice;

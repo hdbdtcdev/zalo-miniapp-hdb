@@ -29,15 +29,15 @@ const App: React.FC = () => {
     };
   }, []);
 
-  if (!ready) {
-    return (
-      <div className="flex items-center justify-center h-screen text-gray-500">
-        Đang khởi động ứng dụng...
-      </div>
-    );
-  }
+  // if (!ready) {
+  //   return (
+  //     <div className="flex items-center justify-center h-screen text-gray-500">
+  //       Đang khởi động ứng dụng...
+  //     </div>
+  //   );
+  // }
 
-  return <AppRoutes />
+  return <AppRoutes />;
 };
 
 export default App;

@@ -5,22 +5,22 @@ export function isUpperCase(char: string) {
 export const vietnameseSlugify = (text: string, lowerCase = true) => {
   const vietnameseSlugifyText = text
     .replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, (matchChar) => {
-      return isUpperCase(matchChar) ? 'A' : 'a';
+      return isUpperCase(matchChar) ? "A" : "a";
     })
     .replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, (matchChar) => {
-      return isUpperCase(matchChar) ? 'E' : 'e';
+      return isUpperCase(matchChar) ? "E" : "e";
     })
     .replace(/i|í|ì|ỉ|ĩ|ị/gi, (matchChar) => {
-      return isUpperCase(matchChar) ? 'I' : 'i';
+      return isUpperCase(matchChar) ? "I" : "i";
     })
     .replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, (matchChar) =>
-      isUpperCase(matchChar) ? 'O' : 'o'
+      isUpperCase(matchChar) ? "O" : "o"
     )
     .replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, (matchChar) =>
-      isUpperCase(matchChar) ? 'U' : 'u'
+      isUpperCase(matchChar) ? "U" : "u"
     )
-    .replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, (matchChar) => (isUpperCase(matchChar) ? 'Y' : 'y'))
-    .replace(/đ/gi, (matchChar) => (isUpperCase(matchChar) ? 'D' : 'd'));
+    .replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, (matchChar) => (isUpperCase(matchChar) ? "Y" : "y"))
+    .replace(/đ/gi, (matchChar) => (isUpperCase(matchChar) ? "D" : "d"));
 
   if (lowerCase) {
     return vietnameseSlugifyText.toLowerCase();
@@ -55,7 +55,7 @@ export const flattenDeepObject = (
 ): { [key: string]: string } => {
   return Object.keys(obj).reduce(
     (acc, cur) =>
-      typeof obj[cur] === 'object'
+      typeof obj[cur] === "object"
         ? { ...acc, ...flattenDeepObject(obj[cur]) }
         : { ...acc, [cur]: obj[cur] },
     {}
@@ -64,8 +64,8 @@ export const flattenDeepObject = (
 
 export const removeDiacritics = (str: string) => {
   return str
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/đ/g, 'd')
-    .replace(/Đ/g, 'D');
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D");
 };
