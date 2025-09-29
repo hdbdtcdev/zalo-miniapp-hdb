@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import {  useEffect } from 'react';
 import { useDispatch, useSelector } from '@/lib/redux';
 import { useTranslation } from '@/services/i18n';
 import { fetchCardAvailableListThunk, selectCardList, selectStatus } from '../redux';

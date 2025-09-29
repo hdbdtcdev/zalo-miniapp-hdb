@@ -40,10 +40,7 @@ class AxiosService {
     config: RequestConfig | undefined = undefined
   ): Promise<ApiResponse<T>> {
     try {
-      console.log(`KhanhNHB url ===> ${JSON.stringify(url)}`);
       const response = await this.client.post(url, data, config);
-      
-
       return {
         data: response.data,
       };

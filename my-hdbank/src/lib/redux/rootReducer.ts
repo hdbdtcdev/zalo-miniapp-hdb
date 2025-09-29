@@ -7,8 +7,10 @@
 // import DOPLoginSlice from '@src/presentation/dop_login/redux/slice';
 // import { EsignSlice } from '@src/presentation/card_activation/redux/slice';
 // import { EsignEasycaSlice } from '@src/presentation/esign_easy_ca/redux/slice';
+import { cardAvailableSlice } from "@/presentation/pages/home/redux/card-available/slice";
 
 import cardSlice from "@/presentation/pages/them-thong-tin/redux/cardSlice";
 export const reducer = {
   card: cardSlice.reducer,
+  card_available: cardAvailableSlice.reducer,
 };

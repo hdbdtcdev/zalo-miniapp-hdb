@@ -1,38 +1,68 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  type PropsWithChildren,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+import {
+  DEFAULT_LANGUAGE,
+  initializeI18n,
+  LANGUAGE_PREFERENCE_KEY,
+} from './initializeI18n';
+import i18n, { type InitOptions } from 'i18next';
+import { WebStorage } from '../storage';
 
-type Language = "en" | "vi";
-
-interface LangContextValue {
-  language: Language;
-  changeLanguage: (lng: Language) => void;
+export interface LanguageContextType {
+  i18n: typeof i18n;
+  language: string;
+  changeLanguage: (lng: string) => Promise<void>;
 }
 
-const LanguageContext = createContext<LangContextValue | undefined>(undefined);
+export const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+);
 
-export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
-  const [language, setLanguage] = useState<Language>(
-    (localStorage.getItem("lang") as Language) || "en"
-  );
+interface LanguageProviderProps {
+  initOptions?: InitOptions;
+  shouldInitializeI18n?: boolean;
+}
 
-  const changeLanguage = (lng: Language) => {
-    setLanguage(lng);
-    localStorage.setItem("lang", lng);
-  };
+export const LanguageProvider = ({
+  children,
+  initOptions,
+  shouldInitializeI18n = true,
+}: PropsWithChildren<LanguageProviderProps>) => {
+  const [language, setLanguage] = useState<string>(i18n.language);
 
-  useEffect(() => {
-    const stored = localStorage.getItem("lang") as Language;
-    if (stored) setLanguage(stored);
+  const changeLanguage = useCallback(async (lng: string) => {
+    await WebStorage.setItem(LANGUAGE_PREFERENCE_KEY, lng);
+    await i18n.changeLanguage(lng);
   }, []);
 
+  useEffect(() => {
+    const initI18n = async () => {
+      const lng = await WebStorage.getItem(LANGUAGE_PREFERENCE_KEY);
+
+      if (shouldInitializeI18n) {
+        await initializeI18n({ lng: lng || DEFAULT_LANGUAGE, ...initOptions });
+      }
+      setLanguage(lng || i18n.language);
+
+      i18n.on('languageChanged', (lng) => {
+        WebStorage.setItem(LANGUAGE_PREFERENCE_KEY, lng);
+        setLanguage(lng);
+      });
+    };
+
+    initI18n();
+
+    return () => i18n.off('languageChanged');
+  }, [initOptions]);
+
   return (
-    <LanguageContext.Provider value={{ language, changeLanguage }}>
+    <LanguageContext.Provider value={{ i18n, language, changeLanguage }}>
       {children}
     </LanguageContext.Provider>
   );
-};
-
-export const useLanguage = () => {
-  const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error("useLanguage must be used inside LanguageProvider");
-  return ctx;
 };
