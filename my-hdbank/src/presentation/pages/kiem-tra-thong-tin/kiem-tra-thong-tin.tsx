@@ -1,10 +1,13 @@
 import { IMAGE_PNG } from "@/asset/png";
+import { useFriendPicker } from "@/hooks/useFriendPicker";
+import { useDispatch } from "@/lib/redux";
 import { BottomSheetInput } from "@/presentation/bottomSheet/BottomSheetInput";
 import { BottomSheetList } from "@/presentation/bottomSheet/BottomSheetList";
 import { BottomSheetEditAddress } from "@/presentation/bottomSheet/dia-chi";
 import { MoveLeft } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Header, Page, Text, useNavigate } from "zmp-ui";
+import { extractAddressThunk } from "./thunk";
 
 type InfoRowProps = {
   label: string;
@@ -88,11 +91,24 @@ const InfoCard = ({ icon, title, subtitle, rows }: InfoCardProps) => (
 
 export const CustomerInfoPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [bsVisibleReferralCode, setBsVisibleReferralCode] = useState(false);
   const [bsVisibleCMND, setBsVisibleCMND] = useState(false);
   const [bsVisibleAddrPermanent, setBsVisibleAddrPermanent] = useState(false);
   const [bsVisibleJob, setBsVisibleJob] = useState(false);
   const [bsVisiblePositionJob, setBsVisiblePositionJob] = useState(false);
+  const { pickFriends } = useFriendPicker();
+  useEffect(() => {
+    dispatch(
+      extractAddressThunk({
+        address: "thôn Khe Qué, xã Viễn Sơn, Văn Yên, Yên Bái",
+        contactAddr: "thôn Khe Qué, xã Viễn Sơn, Văn Yên, Yên Bái",
+        channel: "MB",
+      })
+    ).then((res) => {
+      console.log("BINHPV LOG APIS", JSON.stringify(res, null, 2));
+    });
+  }, []);
 
   return (
     <>
