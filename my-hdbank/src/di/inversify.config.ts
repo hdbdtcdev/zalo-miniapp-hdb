@@ -6,6 +6,8 @@ import { CardAvailableListRepository } from "@/infrastructure/persistent/card/ca
 import { IDOPRepository } from "@/domain/interfaces";
 import { DOPRepository } from "@/infrastructure/persistent/dop/dop.repository";
 import { DOPGetAuthHandler } from "@/application/dop/dop-get-auth-handler";
+import { IUploadRepository } from "@/domain/interfaces/upload-repository";
+import { UploadRepository } from "@/infrastructure/persistent/dop/upload.repository";
 
 const container = new Container();
 
@@ -16,9 +18,13 @@ container
   .bind<CardAvailableListHandler>(TYPES.CardAvailableListHandler)
   .to(CardAvailableListHandler);
 
+//#region DOP
 container.bind<IDOPRepository>(TYPES.IDOPRepository).to(DOPRepository);
 container
   .bind<DOPGetAuthHandler>(TYPES.DOPGetAuthHandler)
   .to(DOPGetAuthHandler);
+
+container.bind<IUploadRepository>(TYPES.IUploadRepository).to(UploadRepository);
+//#endregion
 
 export { container };

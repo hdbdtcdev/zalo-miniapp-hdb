@@ -22,9 +22,10 @@ export const DOPIDResultScanScreen: React.FC<IProps> = ({}) => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    let task = setTimeout(() => {
       nextScreen();
     }, 1000);
+    return () => clearTimeout(task);
   }, []);
 
   // Main Screen
