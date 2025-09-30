@@ -1,5 +1,9 @@
-import { cardAvailableSlice } from "@/presentation/pages/home/redux/card-available/slice";
+import { cvpCommonSlice } from "@/presentation/cvp_common";
+import { cardAvailableDetailSlice } from "@/presentation/pages/card-available-detail/redux";
+import { cardAvailableListSlice } from "@/presentation/pages/card-available-list/redux";
 
 export const reducer = {
-  card_available: cardAvailableSlice.reducer
+  cvp_common: cvpCommonSlice.reducer,
+  card_available_list: cardAvailableListSlice.reducer,
+  card_available_detail: cardAvailableDetailSlice.reducer,
 };

@@ -1,8 +1,8 @@
 import { inject } from 'inversify';
 import { TYPES } from '@/di/types/types';
-import { ICardAvailableListRepository } from '@/domain/interfaces/card-available-list';
-import { CardAvailableListDataReq } from '@/domain/entities/cardAvailableList';
 import { Command } from '@/domain/models';
+import { CardAvailableListDataReq } from '@/domain/entities/card/cardAvailableList';
+import { ICardAvailableListRepository } from '@/domain/interfaces/card/card-available-list';
 
 export class CardAvailableListHandler {
     private readonly _repository: ICardAvailableListRepository;

@@ -1,13 +1,13 @@
-import {  useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from '@/lib/redux';
 import { useTranslation } from '@/services/i18n';
-import { fetchCardAvailableListThunk, selectCardList, selectStatus } from '../redux';
+import { fetchCardAvailableListThunk, selectCardList, selectStatus } from '@/presentation/pages/card-available-list/redux';
 
-export const useCardAvailable = () => {
+export const useCardAvailableDetail = () => {
   const { t } = useTranslation(['ns']);
   const dispatch = useDispatch();
   const cardListData = useSelector(selectCardList);
-  const cardListStatus = useSelector(selectStatus);
+  const status = useSelector(selectStatus);
 
   const fetchCardAvailable = async () => {
 
@@ -24,5 +24,5 @@ export const useCardAvailable = () => {
     }
   }, []);
 
-  return { cardListStatus };
+  return { status };
 };

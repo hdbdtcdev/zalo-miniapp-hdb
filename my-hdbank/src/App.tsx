@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
-
-import { ZMPRouter, Route, AnimationRoutes } from "zmp-ui";
-
-import HomePage from "@/presentation/pages/HomePage";
-import CreditCardPreview from "@/presentation/pages/card/CreditCardPreview";
-import { DOPIntroScreen } from "@/presentation/pages/dop-intro/DOPIntroScreen";
 import { Device } from "./utils";
+import React, { useEffect } from "react";
+import { ZMPRouter, Route, AnimationRoutes } from "zmp-ui";
+import { DOPIntroScreen } from "@/presentation/pages/dop-intro/DOPIntroScreen";
+import CardAvailableList from "@/presentation/pages/card-available-list/CardAvailableList";
+import CardAvaialbleDetail from "@/presentation/pages/card-available-detail/CardAvailableDetail";
 
 const App: React.FC = () => {
 
@@ -16,8 +14,8 @@ const App: React.FC = () => {
   return (
     <ZMPRouter>
       <AnimationRoutes>
-        <Route path="/" Component={HomePage} />
-        <Route path="/CreditCardPreview" Component={CreditCardPreview} />
+        <Route path="/" Component={CardAvailableList} />
+        <Route path="/card-available-detail" Component={CardAvaialbleDetail} />
         <Route path="/dop-intro" Component={DOPIntroScreen} />
       </AnimationRoutes>
     </ZMPRouter>

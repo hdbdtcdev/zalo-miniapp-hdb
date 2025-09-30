@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initialCardAvailableState } from './type';
-import { fetchCardAvailableListThunk } from '../thunk';
+import { fetchCardAvailableListThunk } from './thunk';
 
-export const cardAvailableSlice = createSlice({
-  name: 'home/card_available',
+export const cardAvailableListSlice = createSlice({
+  name: 'home/card_available_list',
   initialState: initialCardAvailableState,
   reducers: {
     setError: (state, { payload }) => {
@@ -50,5 +50,5 @@ export const cardAvailableSlice = createSlice({
   },
 });
 
-export const { setCardActive } = cardAvailableSlice.actions;
-export default cardAvailableSlice.reducer;
+export const { setCardActive } = cardAvailableListSlice.actions;
+export default cardAvailableListSlice.reducer;

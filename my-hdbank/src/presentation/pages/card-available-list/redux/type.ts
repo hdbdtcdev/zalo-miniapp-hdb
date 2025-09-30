@@ -1,4 +1,4 @@
-import { CardAvailableListDataRes } from "@/domain/entities/cardAvailableList";
+import { CardAvailableListDataRes } from "@/domain/entities/card/cardAvailableList";
 import { StatusResponse } from "@/infrastructure/network";
 
 export interface CardAvailableState {
