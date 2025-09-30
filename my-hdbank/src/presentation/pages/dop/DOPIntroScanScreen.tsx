@@ -5,8 +5,8 @@ import useNavigate from "zmp-ui/useNavigate";
 import { Page, Header, Box, Text } from "zmp-ui";
 import Lottie from "lottie-react-web";
 import { StepLineView } from "@/presentation/components";
-import { getDOPAuthThunk } from "./redux";
-import { useDispatch } from "@/lib/redux";
+import { getDOPAuthThunk, selectAuth } from "./redux";
+import { useDispatch, useSelector } from "@/lib/redux";
 
 interface IProps {}
 
@@ -22,14 +22,19 @@ const defaultOptions = {
 export const DOPIntroScanScreen: React.FC<IProps> = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const dopAuth = useSelector(selectAuth);
+
   const startCapture = () => {
-    navigate("/dop-id-front-scan");
-    // navigate("/dop-nfc-scan");
+    dispatch(getDOPAuthThunk());
   };
 
   useEffect(() => {
-    dispatch(getDOPAuthThunk());
-  }, []);
+    console.log("DOP Auth changed: ", dopAuth);
+    if (dopAuth?.access_token) {
+      navigate("/dop-id-front-scan");
+      // navigate("/dop-nfc-scan");
+    }
+  }, [dopAuth]);
 
   // Main Screen
   return (
