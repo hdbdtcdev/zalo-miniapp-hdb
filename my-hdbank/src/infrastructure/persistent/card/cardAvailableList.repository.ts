@@ -21,6 +21,7 @@ export class CardAvailableListRepository extends BaseService implements ICardAva
     ): Promise<ApiResponse<CardAvailableListDataRes[]>> {
         const request = command as unknown as CardAvailableListDataReq;
         const url = '/dop-card-list-available';
+
         const response = await this.post(
             url,
             request
