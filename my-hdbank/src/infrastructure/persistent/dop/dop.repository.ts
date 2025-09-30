@@ -12,6 +12,7 @@ import {
   IdentifyFrontOCRResponse,
   IdentifyNFCRequest,
   IdentifyNFCResponse,
+  IdentifyRearOCRRequest,
 } from "@/domain/entities/dop";
 
 @injectable()
@@ -41,7 +42,7 @@ export class DOPRepository extends BaseService implements IDOPRepository {
   }
 
   identifyRearOCR(
-    body: IdentifyFrontOCRRequest
+    body: IdentifyRearOCRRequest
   ): Promise<ApiResponse<IdentifyFrontOCRResponse> | undefined> {
     return this.post("/ai/v1/ocr/id", body);
   }

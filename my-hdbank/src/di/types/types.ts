@@ -5,6 +5,10 @@ const TYPES = {
   IUploadRepository: Symbol.for("IUploadRepository"),
 
   DOPGetAuthHandler: Symbol.for("DOPGetAuthHandler"),
+  DOPScanFrontHandler: Symbol.for("DOPScanFrontHandler"),
+  DOPScanRearHandler: Symbol.for("DOPScanRearHandler"),
+  DOPScanLiveFaceHandler: Symbol.for("DOPScanLiveFaceHandler"),
+  DOPLogNFCHandler: Symbol.for("DOPLogNFCHandler"),
 };
 
 export { TYPES };
