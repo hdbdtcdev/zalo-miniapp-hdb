@@ -7,6 +7,8 @@ import {
   WardRequestData,
 } from "@/application/address/address_body";
 import { AddressHandler } from "@/application/address/address_handler";
+import { GetJobRequest, GetJobRequestData } from "@/application/job/job_body";
+import { JobHandler } from "@/application/job/job_handler";
 import { container } from "@/di/inversify.config";
 import { TYPES } from "@/di/types/types";
 import { Command } from "@/domain/models/command";
@@ -52,5 +54,19 @@ export const extractAddressThunk = createAsyncThunk(
     const command = new Command({ command: payloadReq });
 
     return await extractAddressHandler.handle_extract_address(command);
+  }
+);
+export const getJobThunk = createAsyncThunk(
+  "/v1/dop-get-careers-positions",
+  async () => {
+    const handler = container.get<JobHandler>(TYPES.JobHandler);
+
+    const payloadReq: GetJobRequest = {
+      screenName: "SDKSERVICE-DOP-GET-CAREERS-POSITIONS",
+      data: {},
+    };
+    const command = new Command({ command: payloadReq });
+
+    return await handler.get_job_handler(command);
   }
 );

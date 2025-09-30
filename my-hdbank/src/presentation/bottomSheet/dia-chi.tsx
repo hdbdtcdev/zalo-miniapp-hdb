@@ -1,6 +1,6 @@
 import { Box, Input, Text } from "zmp-ui";
 import { BottomSheetBase } from "./BottomSheetBase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BottomSheetProvinceWard, FullAddress } from "./tinh-thanh-phuong-xa";
 
 type BottomSheetEditAddressProps = {
@@ -13,7 +13,9 @@ type BottomSheetEditAddressProps = {
 export const BottomSheetEditAddress = (props: BottomSheetEditAddressProps) => {
   const { visible, onClick, fullAddress, maskCloseable, onClose } = props;
   const [bsProvinceWard, setBsProvinceWard] = useState(false);
-  const [addr, setAddr] = useState<FullAddress>(fullAddress ?? {});
+  const { addressDetail, province, ward } = fullAddress ?? ({} as FullAddress);
+  const [detailAddr, setDetailAddr] = useState(addressDetail);
+  const [fullAddr, setFullAddr] = useState(fullAddress);
   return (
     <>
       <BottomSheetBase
@@ -35,7 +37,7 @@ export const BottomSheetEditAddress = (props: BottomSheetEditAddressProps) => {
               Số nhà, tên đường
             </Text>
 
-            <Input
+            <input
               placeholder={"Số nhà, tên đường"}
               style={{
                 border: 0,
@@ -44,11 +46,13 @@ export const BottomSheetEditAddress = (props: BottomSheetEditAddressProps) => {
                 marginTop: 14,
                 marginBottom: 14,
                 height: 21,
+                outline: "none",
+                boxShadow: "none",
                 paddingLeft: 0,
               }}
-              value={addr.addressDetail}
+              value={detailAddr}
               onChange={(text) => {
-                setAddr({ ...addr, addressDetail: text.target.value });
+                setDetailAddr(text.target.value);
               }}
             />
           </Box>
@@ -85,7 +89,10 @@ export const BottomSheetEditAddress = (props: BottomSheetEditAddressProps) => {
                   marginBottom: 4,
                   height: 21,
                 }}
-              >{`${addr.ward?.value}, ${addr.province?.value}`}</Text>
+              >
+                {fullAddr &&
+                  `${fullAddr?.ward?.value}, ${fullAddr?.province?.value}`}
+              </Text>
             </Box>
             <img
               src="https://static-cdn.hdbank.com.vn/dibank/loan/assets/images/icons/right_arrow.png"
@@ -114,7 +121,13 @@ export const BottomSheetEditAddress = (props: BottomSheetEditAddressProps) => {
                 fontSize: 16,
                 boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
               }}
-              onClick={() => props.onClick && props.onClick(addr)}
+              onClick={() => {
+                props.onClick &&
+                  props.onClick({
+                    ...fullAddr,
+                    addressDetail: detailAddr,
+                  });
+              }}
             >
               Xác nhận
             </button>
@@ -125,7 +138,7 @@ export const BottomSheetEditAddress = (props: BottomSheetEditAddressProps) => {
         visible={bsProvinceWard}
         fullAddr={fullAddress}
         confirmAddr={(fullAddr) => {
-          setAddr(fullAddr);
+          setFullAddr(fullAddr);
           setBsProvinceWard(false);
         }}
         maskCloseable={true}

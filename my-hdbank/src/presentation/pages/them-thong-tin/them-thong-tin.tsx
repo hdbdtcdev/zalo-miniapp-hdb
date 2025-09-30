@@ -308,12 +308,12 @@ export const AddInfoCustomerPage = () => {
         visible={bsEpassAmount}
         title="Số tiền GD thực tế qua ePass trung bình/tháng trong 6 tháng gần nhất"
         listItem={[
-          { code: "01", value: "Từ 200,000 - 300,000 VND" },
-          { code: "02", value: "Từ 300,000 - 500,000 VND" },
-          { code: "03", value: "Từ 500,000 - 700,000 VND" },
-          { code: "04", value: "Từ 700,000 - 1,000,000 VND" },
-          { code: "05", value: "Từ 1,000,000 - 1,500,000 VND" },
-          { code: "06", value: "Từ 1,500,000 VND" },
+          { id: "01", value: "Từ 200,000 - 300,000 VND" },
+          { id: "02", value: "Từ 300,000 - 500,000 VND" },
+          { id: "03", value: "Từ 500,000 - 700,000 VND" },
+          { id: "04", value: "Từ 700,000 - 1,000,000 VND" },
+          { id: "05", value: "Từ 1,000,000 - 1,500,000 VND" },
+          { id: "06", value: "Từ 1,500,000 VND" },
         ]}
         itemView={(item, index) => {
           return (
@@ -322,9 +322,7 @@ export const AddInfoCustomerPage = () => {
                 <Text style={{ flexGrow: 1 }}>{item.value}</Text>
                 <img
                   src={
-                    selectAmountEpass?.code === item.code
-                      ? ic_check
-                      : ic_uncheck
+                    selectAmountEpass?.id === item.id ? ic_check : ic_uncheck
                   }
                   onClick={() => {
                     setSelectAmountEpass(item);

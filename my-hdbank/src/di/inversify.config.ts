@@ -6,6 +6,9 @@ import { CardAvailableListRepository } from "@/infrastructure/persistent/card/ca
 import { IAddressRepository } from "@/domain/interfaces/address";
 import { AddressRepository } from "@/infrastructure/persistent/address/address.repository";
 import { AddressHandler } from "@/application/address/address_handler";
+import { IJobRepository } from "@/domain/interfaces/job";
+import { JobRepository } from "@/infrastructure/persistent/job/job.repository";
+import { JobHandler } from "@/application/job/job_handler";
 
 const container = new Container();
 
@@ -21,5 +24,8 @@ container
   .to(AddressRepository);
 
 container.bind<AddressHandler>(TYPES.AddressHandler).to(AddressHandler);
+container.bind<IJobRepository>(TYPES.IJobRepository).to(JobRepository);
+
+container.bind<JobHandler>(TYPES.JobHandler).to(JobHandler);
 
 export { container };

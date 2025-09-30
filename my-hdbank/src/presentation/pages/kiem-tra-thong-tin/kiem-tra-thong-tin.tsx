@@ -2,24 +2,44 @@ import { IMAGE_PNG } from "@/asset/png";
 import { useFriendPicker } from "@/hooks/useFriendPicker";
 import { useDispatch } from "@/lib/redux";
 import { BottomSheetInput } from "@/presentation/bottomSheet/BottomSheetInput";
-import { BottomSheetList } from "@/presentation/bottomSheet/BottomSheetList";
+import {
+  BottomSheetList,
+  ItemModel,
+} from "@/presentation/bottomSheet/BottomSheetList";
 import { BottomSheetEditAddress } from "@/presentation/bottomSheet/dia-chi";
 import { MoveLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Box, Header, Page, Text, useNavigate } from "zmp-ui";
-import { extractAddressThunk } from "./thunk";
+import { extractAddressThunk, getJobThunk } from "./thunk";
+import { useSelector } from "react-redux";
+import { selectCustomerInfo, selectJobData } from "./selector";
+import { AddressData, ExtractAddressResponse } from "@/domain/entities/address";
+import {
+  CustomerInfoModel,
+  updateAddrContact,
+  updateAddrPermanet,
+  updateCustomerInfo,
+} from "./slice";
+import { flatten } from "lodash";
+import { GetJobResponse } from "@/domain/entities/job";
 
 type InfoRowProps = {
   label: string;
   value: string;
   withArrow?: boolean;
   onClick?: () => void;
+  isHide?: boolean;
 };
-const InfoRow = ({ label, value, withArrow, onClick }: InfoRowProps) => (
+const InfoRow = ({
+  label,
+  value,
+  withArrow,
+  onClick,
+  isHide,
+}: InfoRowProps) => (
   <Box
     flex
     flexDirection="row"
-    alignItems="center"
     style={{ marginTop: 8 }}
     onClick={() => {
       withArrow && onClick && onClick();
@@ -30,23 +50,25 @@ const InfoRow = ({ label, value, withArrow, onClick }: InfoRowProps) => (
     >
       {label}
     </Text>
-    <Text
-      style={{
-        fontWeight: 600,
-        fontSize: 14,
-        textAlign: "right",
-        flexGrow: 1,
-        marginRight: 8,
-      }}
-    >
-      {value}
-    </Text>
-    {withArrow && (
-      <img
-        src="https://static-cdn.hdbank.com.vn/dibank/loan/assets/images/icons/right_arrow.png"
-        style={{ width: 8, height: 11 }}
-      />
-    )}
+    <Box flex flexDirection="row" alignItems="center" style={{ flexGrow: 1 }}>
+      <Text
+        style={{
+          fontWeight: 600,
+          fontSize: 14,
+          textAlign: "right",
+          flexGrow: 1,
+          marginRight: 8,
+        }}
+      >
+        {value}
+      </Text>
+      {withArrow && (
+        <img
+          src="https://static-cdn.hdbank.com.vn/dibank/loan/assets/images/icons/right_arrow.png"
+          style={{ width: 8, height: 11 }}
+        />
+      )}
+    </Box>
   </Box>
 );
 
@@ -82,9 +104,11 @@ const InfoCard = ({ icon, title, subtitle, rows }: InfoCardProps) => (
       </Box>
     </Box>
     <Box style={{ padding: 16 }}>
-      {rows.map((row, idx) => (
-        <InfoRow key={idx} {...row} />
-      ))}
+      {rows
+        .filter((item) => !item.isHide)
+        .map((row, idx) => (
+          <InfoRow key={idx} {...row} />
+        ))}
     </Box>
   </Box>
 );
@@ -95,18 +119,69 @@ export const CustomerInfoPage = () => {
   const [bsVisibleReferralCode, setBsVisibleReferralCode] = useState(false);
   const [bsVisibleCMND, setBsVisibleCMND] = useState(false);
   const [bsVisibleAddrPermanent, setBsVisibleAddrPermanent] = useState(false);
+  const [bsVisibleAddrContact, setBsVisibleAddrContact] = useState(false);
   const [bsVisibleJob, setBsVisibleJob] = useState(false);
   const [bsVisiblePositionJob, setBsVisiblePositionJob] = useState(false);
-  const { pickFriends } = useFriendPicker();
+  const customerInfo = useSelector(selectCustomerInfo);
+  const { addrContact, addrPermanent, referralCode, cmnd } = customerInfo;
+  const [loading, setLoading] = useState(false);
+  const [listCareer, setListCareer] = useState<ItemModel[]>();
+  const [listPosition, setListPosition] = useState<ItemModel[]>();
+  const { careers, positions } = useSelector(selectJobData);
   useEffect(() => {
-    dispatch(
-      extractAddressThunk({
-        address: "thôn Khe Qué, xã Viễn Sơn, Văn Yên, Yên Bái",
-        contactAddr: "thôn Khe Qué, xã Viễn Sơn, Văn Yên, Yên Bái",
-        channel: "MB",
-      })
-    ).then((res) => {
-      console.log("BINHPV LOG APIS", JSON.stringify(res, null, 2));
+    setLoading(true);
+    Promise.all([
+      dispatch(
+        extractAddressThunk({
+          address: "thôn Khe Qué, xã Viễn Sơn, Văn Yên, Yên Bái",
+          contactAddr: "thôn Khe Qué, xã Viễn Sơn, Văn Yên, Yên Bái",
+          channel: "MB",
+        })
+      ).then((res) => {
+        const response = res.payload as ExtractAddressResponse;
+        if (response.resultCode !== "00") {
+          console.log("BINHPV LOG APIS", JSON.stringify(res, null, 2));
+          return;
+        }
+        dispatch(
+          updateAddrContact({
+            addressDetail: response.data.contactDetail,
+            province: {
+              id: response.data.contactProvinceId,
+              value: response.data.contactProvinceName,
+            },
+            ward: {
+              id: response.data.contactWardId,
+              value: response.data.contactWardName,
+            },
+          })
+        );
+        dispatch(
+          updateAddrPermanet({
+            addressDetail: response.data.addrDetail,
+            province: {
+              id: response.data.addrProvinceId,
+              value: response.data.addrProvinceName,
+            },
+            ward: {
+              id: response.data.addrWardId,
+              value: response.data.addrWardName,
+            },
+          })
+        );
+      }),
+      dispatch(getJobThunk()).then((res) => {
+        const response = res.payload as GetJobResponse;
+        if (response.resultCode !== "00") return;
+        setListCareer(
+          response.data.careers.map((item) => ({
+            id: item.careerId,
+            value: item.careerName,
+          }))
+        );
+      }),
+    ]).finally(() => {
+      setLoading(false);
     });
   }, []);
 
@@ -127,6 +202,7 @@ export const CustomerInfoPage = () => {
               color: "#fff",
             }}
           />
+
           <Box style={{ marginLeft: 16, marginRight: 16 }}>
             <Text
               style={{
@@ -157,7 +233,7 @@ export const CustomerInfoPage = () => {
                 { label: "Ngày hết hạn", value: "31/12/2030" },
                 {
                   label: "Số CMND cũ",
-                  value: "001304027098",
+                  value: cmnd ?? "",
                   withArrow: true,
                   onClick: () => {
                     setBsVisibleCMND(true);
@@ -175,7 +251,7 @@ export const CustomerInfoPage = () => {
                 { label: "Giới tính", value: "Nam" },
                 {
                   label: "Nơi thường trú",
-                  value: "7 Thai Ha Street, An Khanh Ward, Vung Tau City, BRVT",
+                  value: `${addrPermanent?.addressDetail}, ${addrPermanent?.ward?.value}, ${addrPermanent?.province?.value}`,
                   withArrow: true,
                   onClick: () => {
                     setBsVisibleAddrPermanent(true);
@@ -183,12 +259,15 @@ export const CustomerInfoPage = () => {
                 },
                 {
                   label: "Nơi ở hiện tại",
-                  value: "7 Thai Ha Street, An Khanh Ward, Vung Tau City, BRVT",
+                  value: `${addrContact?.addressDetail}, ${addrContact?.ward?.value}, ${addrContact?.province?.value}`,
                   withArrow: true,
+                  onClick: () => {
+                    setBsVisibleAddrContact(true);
+                  },
                 },
                 {
                   label: "Công việc",
-                  value: "Nhân viên văn phòng",
+                  value: customerInfo.career?.careerName ?? "Nhập",
                   withArrow: true,
                   onClick: () => {
                     setBsVisibleJob(true);
@@ -196,11 +275,12 @@ export const CustomerInfoPage = () => {
                 },
                 {
                   label: "Vị trí công việc",
-                  value: "Nhân viên",
+                  value: customerInfo.position?.positionName ?? "",
                   withArrow: true,
                   onClick: () => {
                     setBsVisiblePositionJob(true);
                   },
+                  isHide: !customerInfo.career,
                 },
               ]}
             />
@@ -219,13 +299,29 @@ export const CustomerInfoPage = () => {
                 setBsVisibleReferralCode(true);
               }}
             >
-              <Text style={{ flexGrow: 1 }}>Bạn có mã giới thiệu?</Text>
-              <Box flex justifyContent="center" alignItems="center">
-                <img
-                  src="https://static-cdn.hdbank.com.vn/dibank/loan/assets/images/icons/right_arrow.png"
-                  style={{ width: 8, height: 11 }}
-                />
-              </Box>
+              {!referralCode ? (
+                <Box flex flexDirection="row" style={{ width: "100%" }}>
+                  <Text style={{ flexGrow: 1 }}>Bạn có mã giới thiệu?</Text>
+                  <Box flex justifyContent="center" alignItems="center">
+                    <img
+                      src="https://static-cdn.hdbank.com.vn/dibank/loan/assets/images/icons/right_arrow.png"
+                      style={{ width: 8, height: 11 }}
+                    />
+                  </Box>
+                </Box>
+              ) : (
+                <Text
+                  style={{
+                    textAlign: "end",
+                    color: "black",
+                    fontWeight: 700,
+                    marginTop: 4,
+                    width: "100%",
+                  }}
+                >
+                  {referralCode}
+                </Text>
+              )}
             </Box>
 
             <Box
@@ -260,15 +356,22 @@ export const CustomerInfoPage = () => {
       </Page>
       <BottomSheetInput
         visible={bsVisibleReferralCode}
-        value={""}
+        value={referralCode ?? ""}
         title="Mã giới thiệu"
         label="Nhập mã giới thiệu"
         isShowClearText={true}
-        onClick={(_text) => {
+        onConfirm={(text) => {
+          dispatch(updateCustomerInfo({ referralCode: text }));
           setBsVisibleReferralCode(false);
         }}
         maskClosable={true}
         onClose={() => setBsVisibleReferralCode(false)}
+        inputProps={{
+          type: "number",
+          inputMode: "numeric",
+          pattern: "[0-9]*",
+          maxLength: 10,
+        }}
       />
       <BottomSheetInput
         visible={bsVisibleCMND}
@@ -276,15 +379,24 @@ export const CustomerInfoPage = () => {
         title="Số CMND cũ"
         label="Nhập số CMND cũ"
         isShowClearText={true}
-        onClick={(_text) => {
+        onConfirm={(text) => {
+          dispatch(updateCustomerInfo({ cmnd: text }));
           setBsVisibleCMND(false);
         }}
         maskClosable={true}
         onClose={() => setBsVisibleCMND(false)}
+        inputProps={{
+          type: "number",
+          inputMode: "numeric",
+          pattern: "[0-9]*",
+          maxLength: 10,
+        }}
       />
       <BottomSheetEditAddress
         visible={bsVisibleAddrPermanent}
-        onClick={() => {
+        fullAddress={addrPermanent}
+        onClick={(addr) => {
+          dispatch(updateAddrPermanet(addr));
           setBsVisibleAddrPermanent(false);
         }}
         maskCloseable={true}
@@ -292,28 +404,53 @@ export const CustomerInfoPage = () => {
           setBsVisibleAddrPermanent(false);
         }}
       />
+      <BottomSheetEditAddress
+        visible={bsVisibleAddrContact}
+        fullAddress={addrContact}
+        onClick={(addr) => {
+          dispatch(updateAddrContact(addr));
+          setBsVisibleAddrContact(false);
+        }}
+        maskCloseable={true}
+        onClose={() => {
+          setBsVisibleAddrContact(false);
+        }}
+      />
       <BottomSheetList
         visible={bsVisibleJob}
         title="Công việc"
         content="Vui lòng chọn công việc hiện tại"
-        listItem={[
-          { code: "01", value: "Nội trợ" },
-          { code: "02", value: "Kinh doanh" },
-          { code: "03", value: "Thông tin và truyền thông" },
-          { code: "04", value: "Giáo dục - Đào tạo" },
-          { code: "05", value: "Y tế" },
-          { code: "00", value: "Khác" },
-        ]}
+        listItem={listCareer ?? []}
         itemView={(item, index) => {
           return (
             <Box
               pr={4}
               pl={4}
               onClick={() => {
+                if (careers && positions) {
+                  const careerItem = careers.find(
+                    (itemCareer) => itemCareer.careerId === item.id
+                  );
+                  setListPosition(
+                    positions
+                      .filter((position) => position.careerId === item.id)
+                      .map((itemPosition) => ({
+                        id: itemPosition.positionId,
+                        value: itemPosition.positionName,
+                      }))
+                  );
+                  dispatch(updateCustomerInfo({ career: careerItem }));
+                }
                 setBsVisibleJob(false);
+                setBsVisiblePositionJob(true);
               }}
             >
-              <Text style={{ marginTop: 15, marginBottom: 15 }}>
+              <Text
+                style={{
+                  marginTop: 15,
+                  marginBottom: 15,
+                }}
+              >
                 {item.value}
               </Text>
               {index != 5 && (
@@ -328,20 +465,19 @@ export const CustomerInfoPage = () => {
         visible={bsVisiblePositionJob}
         title="Vị trí công việc"
         content="Vui lòng chọn vị trí công việc của bạn"
-        listItem={[
-          { code: "01", value: "Nhân viên" },
-          { code: "02", value: "Kế toán" },
-          { code: "03", value: "Trưởng phòng" },
-          { code: "04", value: "Quản lý" },
-          { code: "05", value: "Thu Ngân " },
-          { code: "00", value: "Giao hàng" },
-        ]}
+        listItem={listPosition ?? []}
         itemView={(item, index) => {
           return (
             <Box
               pr={4}
               pl={4}
               onClick={() => {
+                if (positions) {
+                  const positionItem = positions.find(
+                    (itemCareer) => itemCareer.positionId === item.id
+                  );
+                  dispatch(updateCustomerInfo({ position: positionItem }));
+                }
                 setBsVisiblePositionJob(false);
               }}
             >

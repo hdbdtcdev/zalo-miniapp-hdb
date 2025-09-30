@@ -8,11 +8,11 @@
 // import { EsignSlice } from '@src/presentation/card_activation/redux/slice';
 // import { EsignEasycaSlice } from '@src/presentation/esign_easy_ca/redux/slice';
 import { cardAvailableSlice } from "@/presentation/pages/home/redux/card-available/slice";
-import addressSlice from "@/presentation/pages/kiem-tra-thong-tin/slice";
+import customerInfoSlice from "@/presentation/pages/kiem-tra-thong-tin/slice";
 
 import cardSlice from "@/presentation/pages/them-thong-tin/redux/cardSlice";
 export const reducer = {
   card: cardSlice.reducer,
   card_available: cardAvailableSlice.reducer,
-  address: addressSlice.reducer,
+  customerInfo: customerInfoSlice.reducer,
 };

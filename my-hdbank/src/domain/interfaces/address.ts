@@ -9,11 +9,9 @@ import {
 export interface IAddressRepository {
   extractAddress<TParameter>(
     command: Command<TParameter>
-  ): Promise<ApiResponse<ExtractAddressResponse>>;
+  ): Promise<ExtractAddressResponse>;
   getProvince<TParameter>(
     command: Command<TParameter>
-  ): Promise<ApiResponse<ProvinceResponse>>;
-  getWard<TParameter>(
-    command: Command<TParameter>
-  ): Promise<ApiResponse<WardResponse>>;
+  ): Promise<ProvinceResponse>;
+  getWard<TParameter>(command: Command<TParameter>): Promise<WardResponse>;
 }

@@ -1,24 +1,19 @@
 import {
-  CardAvailableListDataReq,
-  CardAvailableListDataRes,
-} from "@/domain/entities/cardAvailableList";
-import { ICardAvailableListRepository } from "@/domain/interfaces/card-available-list";
-import { Command } from "@/domain/models";
-import { ApiResponse } from "@/infrastructure/network";
-import { BaseService } from "@/infrastructure/services/base-service";
-import { injectable } from "inversify";
+  ExtractAddressRequest,
+  ProvinceRequest,
+  WardRequest,
+} from "@/application/address/address_body";
 import config from "@/config/config.json";
-import { IAddressRepository } from "@/domain/interfaces/address";
 import {
   ExtractAddressResponse,
   ProvinceResponse,
   WardResponse,
 } from "@/domain/entities/address";
-import {
-  ExtractAddressRequest,
-  ProvinceRequest,
-  WardRequest,
-} from "@/application/address/address_body";
+import { IAddressRepository } from "@/domain/interfaces/address";
+import { Command } from "@/domain/models";
+import { ApiResponse } from "@/infrastructure/network";
+import { BaseService } from "@/infrastructure/services/base-service";
+import { injectable } from "inversify";
 
 @injectable()
 export class AddressRepository
@@ -34,7 +29,7 @@ export class AddressRepository
     const request = command as unknown as ProvinceRequest;
     const url = "/address-provinces";
     const response = await this.post(url, request);
-    return response?.data as ApiResponse<ProvinceResponse>;
+    return response.data as ApiResponse<ProvinceResponse>;
   }
   async getWard<TParameter>(
     command: Command<TParameter>
@@ -42,7 +37,7 @@ export class AddressRepository
     const request = command as unknown as WardRequest;
     const url = "/address-wards";
     const response = await this.post(url, request);
-    return response?.data as ApiResponse<WardResponse>;
+    return response.data as ApiResponse<WardResponse>;
   }
   async extractAddress<TParameter>(
     command: Command<TParameter>
@@ -51,6 +46,6 @@ export class AddressRepository
     const url = "/extract-address";
     const response = await this.post(url, request);
 
-    return response?.data as ApiResponse<ExtractAddressResponse>;
+    return response.data as ApiResponse<ExtractAddressResponse>;
   }
 }

@@ -1,18 +1,25 @@
 import { Box, Input, Text } from "zmp-ui";
 import { BottomSheetBase } from "./BottomSheetBase";
 import ic_search from "@/asset/icon-search.svg";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ic_location from "@/asset/icon-location.svg";
 import ic_close from "@/asset/icon-close.svg";
+import {
+  getProvinceListThunk,
+  getWardListThunk,
+} from "../pages/kiem-tra-thong-tin/thunk";
+import { useDispatch } from "@/lib/redux";
+import { ProvinceResponse, WardResponse } from "@/domain/entities/address";
 
 export interface Address {
   code: string;
   id: string;
   value: string;
+  short?: string;
 }
 export interface Province extends Address {}
 export interface Ward extends Address {
-  provinceCode: string;
+  provinceId: string;
 }
 export interface FullAddress {
   addressDetail?: string;
@@ -34,6 +41,7 @@ export const BottomSheetProvinceWard = (
   props: BottomSheetProvinceWardProps
 ) => {
   const { visible, confirmAddr, fullAddr, maskCloseable, onClose } = props;
+  const dispatch = useDispatch();
   const [selectAddrType, setSelectAddrType] = useState<AddrType>(
     AddrType.PROVINCE
   );
@@ -42,27 +50,57 @@ export const BottomSheetProvinceWard = (
   const [province, setProvince] = useState<Province | undefined>(
     fullAddr?.province
   );
-  const listProvince: Province[] = [
-    { code: "01", id: "", value: "Hồ Chí Minh" },
-    { code: "02", id: "", value: "Hà Nội" },
-    { code: "03", id: "", value: "Đà Nẵng" },
-    { code: "04", id: "", value: "An Giang" },
-    { code: "05", id: "", value: "Đăk Lăk" },
-    { code: "06", id: "", value: "Lâm Đồng" },
-    { code: "07", id: "", value: "Nghệ An" },
-    { code: "08", id: "", value: "Cần Thơ" },
-    { code: "09", id: "", value: "Khánh Hoà" },
-  ];
-  const listWard: Province[] = [
-    { code: "01", id: "", value: "Sài Gòn" },
-    { code: "02", id: "", value: "Tân Định" },
-    { code: "03", id: "", value: "Bến Thành" },
-    { code: "04", id: "", value: "Cầu Ông Lãnh" },
-    { code: "05", id: "", value: "Bàn Cờ" },
-    { code: "06", id: "", value: "Xuân Hòa" },
-    { code: "07", id: "", value: "Phú Nhuận" },
-    { code: "08", id: "", value: "Đức Nhuận" },
-  ];
+  const [listProvince, setListProvince] = useState<Province[]>([]);
+  const [listWard, setListWard] = useState<Ward[]>([
+    {
+      code: "01",
+      id: "",
+      value: "Sài Gòn",
+      provinceId: "",
+    },
+    {
+      code: "02",
+      id: "",
+      value: "Tân Định",
+      provinceId: "",
+    },
+    {
+      code: "03",
+      id: "",
+      value: "Bến Thành",
+      provinceId: "",
+    },
+    {
+      code: "04",
+      id: "",
+      value: "Cầu Ông Lãnh",
+      provinceId: "",
+    },
+    {
+      code: "05",
+      id: "",
+      value: "Bàn Cờ",
+      provinceId: "",
+    },
+    {
+      code: "06",
+      id: "",
+      value: "Xuân Hòa",
+      provinceId: "",
+    },
+    {
+      code: "07",
+      id: "",
+      value: "Phú Nhuận",
+      provinceId: "",
+    },
+    {
+      code: "08",
+      id: "",
+      value: "Đức Nhuận",
+      provinceId: "",
+    },
+  ]);
   const removeVietnameseAccents = (str: string) => {
     return str
       .normalize("NFD")
@@ -90,6 +128,49 @@ export const BottomSheetProvinceWard = (
       ) ?? []
     );
   }, [listProvince, selectAddrType]);
+  useEffect(() => {
+    if (listProvince.length < 1) {
+      dispatch(getProvinceListThunk({ clientNo: "123", channel: "" })).then(
+        (res) => {
+          const response = res.payload as ProvinceResponse;
+          if (response.resultCode !== "00") return;
+          setListProvince(
+            response.data.map((item) => ({
+              id: item.id,
+              code: item.code,
+              value: item.name,
+              short: item.nameUnsigned,
+            }))
+          );
+        }
+      );
+    }
+  }, []);
+  useEffect(() => {
+    if (province) {
+      dispatch(
+        getWardListThunk({
+          clientNo: "",
+          provinceId: province.id,
+          districtId: "",
+          channel: "",
+        })
+      ).then((res) => {
+        console.log("BINHPV Addr", JSON.stringify(res, null, 2));
+        const response = res.payload as WardResponse;
+        if (response.resultCode !== "00") return;
+        setListWard(
+          response.data.map((item) => ({
+            id: item.id,
+            code: item.code,
+            value: item.name,
+            short: item.nameUnsigned,
+            provinceId: province.id,
+          }))
+        );
+      });
+    }
+  }, [province]);
   return (
     <BottomSheetBase
       visible={visible}
@@ -238,7 +319,7 @@ export const BottomSheetProvinceWard = (
                         code: item.code,
                         id: item.id,
                         value: item.value,
-                        provinceCode: (item as Ward).provinceCode,
+                        provinceId: (item as Ward).provinceId,
                       });
                       confirmAddr({
                         ...fullAddr,
@@ -246,7 +327,7 @@ export const BottomSheetProvinceWard = (
                           code: item.code,
                           id: item.id,
                           value: item.value,
-                          provinceCode: (item as Ward).provinceCode,
+                          provinceCode: (item as Ward).provinceId,
                         },
                         province: province,
                       });

@@ -3,7 +3,7 @@ import { BottomSheetBase } from "./BottomSheetBase";
 import { Box } from "zmp-ui";
 
 export interface ItemModel {
-  code: string;
+  id: string;
   value: string;
 }
 type BottomSheetListProps = {
@@ -37,9 +37,16 @@ export const BottomSheetList = (props: BottomSheetListProps) => {
       maskClosable={maskCloseable}
       onClose={onClose}
     >
-      {listItem?.map((item, index) =>
-        itemView ? itemView(item, index) : <></>
-      )}
+      <Box
+        style={{
+          height: 400,
+          overflowY: "auto",
+        }}
+      >
+        {listItem?.map((item, index) =>
+          itemView ? itemView(item, index) : <></>
+        )}
+      </Box>
       {textButton && (
         <Box pt={4} pb={8} pl={4} pr={4}>
           <button

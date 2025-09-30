@@ -1,32 +1,27 @@
 import { ReactNode, useState, CSSProperties } from "react";
-import { Box, Input, Sheet, Text } from "zmp-ui";
+import { Box, Sheet, Text } from "zmp-ui";
 import ic_clear from "@/asset/icon-clear-text.svg";
 
 type BottomSheetInputProps = {
   visible: boolean;
-  // text
+  value: string;
   title?: string;
   content?: string;
   label?: string;
-
-  // value & events
-  value: string;
-  validate?: boolean;
-  isShowClearText?: boolean;
-  onClick?: (value: string) => void;
-
-  // custom styles
+  buttonText?: string;
+  onConfirm: (value: string) => void;
+  onClose?: () => void;
   titleStyle?: CSSProperties;
   contentStyle?: CSSProperties;
   labelStyle?: CSSProperties;
   inputStyle?: CSSProperties;
-  inputClassName?: string;
   dividerStyle?: CSSProperties;
   buttonStyle?: CSSProperties;
   buttonClassName?: string;
-  buttonText?: string;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  isShowClearText?: boolean;
   maskClosable?: boolean;
-  onClose?: () => void;
+  error?: string;
 };
 
 export const BottomSheetInput = (props: BottomSheetInputProps) => {
@@ -46,11 +41,7 @@ export const BottomSheetInput = (props: BottomSheetInputProps) => {
         <Box pl={4} pr={4}>
           {props.title && (
             <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 600,
-                ...props.titleStyle,
-              }}
+              style={{ fontSize: 20, fontWeight: 600, ...props.titleStyle }}
             >
               {props.title}
             </Text>
@@ -69,6 +60,7 @@ export const BottomSheetInput = (props: BottomSheetInputProps) => {
               {props.content}
             </Text>
           )}
+
           <Box
             flex
             flexDirection="row"
@@ -90,9 +82,10 @@ export const BottomSheetInput = (props: BottomSheetInputProps) => {
                 </Text>
               )}
 
-              <Input
+              <input
+                {...props.inputProps}
                 placeholder={!valueInput ? props.label : ""}
-                className={props.inputClassName}
+                className={props.inputProps?.className}
                 style={{
                   border: 0,
                   fontSize: 16,
@@ -101,22 +94,31 @@ export const BottomSheetInput = (props: BottomSheetInputProps) => {
                   marginBottom: 14,
                   height: 21,
                   paddingLeft: 0,
+                  outline: "none",
+                  width: "100%",
                   ...props.inputStyle,
+                  ...props.inputProps?.style,
                 }}
                 value={valueInput}
-                onChange={(text) => onChangeValue(text.target.value)}
+                onChange={(e) => onChangeValue(e.target.value)}
               />
             </Box>
+
             {props.isShowClearText && valueInput && (
               <img
                 src={ic_clear}
-                style={{ width: 20, height: 20 }}
-                onClick={() => {
-                  setValueInput("");
-                }}
-              ></img>
+                style={{ width: 20, height: 20, cursor: "pointer" }}
+                onClick={() => setValueInput("")}
+              />
             )}
           </Box>
+
+          {props.error && (
+            <Text style={{ color: "red", fontSize: 12, marginTop: 4 }}>
+              {props.error}
+            </Text>
+          )}
+
           <Box
             style={{
               height: 1,
@@ -143,7 +145,9 @@ export const BottomSheetInput = (props: BottomSheetInputProps) => {
                 boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
                 ...props.buttonStyle,
               }}
-              onClick={() => props.onClick && props.onClick(valueInput)}
+              onClick={() => {
+                props.onConfirm(valueInput);
+              }}
             >
               {props.buttonText || "Lưu"}
             </button>
