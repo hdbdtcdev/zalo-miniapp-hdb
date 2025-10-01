@@ -1,5 +1,9 @@
+.zaui-swiper {
+  padding-bottom: 40px;
+}
+
 .zaui-swiper .zaui-swiper-dots {
-  background-color:  transparent !important
+  background-color:  transparent !important;
 }
 
 .zaui-swiper .zaui-swiper-dots .zaui-swiper-dots-item {

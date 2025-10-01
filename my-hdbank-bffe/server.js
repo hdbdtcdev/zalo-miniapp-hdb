@@ -56,13 +56,16 @@ app.get("/api/strapi-cms/v1/cvp-commons", async (req, res) => {
   try {
     const locale = req.query.locale || config.api.defaultLanguage;
     const populate = req.query.populate || "deep,5";
+    const domainCode = req.query.domainCode || "DOP";
+    const cvpTitle = req.query.cvpTitle || "dopvj";
+    const isActive = req.query.isActive || true;
 
     const url =
       `${config.api.baseUrl}/strapi-cms/v1/cvp-commons` +
       `?locale=${locale}&populate=${[populate]}` +
-      `&filters[domain_code][$eq]=DOP` +
-      `&filters[cvp_title][$eq]=dopvj` +
-      `&filters[is_active][$eq]=true`;
+      `&filters[domain_code][$eq]=${domainCode}` +
+      `&filters[cvp_title][$eq]=${cvpTitle}` +
+      `&filters[is_active][$eq]=${isActive}`;
 
     const response = await fetch(url, {
       method: "GET",
