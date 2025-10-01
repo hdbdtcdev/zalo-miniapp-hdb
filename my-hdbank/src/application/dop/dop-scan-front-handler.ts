@@ -71,6 +71,14 @@ export class DOPScanFrontHandler {
       throw new Error("Có lỗi xảy ra trong quá trình nhận diện CCCD");
     }
 
+    const { classify_general, liveness_card_front } =
+      identityResponse.data.object || {};
+    const errorMessage = liveness_card_front?.response_body?.message;
+
+    if (classify_general !== 1) {
+      throw new Error("Ảnh không phải mặt trước CCCD");
+    }
+
     return {
       meta: addResponse.data,
       upload: uploadResponse?.data,
