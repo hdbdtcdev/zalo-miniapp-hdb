@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { Page, Header, Box, Swiper, useNavigate } from "zmp-ui";
 import { MoveLeft } from "lucide-react";
 import { useSelector } from "@/lib/redux";
@@ -7,10 +7,11 @@ import { useTranslation } from "react-i18next";
 
 import "@/presentation/styles/home.css";
 import "@/presentation/styles/swiper.css";
-import { useCardAvailableList } from "@/hooks";
+import { useCardAvailableDetail, useCardAvailableList } from "@/hooks";
 import CardProduct from "@/presentation/components/CardProduct";
 import Logo from '@/asset/HDBank.svg';
 import { CardAvailableListDataRes } from "@/domain/entities/card/cardAvailableList";
+import { selectStatus } from "../card-available-detail/redux";
 
 const CardAvailableList: FC = () => {
   const navigate = useNavigate();
@@ -20,10 +21,17 @@ const CardAvailableList: FC = () => {
   const cardList = useSelector(selectCardList);
   const { cardListStatus } = useCardAvailableList();
 
-  const handleSelect = (product: CardAvailableListDataRes) => {
-    console.log(`GOGO: ${JSON.stringify(product)}`);
+  const cardDetail = useSelector(selectCardList);
+  const cardDetailStatus = useSelector(selectStatus);
+
+  const handleSelect = useCallback((product: CardAvailableListDataRes) => {
+    const { productCode } = product;
+    if (!productCode) { return; }
+
+    // const { status } = useCardAvailableDetail(productCode);
+
     navigate("/card-available-detail");
-  };
+  }, []);
 
   return (
     <Page className="bg-transparent">
