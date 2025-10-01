@@ -38,7 +38,7 @@ export class DOPScanLiveFaceHandler {
     } as AddFileRequest);
 
     if (!addResponse || !addResponse.data) {
-      throw new Error("Failed to get upload URL");
+      throw new Error("Có lỗi xảy ra trong quá trình lấy URL tải ảnh lên");
     }
 
     const { form_data, hash, upload_url } = addResponse.data.object;
@@ -57,8 +57,8 @@ export class DOPScanLiveFaceHandler {
       uploadUrl: upload_url,
     } as UploadFileRequest);
 
-    if (!uploadResponse) {
-      throw new Error("Failed to upload file");
+    if (uploadResponse?.status?.code !== "200") {
+      throw new Error("Có lỗi xảy ra trong quá trình tải ảnh lên");
     }
 
     const identityResponse = await this._dopRepository.compareFace({
@@ -69,7 +69,7 @@ export class DOPScanLiveFaceHandler {
     });
 
     if (!identityResponse || !identityResponse.data) {
-      throw new Error("Failed to identify live face");
+      throw new Error("Có lỗi xảy ra trong quá trình xác thực khuôn mặt");
     }
 
     return {

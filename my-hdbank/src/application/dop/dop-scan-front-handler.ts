@@ -36,7 +36,7 @@ export class DOPScanFrontHandler {
     } as AddFileRequest);
 
     if (!addResponse || !addResponse.data) {
-      throw new Error("Failed to get upload URL");
+      throw new Error("Có lỗi xảy ra trong quá trình lấy URL tải ảnh lên");
     }
 
     const { form_data, hash, upload_url } = addResponse.data.object;
@@ -55,8 +55,8 @@ export class DOPScanFrontHandler {
       uploadUrl: upload_url,
     } as UploadFileRequest);
 
-    if (!uploadResponse) {
-      throw new Error("Failed to upload file");
+    if (uploadResponse?.status?.code !== "200") {
+      throw new Error("Có lỗi xảy ra trong quá trình tải ảnh lên");
     }
 
     const identityResponse = await this._dopRepository.identifyFrontOCR({
@@ -68,7 +68,7 @@ export class DOPScanFrontHandler {
     });
 
     if (!identityResponse || !identityResponse.data) {
-      throw new Error("Failed to identify front OCR");
+      throw new Error("Có lỗi xảy ra trong quá trình nhận diện CCCD");
     }
 
     return {

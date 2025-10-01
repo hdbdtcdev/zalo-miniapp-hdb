@@ -3,7 +3,7 @@ import { MoveLeft, RotateCcw } from "lucide-react";
 import { Header, Page, Text, Box, useNavigate } from "zmp-ui";
 import { icCaptureButton } from "@/asset";
 import { useDispatch, useSelector } from "@/lib/redux";
-import { scanFrontThunk, selectAuth, selectFront } from "./redux";
+import { scanFrontThunk, selectAuth, selectError, selectFront } from "./redux";
 
 interface IProps {}
 
@@ -14,11 +14,18 @@ export const DOPIDFrontScanScreen: React.FC<IProps> = () => {
   const dispatch = useDispatch();
   const dopAuth = useSelector(selectAuth);
   const front = useSelector(selectFront);
+  const reduxError = useSelector(selectError);
 
   const onPhotoCapture = (imageDataUrl: string) => {
     if (!imageDataUrl) return;
     console.log("Photo captured:", imageDataUrl);
   };
+
+  useEffect(() => {
+    if (reduxError) {
+      alert(reduxError);
+    }
+  }, [reduxError]);
 
   useEffect(() => {
     if (front) {

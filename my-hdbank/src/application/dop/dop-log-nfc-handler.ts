@@ -16,7 +16,7 @@ export class DOPLogNFCHandler {
   async handle({ nfcData }: { nfcData: IdentifyNFCRequest }) {
     const identityResponse = await this._dopRepository.identifyNFC(nfcData);
     if (!identityResponse || !identityResponse.data) {
-      throw new Error("Failed to identify NFC");
+      throw new Error("Có lỗi xảy ra trong quá trình nhận diện NFC");
     }
 
     return {

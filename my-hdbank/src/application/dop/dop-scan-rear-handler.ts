@@ -38,7 +38,7 @@ export class DOPScanRearHandler {
     } as AddFileRequest);
 
     if (!addResponse || !addResponse.data) {
-      throw new Error("Failed to get upload URL");
+      throw new Error("Có lỗi xảy ra trong quá trình lấy URL tải ảnh lên");
     }
 
     const { form_data, hash, upload_url } = addResponse.data.object;
@@ -57,10 +57,9 @@ export class DOPScanRearHandler {
       uploadUrl: upload_url,
     } as UploadFileRequest);
 
-    if (!uploadResponse) {
-      throw new Error("Failed to upload file");
+    if (uploadResponse?.status?.code !== "200") {
+      throw new Error("Có lỗi xảy ra trong quá trình tải ảnh lên");
     }
-
     const identityResponse = await this._dopRepository.identifyRearOCR({
       type: -1,
       img_front: imgFront,
@@ -72,7 +71,7 @@ export class DOPScanRearHandler {
     });
 
     if (!identityResponse || !identityResponse.data) {
-      throw new Error("Failed to identify rear OCR");
+      throw new Error("Có lỗi xảy ra trong quá trình nhận diện CCCD");
     }
 
     return {

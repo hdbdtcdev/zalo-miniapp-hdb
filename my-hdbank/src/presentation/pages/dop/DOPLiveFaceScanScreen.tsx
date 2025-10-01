@@ -2,21 +2,45 @@ import React, { useState, useRef, useEffect } from "react";
 import { MoveLeft, RotateCcw } from "lucide-react";
 import { Header, Page, useNavigate } from "zmp-ui";
 import { icCaptureButton } from "@/asset";
+import { useDispatch, useSelector } from "@/lib/redux";
+import {
+  scanLiveFaceThunk,
+  selectAuth,
+  selectError,
+  selectFront,
+  selectLiveFace,
+} from "./redux";
 
-interface IProps {
-  onBack?: () => void;
-  onPhotoCapture?: (imageDataUrl: string) => void;
-}
+interface IProps {}
 
 type FacingMode = "user" | "environment";
 
-export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
-  onBack,
-  onPhotoCapture,
-}) => {
+export const DOPLiveFaceScanScreen: React.FC<IProps> = ({}) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const dopAuth = useSelector(selectAuth);
+  const front = useSelector(selectFront);
+  const liveFace = useSelector(selectLiveFace);
+  const reduxError = useSelector(selectError);
+
+  useEffect(() => {
+    if (reduxError) {
+      alert(reduxError);
+    }
+  }, [reduxError]);
+
+  useEffect(() => {
+    if (liveFace) {
+      navigate("/dop-nfc-scan");
+    }
+  }, [liveFace]);
+
+  const onPhotoCapture = (imageDataUrl: string) => {
+    console.log("Photo captured:", imageDataUrl);
+  };
 
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
@@ -116,7 +140,7 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
     setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
   };
 
-  const handleGoBack = (): void => {
+  /*const handleGoBack = (): void => {
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
     }
@@ -126,13 +150,20 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({
     } else {
       console.log("Navigate back");
     }
-  };
+  };*/
 
   const handleUsePhoto = (): void => {
     if (capturedImage) {
       console.log("Use photo:", capturedImage);
       // Process the captured image here
-      navigate("/dop-nfc-scan");
+      dispatch(
+        scanLiveFaceThunk({
+          file: capturedImage,
+          token: dopAuth?.access_token,
+          clientSession: dopAuth?.transaction_id,
+          imgFront: front?.meta?.object.hash,
+        })
+      );
     }
   };
 

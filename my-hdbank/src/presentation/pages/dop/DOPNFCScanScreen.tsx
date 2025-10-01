@@ -1,24 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MoveLeft } from "lucide-react";
-import {
-  icNfcIllustration,
-  icPlayCircle,
-  icScanPhone,
-  icScanReady,
-  icScanLoading,
-} from "@/asset";
+import { icNfcIllustration, icPlayCircle } from "@/asset";
 import useNavigate from "zmp-ui/useNavigate";
 import { Page, Header, Box, Text } from "zmp-ui";
-import { Sheet } from "zmp-ui";
-import { StepLineView, StepperLoadingView } from "@/presentation/components";
+import { StepLineView } from "@/presentation/components";
 import { scanNFC } from "zmp-sdk/apis";
+import { useDispatch, useSelector } from "@/lib/redux";
+import {
+  logNFCThunk,
+  selectAuth,
+  selectError,
+  selectFront,
+  selectLiveFace,
+  selectNFC,
+} from "./redux";
 
 interface IProps {}
 
 export const DOPNFCScanScreen: React.FC<IProps> = () => {
   const navigate = useNavigate();
-  const [scanInfoVisible, setScanInfoVisible] = React.useState(false);
-  const [scanStep, setScanStep] = React.useState(1);
+  const dispatch = useDispatch();
+  const dopAuth = useSelector(selectAuth);
+  const front = useSelector(selectFront);
+  const liveFace = useSelector(selectLiveFace);
+  const nfc = useSelector(selectNFC);
+
+  const reduxError = useSelector(selectError);
+
+  useEffect(() => {
+    if (reduxError) {
+      alert(reduxError);
+    }
+  }, [reduxError]);
+
+  useEffect(() => {
+    if (nfc) {
+      navigate("/CreditCardPreview");
+    }
+  }, [nfc]);
+
+  /*const [scanInfoVisible, setScanInfoVisible] = React.useState(false);
+  const [scanStep, setScanStep] = React.useState(1);*/
 
   const startScan = () => {
     /*setScanInfoVisible(true);
@@ -37,17 +59,23 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
       },
       type: "cccd",
       success: (data) => {
-        navigate("/CreditCardPreview");
+        dispatch(
+          logNFCThunk({
+            token: dopAuth?.access_token,
+            img_face: front?.meta?.object.hash,
+            img_back: liveFace?.meta?.object.hash,
+            mrz: [""],
+          })
+        );
       },
       fail: (err) => {
-        // xử lý khi gọi api thất bại
         console.log(err);
         alert("Lỗi quét NFC: " + JSON.stringify(err));
       },
     });
   };
 
-  const getStepTile = (step: number) => {
+  /*const getStepTile = (step: number) => {
     switch (step) {
       case 1:
         return "Sẵn sàng quét";
@@ -56,7 +84,7 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
       default:
         return "Đang xử lý....";
     }
-  };
+  };*/
 
   // Main Screen
   return (
@@ -157,7 +185,7 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
           </button>
         </Box>
       </Box>
-      <Sheet
+      {/* <Sheet
         title={getStepTile(scanStep)}
         visible={scanInfoVisible}
         onClose={() => {
@@ -213,7 +241,7 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
             </>
           )}
         </Box>
-      </Sheet>
+      </Sheet> */}
     </Page>
   );
 };
