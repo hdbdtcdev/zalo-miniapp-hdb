@@ -21,7 +21,7 @@ const CardAvaialbleDetail: FC = () => {
   const [muted, setMuted] = useState(false);
 
   const card = useSelector(selectCard);
-  const { status } = useCardAvailableDetail();
+  // const { status } = useCardAvailableDetail();
 
   const cvpCommon = useSelector(selectData);
   const { cvpCommonStatus } = useCvpCommon({

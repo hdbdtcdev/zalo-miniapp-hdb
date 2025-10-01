@@ -1,0 +1,466 @@
+[
+    {
+        "productCode": "DOPVJ",
+        "productName": "HDBank Đồng thương hiệu Vietjet",
+        "image": "https://chic-starburst-059945.netlify.app/temp/card_vietjet.png",
+        "virtualCardSupported": true,
+        "debtAcctRequired": false,
+        "promoList": [
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Khi mua vé máy bay Vietjet",
+                "title": "Hoàn 10%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Khi giao dịch du lịch, ẩm thực",
+                "title": "Hoàn 10%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Tại quầy vé của Vietjet Air",
+                "title": "Check-in ưu tiên"
+            }
+        ],
+        "offerList": [
+            {
+                "detail": "Từ 20 triệu đồng",
+                "title": "HẠN MỨC"
+            },
+            {
+                "detail": "29%/năm",
+                "title": "LÃI SUẤT"
+            },
+            {
+                "detail": "Phí thường niên năm đầu",
+                "title": "TẶNG 990.000 ĐỒNG"
+            }
+        ],
+        "benefit": [
+            {
+                "detail": "• Tặng 10% khi mua vé máy bay Vietjet Air.</br>• Hoàn tiền 10% khi chi tiêu lĩnh vực du lịch, ẩm thực.</br>• Bảo hiểm du lịch toàn cầu đến 12 tỷ đồng.</br>• Quy tắc bảo hiểm và Mẫu giấy chứng nhận bảo hiểm.</br>• Ưu tiên check-in quầy Vietjet tại sân bay dành cho chủ thẻ.</br>• Phí chuyển đổi ngoại tệ 1.5% giá trị giao dịch.</br>• Trả góp lãi suất 0% tại các đối tác liên kết của HDBank.</br>",
+                "title": "Lợi ích"
+            },
+            {
+                "detail": "• Miễn lãi tối đa 55 ngày.</br>• Hoàn phí thường niên năm đầu thẻ chính và chủ thẻ phụ*.</br>• Hạn mức tín dụng từ 20 triệu đồng.</br>• An toàn bảo mật với chip EMV, công nghệ xác thực thanh toán 3D - Secure.",
+                "title": "Tính năng"
+            }
+        ],
+        "interestRate": [
+            {
+                "detail": "Từ 20 triệu đồng",
+                "title": "Hạn mức thẻ"
+            },
+            {
+                "detail": "Miễn phí",
+                "title": "Phí phát hành"
+            },
+            {
+                "detail": "+ 990.000 đồng/ năm (Hoàn phí năm đầu)</br>+ Hoàn phí thường niên năm đầu cho chủ thẻ phụ (Điều khoản điều kiện theo quy định HDBank)",
+                "title": "Phí thường niên"
+            },
+            {
+                "detail": "29%",
+                "title": "Lãi suất (%/ năm)"
+            },
+            {
+                "detail": "3%",
+                "title": "Tỷ lệ thanh toán tối thiểu"
+            },
+            {
+                "detail": "1.5%",
+                "title": "Phí chuyển đổi ngoại tệ"
+            },
+            {
+                "detail": "55 ngày",
+                "title": "Thời gian miễn lãi tối đa"
+            }
+        ]
+    },
+    {
+        "productCode": "DOPPLX",
+        "productName": "HDBank Petrolimex 4in1",
+        "image": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/petrolimex.png",
+        "virtualCardSupported": true,
+        "debtAcctRequired": true,
+        "promoList": [
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Không chứng minh thu nhập",
+                "title": "Mở thẻ online 100%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Thuận lợi mang theo",
+                "title": "Tất cả trong một"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Cho mỗi 100.000đ doanh thu giao dịch.",
+                "title": "Tích điểm đổi quà không giới hạn"
+            }
+        ],
+        "offerList": [
+            {
+                "detail": "Đến 10 tỷ đồng",
+                "title": "HẠN MỨC"
+            },
+            {
+                "detail": "36%/năm",
+                "title": "LÃI SUẤT"
+            },
+            {
+                "detail": "Hoàn phí thường niên năm đầu*",
+                "title": "PHÍ THƯỜNG NIÊN"
+            }
+        ],
+        "benefit": [
+            {
+                "detail": "• Hoàn phí thường niên năm đầu*<br/>• Tích 2 điểm thưởng SkyJoy cho mỗi 100.000 đồng doanh thu giao dịch nội địa.<br/>• Tích 3 điểm thưởng SkyJoy cho mỗi 100.000 đồng doanh thu giao dịch quốc tế.<br/>• Mở thẻ 100% trực tuyến, không cần đến ngân hàng.<br/>",
+                "title": "Lợi ích"
+            },
+            {
+                "detail": "• Miễn lãi tối đa 45 ngày.<br/>• Hoàn phí thường niên năm đầu (không phát hành thẻ phụ)*.<br/>• Hạn mức tín dụng lên đến 10 tỷ đồng.<br/>• An toàn bảo mật với chip EMV, công nghệ xác thực thanh toán 3D - Secure.<br/>• Khách hàng chủ động lựa chọn nguồn tiền từ thẻ tín dụng, thẻ ghi nợ, thẻ trả trước khi giao dịch.<br/>• Thanh toán trực tuyến tiện lợi.",
+                "title": "Tính năng"
+            }
+        ],
+        "interestRate": [
+            {
+                "detail": "Lên đến 10 tỷ đồng",
+                "title": "Hạn mức thẻ"
+            },
+            {
+                "detail": "Miễn phí",
+                "title": "Phí phát hành"
+            },
+            {
+                "detail": "+ 440.000 đồng/ năm (Hoàn phí thường niên năm đầu*)<br/>+ Không có thẻ phụ",
+                "title": "Phí thường niên"
+            },
+            {
+                "detail": "36%",
+                "title": "Lãi suất (%/ năm)"
+            },
+            {
+                "detail": "3%",
+                "title": "Tỷ lệ thanh toán tối thiểu"
+            },
+            {
+                "detail": "3%",
+                "title": "Phí chuyển đổi ngoại tệ"
+            },
+            {
+                "detail": "45 ngày",
+                "title": "Thời gian miễn lãi tối đa"
+            }
+        ]
+    },
+    {
+        "productCode": "DOPEPA",
+        "productName": "Thẻ liên kết HDBank ePass 3in1",
+        "image": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240821/ePass.png",
+        "virtualCardSupported": true,
+        "debtAcctRequired": true,
+        "promoList": [
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Giao dịch thanh toán vào TKGT ePass",
+                "title": "Hoàn 5%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Giao dịch tại Trung tâm/Xưởng bảo dưỡng, chăm sóc ô tô",
+                "title": "Hoàn 3%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Cho các giao dịch khác trong tháng (không giới hạn số tiền hoàn)",
+                "title": "Hoàn 0.2%"
+            }
+        ],
+        "offerList": [
+            {
+                "detail": "Đến 1 tỷ đồng",
+                "title": "HẠN MỨC"
+            },
+            {
+                "detail": "3%/tháng",
+                "title": "LÃI SUẤT"
+            },
+            {
+                "detail": "Miễn phí thường niên năm đầu*",
+                "title": "PHÍ THƯỜNG NIÊN"
+            }
+        ],
+        "benefit": [
+            {
+                "detail": "• Hoàn tiền 10% trên thẻ khi giao dịch thanh toán vào TKGT ePass.<br/>•Hoàn 6% khi giao dịch tại Trung Tâm/Xưởng bảo dưỡng, chăm sóc ô tô.<br/>• Khi tổng chi tiêu từ 30 triệu đồng/tháng trở lên (Hoàn tối đa 500.000 VND/tháng).<br/>",
+                "title": "Lợi ích"
+            },
+            {
+                "detail": "• Miễn lãi tối đa 45 ngày.<br/>• Miễn phí thường niên năm đầu thẻ chính*.<br/>• Hạn mức tín dụng lên đến 1 tỷ đồng.<br/>• An toàn bảo mật với chip EMV, công nghệ xác thực thanh toán 3D - Secure.<br/>• Mở 1 được 3 (Thẻ tín dụng, Thẻ ghi nợ, Thẻ trả trước định danh). Khách hàng được chủ động lựa chọn nguồn tiền từ thẻ tín dụng, thẻ ghi nợ, thẻ trả trước khi giao dịch",
+                "title": "Tính năng"
+            }
+        ],
+        "interestRate": [
+            {
+                "detail": "3%/tháng",
+                "title": "Lãi suất (GD tài chính)"
+            },
+            {
+                "detail": "Miễn phí",
+                "title": "Lãi suất trả góp"
+            },
+            {
+                "detail": "440,000 VND (Miễn phí năm đầu)",
+                "title": "Phí thường niên"
+            },
+            {
+                "detail": "4% (tối thiểu 100,000 VND)",
+                "title": "Phí rút tiền mặt tại ATM"
+            },
+            {
+                "detail": "4% (tối thiểu 100,000 VND",
+                "title": "Phí chậm thanh toán )"
+            },
+            {
+                "detail": "Miễn phí",
+                "title": "Phí cấp lại ePIN"
+            }
+        ]
+    },
+    {
+        "productCode": "DOPSNT",
+        "productName": "HDBank Priority – Tinh Tú Phương Đông",
+        "image": "https://static-cdn.hdbank.com.vn/sdk/dop/visa-sig.jpg",
+        "virtualCardSupported": false,
+        "debtAcctRequired": false,
+        "promoList": [
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Mua sắm TTTM, cửa hàng thời trang và cửa hàng miễn thuế.",
+                "title": "Hoàn tiền 15%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Cho các GD chi tiêu khác.",
+                "title": "Hoàn tiền 0,5%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "*Áp dụng Điều kiện Điều khoản",
+                "title": "Sử dụng Phòng chờ hoặc Fast track không giới hạn"
+            }
+        ],
+        "offerList": [
+            {
+                "detail": "Đến 10 tỷ đồng",
+                "title": "HẠN MỨC"
+            },
+            {
+                "detail": "28%/năm",
+                "title": "LÃI SUẤT"
+            },
+            {
+                "detail": "Miễn phí thường niên năm đầu",
+                "title": "PHÍ THƯỜNG NIÊN"
+            }
+        ],
+        "benefit": [
+            {
+                "detail": "• Hoàn tiền 15% cho giao dịch mua sắm tại TTTM, cửa hàng thời trang và cửa hàng miễn thuế (Tối đa 500.000 đồng/tháng).<br/>• Hoàn tiền 0,5% cho các giao dịch chi tiêu khác (tối đa 500.000 đồng/tháng).<br/>• Khách hàng đạt doanh số giao dịch với mỗi 30.000.000 đồng/tháng sẽ nhận được một trong 2 ưu đãi sau:.<br/>+ 1 lượt vào Phòng chờ sân bay<br/>+ 1 lượt sử dụng dịch vụ Fast track (dịch vụ đón/tiễn ưu tiên tại sân bay)<br/>*Không giới hạn số lượng ưu đãi</br>• Bảo hiểm du lịch toàn cầu đến 12 tỷ đồng.<br/>• Chủ thẻ được phục vụ theo hotline VIP 1800 6868 của HDBank.<br/>• Trả góp lãi suất 0% tại các đối tác liên kết của HDBank.",
+                "title": "Lợi ích"
+            },
+            {
+                "detail": "• Miễn lãi tối đa 55 ngày.<br/>• Miễn phí thường niên năm đầu tiên với giá trị đến 1,9 triệu đồng.<br/>• Miễn phí thường niên năm đầu tiên dành cho chủ thẻ chính và thẻ phụ.<br/>• Hạn mức tín dụng từ 100 triệu đến 10 tỷ đồng.<br/>• An toàn bảo mật với chip EMV, công nghệ xác thực thanh toán 3D - Secure.",
+                "title": "Tính năng"
+            }
+        ],
+        "interestRate": [
+            {
+                "detail": "Từ 100 triệu đồng",
+                "title": "Hạn mức thẻ"
+            },
+            {
+                "detail": "Miễn phí",
+                "title": "Phí phát hành"
+            },
+            {
+                "detail": "1.900.000 đồng/năm (Miễn phí năm đầu)<br/>+ Miễn phí thường niên năm đầu cho chủ thẻ chính và thẻ phụ (Điều khoản, điều kiện theo quy định HDBank)",
+                "title": "Phí thường niên"
+            },
+            {
+                "detail": "28%",
+                "title": "Lãi suất (%/năm)"
+            },
+            {
+                "detail": "3%",
+                "title": "Tỷ lệ thanh toán tối thiểu"
+            },
+            {
+                "detail": "3%",
+                "title": "Phí chuyển đổi ngoại tệ"
+            },
+            {
+                "detail": "55 ngày",
+                "title": "Thời gian miễn lãi tối đa"
+            }
+        ]
+    },
+    {
+        "productCode": "DOPJUM",
+        "productName": "HDBank JCB Ultimate",
+        "image": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20250317/jcb_card.png",
+        "virtualCardSupported": false,
+        "debtAcctRequired": false,
+        "promoList": [
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Khi chi tiêu tại Nhật Bản.",
+                "title": "Hoàn đến 20%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Khi chi tiêu du lịch, khách sạn, resort.",
+                "title": "Hoàn đến 15%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Cho giao dịch quốc tế.",
+                "title": "Hoàn đến 6%"
+            }
+        ],
+        "offerList": [
+            {
+                "detail": "Đến 10 tỷ đồng",
+                "title": "HẠN MỨC"
+            },
+            {
+                "detail": "28%/năm",
+                "title": "LÃI SUẤT"
+            },
+            {
+                "detail": "Miễn phí thường niên năm đầu",
+                "title": "PHÍ THƯỜNG NIÊN"
+            }
+        ],
+        "benefit": [
+            {
+                "detail": "• Tặng 5% cho giao dịch trả phí sử dụng đường bộ.<br/>- Nhóm 1: Khách hàng có tổng doanh số giao dịch từ 50 triệu/tháng trở lên:<br/>+ Các giao dịch chi tiêu tại Nhật Bản: Hoàn 20% tối đa 500.000 VNĐ/tháng.<br/>+ Các giao dịch chi tiêu cho lĩnh vực du lịch, khách sạn, resort: Hoàn 15% tối đa 300.000 VNĐ/tháng.<br/>+ Các giao dịch chi tiêu tại nước ngoài: Hoàn 6% tối đa 200.000 VNĐ/tháng.<br/>+ Các giao chi tiêu còn lại tại POS trên lãnh thổ Việt Nam: Hoàn 4% tối đa 200.000 VNĐ/tháng.<br/>- Nhóm 2: Khách hàng có tổng doanh số giao dịch dưới 50 triệu/tháng:<br/>+ Các giao dịch chi tiêu tại Nhật Bản: Hoàn 10% tối đa 250.000 VNĐ/tháng.<br/>+ Các giao dịch chi tiêu cho lĩnh vực du lịch, khách sạn, resort: Hoàn 5% tối đa 150.000 VNĐ/tháng.<br/>+ Các giao dịch chi tiêu tại nước ngoài: Hoàn 3% tối đa 100.000 VNĐ.<br/>+ Các giao chi tiêu còn lại tại POS trên lãnh thổ Việt Nam: Hoàn 2% tối đa 100.000 VNĐ/tháng.<br/>• Đặc quyền ưu đãi theo quý: Khách hàng đạt tổng doanh số giao dịch tối thiểu là 100 triệu đồng/quý sẽ nhận được 01 lượt ưu đãi phí chơi Golf/quý, tối đa 4 lượt ưu đãi/năm. Trị giá ưu đãi nhận được tối đa 1.000.000 đồng/lượt (đã bao gồm VAT). Doanh số giao dịch để xét nhận ưu đãi được tính theo quý, không được cộng dồn qua quý tiếp theo.<br/>• Bảo hiểm du lịch toàn cầu lên đến 12 tỷ đồng.<br/>• Chủ thẻ được phục vụ theo hotline VIP 1800 6868 của HDBank.<br/>• Trả góp lãi suất 0% tại các đối tác liên kết của HDBank.",
+                "title": "Lợi ích"
+            },
+            {
+                "detail": "• Miễn lãi tối đa 55 ngày.<br/>• Miễn phí thường niên năm đầu tiên với giá trị 2 triệu đồng.<br/>• Miễn phí thường niên năm đầu tiên dành cho Chủ thẻ phụ.<br/>• An toàn bảo mật với chip EMV, công nghệ xác thực thanh toán 3D - Secure.",
+                "title": "Tính năng"
+            }
+        ],
+        "interestRate": [
+            {
+                "detail": "Từ 100 triệu đồng",
+                "title": "Hạn mức thẻ"
+            },
+            {
+                "detail": "Miễn phí",
+                "title": "Phí phát hành"
+            },
+            {
+                "detail": "2.000.000 đồng/ năm (Miễn phí năm đầu)<br/>+ Miễn phí thường niên năm đầu cho chủ thẻ phụ (Điều khoản điều kiện theo quy định HDBank)",
+                "title": "Phí thường niên"
+            },
+            {
+                "detail": "28%",
+                "title": "Lãi suất (%/ năm)"
+            },
+            {
+                "detail": "4%",
+                "title": "Tỷ lệ thanh toán tối thiểu"
+            },
+            {
+                "detail": "3%",
+                "title": "Phí chuyển đổi ngoại tệ"
+            },
+            {
+                "detail": "55 ngày",
+                "title": "Thời gian miễn lãi tối đa"
+            }
+        ]
+    },
+    {
+        "productCode": "DOPVSG",
+        "productName": "HDBank Visa Gold",
+        "image": "https://static-cdn.hdbank.com.vn/sdk/dop/VisaGold.png",
+        "virtualCardSupported": true,
+        "debtAcctRequired": false,
+        "promoList": [
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Khi chi tiêu online.",
+                "title": "Hoàn đến 10%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Khi chi tiêu ăn uống",
+                "title": "Hoàn đến 8%"
+            },
+            {
+                "icon": "https://static-cdn.hdbank.com.vn/sdk/dop/icon/20240524/check_circle.png",
+                "detail": "Dễ dàng, tiện lợi.",
+                "title": "Mở thẻ online"
+            }
+        ],
+        "offerList": [
+            {
+                "detail": "Từ 10 triệu đồng",
+                "title": "HẠN MỨC"
+            },
+            {
+                "detail": "33%/năm",
+                "title": "LÃI SUẤT"
+            },
+            {
+                "detail": "Phí thường niên năm đầu",
+                "title": "TẶNG 440.000 ĐỒNG"
+            }
+        ],
+        "benefit": [
+            {
+                "detail": "• Ưu đãi hoàn tiền hàng tháng cho chủ thẻ tín dụng quốc tế HDBank Visa Gold:.<br/>• - Ưu đãi 1: Khách hàng có tổng doanh số giao dịch chi tiêu online/ăn uống hợp lệ từ 10 triệu VND/tháng trở lên.<br/>• + Đối với chi tiêu online: Hoàn 10% tối đa 400.000 VND/tháng.<br/>• Đối với chi tiêu ăn uống: Hoàn 8% tối đa 200.000 VND/tháng.<br/>• - Ưu đãi 2: Khách hàng có tổng doanh số giao dịch chi tiêu online/ ăn uống hợp lệ dưới 10 triệu VND/tháng.<br/>• + Đối với chi tiêu online: Hoàn 6% tối đa 200.000 VND/tháng.<br/>• + Đối với chi tiêu ăn uống: Hoàn 4% tối đa 100.000 VND/tháng.<br/>• Giá trị hoàn tối thiểu của chung chương trình khi chi tiêu online và ăn uống là 50.000 VND/tháng.<br/>",
+                "title": "Lợi ích"
+            },
+            {
+                "detail": "• Miễn lãi tối đa 45 ngày.<br/>• Miễn phí thường niên năm đầu tiên dành cho chủ thẻ chính và phụ (Điều khoản điều kiện theo quy định của HDBank).<br/>• An toàn bảo mật với chip EMV, công nghệ xác thực thanh toán 3D - Secure.",
+                "title": "Tính năng"
+            }
+        ],
+        "interestRate": [
+            {
+                "detail": "Từ 10 triệu đồng",
+                "title": "Hạn mức thẻ"
+            },
+            {
+                "detail": "Miễn phí",
+                "title": "Phí phát hành"
+            },
+            {
+                "detail": "*440.000 đồng/ năm (Hoàn phí năm đầu)<br/>+ Hoàn phí thường niên năm đầu cho chủ thẻ chính và phụ (Điều khoản điều kiện theo quy định HDBank)",
+                "title": "Phí thường niên"
+            },
+            {
+                "detail": "33%",
+                "title": "Lãi suất (%/ năm)"
+            },
+            {
+                "detail": "3%",
+                "title": "Tỷ lệ thanh toán tối thiểu"
+            },
+            {
+                "detail": "3%",
+                "title": "Phí chuyển đổi ngoại tệ"
+            },
+            {
+                "detail": "45 ngày",
+                "title": "Thời gian miễn lãi tối đa"
+            }
+        ]
+    }
+]

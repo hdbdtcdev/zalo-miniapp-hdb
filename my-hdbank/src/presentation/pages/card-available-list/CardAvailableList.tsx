@@ -12,6 +12,7 @@ import CardProduct from "@/presentation/components/CardProduct";
 import Logo from '@/asset/HDBank.svg';
 import { CardAvailableListDataRes } from "@/domain/entities/card/cardAvailableList";
 import { selectStatus } from "../card-available-detail/redux";
+import CardAvaialbleListMock from '@/mock/card_available_list.json';
 
 const CardAvailableList: FC = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const CardAvailableList: FC = () => {
     const { productCode } = product;
     if (!productCode) { return; }
 
-    // const { status } = useCardAvailableDetail(productCode);
+    // const { cardData, status } = useCardAvailableDetail(productCode);
 
     navigate("/card-available-detail");
   }, []);
@@ -69,7 +70,7 @@ const CardAvailableList: FC = () => {
               loop={false}
               style={{ width: "100%" }} // cho swiper rộng hơn
             >
-              {cardList.map((card) => (
+              {CardAvaialbleListMock.map((card) => (
                 <Swiper.Slide
                   key={card.productCode}
                   style={{}}
