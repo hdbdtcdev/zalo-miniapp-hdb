@@ -6,6 +6,7 @@ import {
   type RequestHeaders,
 } from '../axios';
 import { UserService } from '@/services/user/user.service';
+import { Device } from '@/utils';
 
 class HttpService extends AxiosService {
   constructor(config: RequestConfig | undefined = undefined) {
@@ -18,13 +19,20 @@ class HttpService extends AxiosService {
 
 const createBaseHeaders = (headers: RequestHeaders): RequestHeaders => {
   const userAuth = UserService.getAuthToken();
-
+  
   const result = {
     'GTW-Authorization': '',
     'OBD-Authorization': '',
     'X-Request-ID': '',
     'X-Open-ID': '',
+    'X-Client-IP': Device.INFO.ipAddress,
     'X-Platform': '',
+    'device-id': Device.ID,
+    'device-version': Device.INFO.systemVersion,
+    'device-manufacturer': Device.INFO.manufacturer,
+    'device-model': Device.INFO.model,
+    'device-name': Device.INFO.deviceName,
+    'app-version': `${Device.APP_VERSION} (${Device.INFO.buildNumber})`,
     'x-app-route-config': '',
     'x-session-id': '',
     'x-amz-request-id': '',

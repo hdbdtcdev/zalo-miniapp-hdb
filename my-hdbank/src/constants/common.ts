@@ -21,3 +21,6 @@ export const DATE_FORMAT_DASH = 'DD-MM-YYYY';
 export const DATE_FORMAT_SLASH = 'DD/MM/YYYY';
 export const REVERSE_DATE_FORMAT_DASH = 'YYYY-MM-DD';
 export const DATETIME_FORMAT_ISO_8601 = 'YYYY-MM-DDTHH:mm:ss';
+
+export const LANGUAGE_PREFERENCE_KEY = 'LANGUAGE_PREFERENCE';
+export const DEFAULT_LANGUAGE = 'vi';

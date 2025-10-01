@@ -1,12 +1,12 @@
 import {
     CardAvailableListDataReq,
     CardAvailableListDataRes
-} from '@/domain/entities/cardAvailableList';
-import { ICardAvailableListRepository } from '@/domain/interfaces/card-available-list';
+} from '@/domain/entities/card/cardAvailableList';
 import { Command } from '@/domain/models';
 import { ApiResponse } from '@/infrastructure/network';
 import { BaseService } from '@/infrastructure/services/base-service';
 import { injectable } from 'inversify';
+import { ICardAvailableListRepository } from '@/domain/interfaces/card/card-available-list';
 import config from '@/config/config.json';
 
 @injectable()
@@ -21,6 +21,7 @@ export class CardAvailableListRepository extends BaseService implements ICardAva
     ): Promise<ApiResponse<CardAvailableListDataRes[]>> {
         const request = command as unknown as CardAvailableListDataReq;
         const url = '/dop-card-list-available';
+
         const response = await this.post(
             url,
             request

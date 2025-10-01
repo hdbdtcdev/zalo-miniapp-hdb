@@ -1,8 +1,20 @@
 import { Container } from "inversify";
 import { TYPES } from "./types/types";
-import { CardAvailableListHandler } from "@/application/card/card_available_list_handler";
-import { ICardAvailableListRepository } from "@/domain/interfaces/card-available-list";
-import { CardAvailableListRepository } from "@/infrastructure/persistent/card/cardAvailableList.repository";
+import {
+  ICardAvailableDetailRepository,
+  ICardAvailableListRepository,
+} from "@/domain/interfaces/card";
+import {
+  CardAvailableDetailRepository,
+  CardAvailableListRepository,
+  CvpCommonRepository,
+} from "@/infrastructure/persistent";
+import {
+  CardAvailableDetailHandler,
+  CardAvailableListHandler,
+  CvpCommonHandler,
+} from "@/application";
+import { ICvpCommonRepository } from "@/domain/interfaces/cms";
 import { IDOPRepository } from "@/domain/interfaces";
 import { DOPRepository } from "@/infrastructure/persistent/dop/dop.repository";
 import { DOPGetAuthHandler } from "@/application/dop/dop-get-auth-handler";
@@ -40,5 +52,17 @@ container
   .to(DOPScanLiveFaceHandler);
 container.bind<DOPLogNFCHandler>(TYPES.DOPLogNFCHandler).to(DOPLogNFCHandler);
 //#endregion
+
+container
+  .bind<ICardAvailableDetailRepository>(TYPES.ICardAvailableDetailRepository)
+  .to(CardAvailableDetailRepository);
+container
+  .bind<CardAvailableDetailHandler>(TYPES.CardAvailableDetailHandler)
+  .to(CardAvailableDetailHandler);
+
+container
+  .bind<ICvpCommonRepository>(TYPES.ICvpCommonRepository)
+  .to(CvpCommonRepository);
+container.bind<CvpCommonHandler>(TYPES.CvpCommonHandler).to(CvpCommonHandler);
 
 export { container };

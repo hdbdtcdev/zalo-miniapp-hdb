@@ -1,12 +1,10 @@
 import { FC, useState } from "react";
 import { Page, Header, Box, Swiper, useNavigate, Button } from "zmp-ui";
 import { MoveLeft } from "lucide-react";
-import { useSelector } from "@/lib/redux";
+// import { useSelector } from "@/lib/redux";
 
 import "@/presentation/styles/swiper.css";
 import "@/presentation/styles/home.css"; // 👈 thêm file css gom style
-import { useCardAvailable } from "./home/hooks";
-import { selectCardList } from "./home/redux";
 import { useTranslation } from "react-i18next";
 
 const products = [
@@ -83,8 +81,8 @@ const HomePage: FC = () => {
   const [active, setActive] = useState(0);
   const { t } = useTranslation(["ns"]);
 
-  const cardList = useSelector(selectCardList);
-  const { cardListStatus } = useCardAvailable();
+  // const cardList = useSelector(selectCardList);
+  // const { cardListStatus } = useCardAvailable();
 
   const handleSelect = () => {
     const selected = products[active];
@@ -118,11 +116,7 @@ const HomePage: FC = () => {
 
           {/* Button */}
           <Box className="btn-wrapper">
-            <Button
-              fullWidth
-              className="btn-select"
-              onClick={handleSelect}
-            >
+            <Button fullWidth className="btn-select" onClick={handleSelect}>
               Chọn sản phẩm này
             </Button>
           </Box>

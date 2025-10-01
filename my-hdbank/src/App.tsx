@@ -1,9 +1,8 @@
-import React from "react";
-
+import { Device } from "./utils";
+import React, { useEffect } from "react";
 import { ZMPRouter, Route, AnimationRoutes } from "zmp-ui";
-
-import HomePage from "@/presentation/pages/HomePage";
-import CreditCardPreview from "@/presentation/pages/card/CreditCardPreview";
+import CardAvailableList from "@/presentation/pages/card-available-list/CardAvailableList";
+import CardAvaialbleDetail from "@/presentation/pages/card-available-detail/CardAvailableDetail";
 import { DOPIDFrontScanScreen } from "./presentation/pages/dop/DOPIDFrontScanScreen";
 import { DOPIDRearScanScreen } from "./presentation/pages/dop/DOPIDRearScanScreen";
 import { DOPIDResultScanScreen } from "./presentation/pages/dop/DOPIDResultScanScreen";
@@ -12,23 +11,29 @@ import { DOPLiveFacePreScanScreen } from "./presentation/pages/dop/DOPLiveFacePr
 import { DOPLiveFaceScanScreen } from "./presentation/pages/dop/DOPLiveFaceScanScreen";
 import { DOPNFCScanScreen } from "./presentation/pages/dop/DOPNFCScanScreen";
 
-const App: React.FC = () => (
-  <ZMPRouter>
-    <AnimationRoutes>
-      <Route path="/" Component={HomePage} />
-      <Route path="/CreditCardPreview" Component={CreditCardPreview} />
-      <Route path="/dop-intro" Component={DOPIntroScanScreen} />
-      <Route path="/dop-id-front-scan" Component={DOPIDFrontScanScreen} />
-      <Route path="/dop-id-rear-scan" Component={DOPIDRearScanScreen} />
-      <Route path="/dop-id-result-scan" Component={DOPIDResultScanScreen} />
-      <Route
-        path="/dop-live-face-pre-scan"
-        Component={DOPLiveFacePreScanScreen}
-      />
-      <Route path="/dop-live-face-scan" Component={DOPLiveFaceScanScreen} />
-      <Route path="/dop-nfc-scan" Component={DOPNFCScanScreen} />
-    </AnimationRoutes>
-  </ZMPRouter>
-);
+const App: React.FC = () => {
+  useEffect(() => {
+    Device.init();
+  }, []);
+
+  return (
+    <ZMPRouter>
+      <AnimationRoutes>
+        <Route path="/" Component={CardAvailableList} />
+        <Route path="/card-available-detail" Component={CardAvaialbleDetail} />
+        <Route path="/dop-intro" Component={DOPIntroScanScreen} />
+        <Route path="/dop-id-front-scan" Component={DOPIDFrontScanScreen} />
+        <Route path="/dop-id-rear-scan" Component={DOPIDRearScanScreen} />
+        <Route path="/dop-id-result-scan" Component={DOPIDResultScanScreen} />
+        <Route
+          path="/dop-live-face-pre-scan"
+          Component={DOPLiveFacePreScanScreen}
+        />
+        <Route path="/dop-live-face-scan" Component={DOPLiveFaceScanScreen} />
+        <Route path="/dop-nfc-scan" Component={DOPNFCScanScreen} />
+      </AnimationRoutes>
+    </ZMPRouter>
+  );
+};
 
 export default App;
