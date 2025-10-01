@@ -3,7 +3,13 @@ import { MoveLeft, RotateCcw } from "lucide-react";
 import { Header, Page, Text, Box, useNavigate } from "zmp-ui";
 import { icCaptureButton } from "@/asset";
 import { useDispatch, useSelector } from "@/lib/redux";
-import { scanRearThunk, selectAuth, selectError, selectFront, selectRear } from "./redux";
+import {
+  scanRearThunk,
+  selectAuth,
+  selectError,
+  selectFront,
+  selectRear,
+} from "./redux";
 
 interface IProps {}
 
@@ -27,7 +33,7 @@ export const DOPIDRearScanScreen: React.FC<IProps> = () => {
     if (rear) {
       navigate("/dop-id-result-scan");
     }
-  }, [front]);
+  }, [rear]);
 
   const onPhotoCapture = (imageDataUrl: string) => {
     console.log("Photo captured:", imageDataUrl);

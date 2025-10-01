@@ -51,13 +51,13 @@ export class DOPScanLiveFaceHandler {
       "x-amz-credential": form_data["x-amz-credential"],
       policy: form_data.policy,
       "content-Type": contentType,
-      key: hash,
+      key: hash.substring(hash.split("/")[0].length + 1, hash.length),
       file: file,
       fileName: fileName,
       uploadUrl: upload_url,
     } as UploadFileRequest);
 
-    if (uploadResponse?.status?.code !== "200") {
+    if (uploadResponse?.status?.code == "403") {
       throw new Error("Có lỗi xảy ra trong quá trình tải ảnh lên");
     }
 
@@ -74,7 +74,7 @@ export class DOPScanLiveFaceHandler {
 
     return {
       meta: addResponse.data,
-      upload: uploadResponse.data,
+      upload: uploadResponse?.data,
       identity: identityResponse.data,
     };
   }
