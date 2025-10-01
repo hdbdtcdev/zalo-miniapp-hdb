@@ -40,7 +40,12 @@ export class UploadRepository extends BaseService implements IUploadRepository {
   ): Promise<ApiResponse<AddFileResponse> | undefined> {
     return await this.post(
       `${config.BIO_BASE_URL}/file-service/v1/addFile`,
-      body
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${body.token}`,
+        },
+      }
     );
   }
 
@@ -49,6 +54,8 @@ export class UploadRepository extends BaseService implements IUploadRepository {
   ): Promise<ApiResponse<UploadFileResponse> | undefined> {
     // Convert base64 -> Blob
     const blob = this.base64ToBlob(body.file, "image/jpeg");
+    console.log("Blob size:", blob.size);
+    console.log("Form data to be sent:", body);
 
     const form = new FormData();
     form.append("x-amz-date", body["x-amz-date"]);

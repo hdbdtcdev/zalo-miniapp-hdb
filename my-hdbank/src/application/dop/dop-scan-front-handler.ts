@@ -24,12 +24,13 @@ export class DOPScanFrontHandler {
     clientSession,
   }: {
     file: string;
-    token: string;
-    clientSession: string;
+    token?: string;
+    clientSession?: string;
   }) {
     const fileName = "cccd_front.jpg";
     const contentType = "image/jpeg";
     const addResponse = await this._uploadRepository.addFile({
+      token: token,
       file_name: fileName,
       content_type: contentType,
     } as AddFileRequest);
@@ -41,6 +42,7 @@ export class DOPScanFrontHandler {
     const { form_data, hash, upload_url } = addResponse.data.object;
 
     const uploadResponse = await this._uploadRepository.uploadFile({
+      token: token,
       "x-amz-date": form_data["x-amz-date"],
       "x-amz-signature": form_data["x-amz-signature"],
       "x-amz-algorithm": form_data["x-amz-algorithm"],
@@ -71,7 +73,7 @@ export class DOPScanFrontHandler {
 
     return {
       meta: addResponse.data,
-      upload: uploadResponse,
+      upload: uploadResponse.data,
       identity: identityResponse.data,
     };
   }

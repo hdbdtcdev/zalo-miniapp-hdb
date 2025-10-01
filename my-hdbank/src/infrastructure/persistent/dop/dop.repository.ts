@@ -38,24 +38,40 @@ export class DOPRepository extends BaseService implements IDOPRepository {
   async identifyFrontOCR(
     body: IdentifyFrontOCRRequest
   ): Promise<ApiResponse<IdentifyFrontOCRResponse> | undefined> {
-    return this.post("/ai/v1/ocr/id/front", body);
+    return this.post("/ai/v1/ocr/id/front", body, {
+      headers: {
+        Authorization: `Bearer ${body.token}`,
+      },
+    });
   }
 
   identifyRearOCR(
     body: IdentifyRearOCRRequest
   ): Promise<ApiResponse<IdentifyFrontOCRResponse> | undefined> {
-    return this.post("/ai/v1/ocr/id", body);
+    return this.post("/ai/v1/ocr/id", body, {
+      headers: {
+        Authorization: `Bearer ${body.token}`,
+      },
+    });
   }
 
   identifyNFC(
     body: IdentifyNFCRequest
   ): Promise<ApiResponse<IdentifyNFCResponse> | undefined> {
-    return this.post("/ai/v1/nfc", body);
+    return this.post("/ai/v1/nfc", body, {
+      headers: {
+        Authorization: `Bearer ${body.token}`,
+      },
+    });
   }
 
   compareFace(
     body: CompareFaceRequest
   ): Promise<ApiResponse<CompareFaceResponse> | undefined> {
-    return this.post("/face-service/v1/face/compare", body);
+    return this.post("/face-service/v1/face/compare", body, {
+      headers: {
+        Authorization: `Bearer ${body.token}`,
+      },
+    });
   }
 }

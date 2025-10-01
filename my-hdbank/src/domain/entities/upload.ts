@@ -1,6 +1,7 @@
 export interface AddFileRequest {
   file_name: string;
   content_type: string;
+  token?: string;
 }
 
 export interface AddFileResponse {
@@ -38,6 +39,7 @@ export interface UploadFileRequest {
   file: string;
   fileName: string;
   uploadUrl: string;
+  token?: string;
 }
 
 export interface UploadFileResponse extends Object {}

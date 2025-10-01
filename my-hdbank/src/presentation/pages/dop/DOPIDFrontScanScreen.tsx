@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { MoveLeft, RotateCcw } from "lucide-react";
 import { Header, Page, Text, Box, useNavigate } from "zmp-ui";
 import { icCaptureButton } from "@/asset";
+import { useDispatch, useSelector } from "@/lib/redux";
+import { scanFrontThunk, selectAuth, selectFront } from "./redux";
 
 interface IProps {}
 
@@ -9,10 +11,20 @@ type FacingMode = "user" | "environment";
 
 export const DOPIDFrontScanScreen: React.FC<IProps> = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const dopAuth = useSelector(selectAuth);
+  const front = useSelector(selectFront);
 
   const onPhotoCapture = (imageDataUrl: string) => {
+    if (!imageDataUrl) return;
     console.log("Photo captured:", imageDataUrl);
   };
+
+  useEffect(() => {
+    if (front) {
+      navigate("/dop-id-rear-scan");
+    }
+  }, [front]);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -126,7 +138,13 @@ export const DOPIDFrontScanScreen: React.FC<IProps> = () => {
   const handleUsePhoto = (): void => {
     if (capturedImage) {
       console.log("Use photo:", capturedImage);
-      navigate("/dop-id-rear-scan");
+      dispatch(
+        scanFrontThunk({
+          file: capturedImage,
+          token: dopAuth?.access_token,
+          clientSession: dopAuth?.transaction_id,
+        })
+      );
     }
   };
 

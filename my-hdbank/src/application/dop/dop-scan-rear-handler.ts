@@ -22,15 +22,17 @@ export class DOPScanRearHandler {
     file,
     clientSession,
     imgFront,
+    token,
   }: {
     file: string;
-    token: string;
-    clientSession: string;
+    token?: string;
+    clientSession?: string;
     imgFront?: string;
   }) {
     const fileName = "cccd_rear.jpg";
     const contentType = "image/jpeg";
     const addResponse = await this._uploadRepository.addFile({
+      token: token,
       file_name: fileName,
       content_type: contentType,
     } as AddFileRequest);
@@ -42,6 +44,7 @@ export class DOPScanRearHandler {
     const { form_data, hash, upload_url } = addResponse.data.object;
 
     const uploadResponse = await this._uploadRepository.uploadFile({
+      token: token,
       "x-amz-date": form_data["x-amz-date"],
       "x-amz-signature": form_data["x-amz-signature"],
       "x-amz-algorithm": form_data["x-amz-algorithm"],
@@ -62,7 +65,7 @@ export class DOPScanRearHandler {
       type: -1,
       img_front: imgFront,
       img_back: hash,
-      token: "",
+      token: token,
       client_session: clientSession,
       validate_postcode: "1",
       transaction_id: "transactionID",
@@ -74,7 +77,7 @@ export class DOPScanRearHandler {
 
     return {
       meta: addResponse.data,
-      upload: uploadResponse,
+      upload: uploadResponse.data,
       identity: identityResponse.data,
     };
   }

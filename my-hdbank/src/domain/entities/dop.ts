@@ -136,6 +136,7 @@ export interface IdentifyRearOCRResponse {
 
 //
 export interface IdentifyNFCRequest {
+  token?: string;
   status?: boolean;
   client_session?: string;
   imgs?: string[];
@@ -178,6 +179,7 @@ export interface IdentifyNFCResponse {
 
 //
 export interface CompareFaceRequest {
+  token?: string;
   img_front?: string;
   img_face?: string;
   client_session?: string;

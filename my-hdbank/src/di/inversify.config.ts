@@ -28,6 +28,7 @@ container
   .bind<DOPGetAuthHandler>(TYPES.DOPGetAuthHandler)
   .to(DOPGetAuthHandler);
 
+container.bind<IUploadRepository>(TYPES.IUploadRepository).to(UploadRepository);
 container
   .bind<DOPScanFrontHandler>(TYPES.DOPScanFrontHandler)
   .to(DOPScanFrontHandler);
@@ -38,7 +39,6 @@ container
   .bind<DOPScanLiveFaceHandler>(TYPES.DOPScanLiveFaceHandler)
   .to(DOPScanLiveFaceHandler);
 container.bind<DOPLogNFCHandler>(TYPES.DOPLogNFCHandler).to(DOPLogNFCHandler);
-container.bind<IUploadRepository>(TYPES.IUploadRepository).to(UploadRepository);
 //#endregion
 
 export { container };
