@@ -1,4 +1,4 @@
-import { cvpCommonSlice } from "@/presentation/cvp_common";
+import { cvpCommonSlice } from "@/presentation/cms/cvp_common";
 import { cardAvailableDetailSlice } from "@/presentation/pages/card-available-detail/redux";
 import { cardAvailableListSlice } from "@/presentation/pages/card-available-list/redux";
 

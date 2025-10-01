@@ -1,18 +1,12 @@
-export interface CmsPayload {
-    segment?: string;
+export interface CvpCommonDataReq { 
     locale: string;
-    cardTitle?: string;
+    populate: string;
+    domainCode: string;
+    cvpTitle: string;
+    isActive: boolean;
 }
-
-export interface CvpCommonDataReq { }
 
 export interface CvpCommonDataRes {
-    data: CvpCommonData[];
-    meta: Meta;
-    signature: string;
-}
-
-export interface CvpCommonData {
     id: number;
     attributes: CvpCommonAttributes;
 }

@@ -13,7 +13,7 @@ export { CmsService };
 const createBaseConfig = (
   config: RequestConfig | undefined = undefined
 ): RequestConfig => {
-  const baseURL = configJson.BASE_URL ?? "";
+  const baseURL = configJson.HD_CMS_API_URL ?? "";
 
   return merge({}, config, {
     baseURL: baseURL,

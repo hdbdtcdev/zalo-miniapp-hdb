@@ -1,4 +1,4 @@
-import { useCardAvailableDetail } from "@/hooks";
+import { useCardAvailableDetail, useCvpCommon } from "@/hooks";
 import { useSelector } from "@/lib/redux";
 import { MoveLeft } from "lucide-react";
 import { FC, useCallback, useState } from "react";
@@ -14,31 +14,29 @@ import {
   useNavigate,
 } from "zmp-ui";
 import { selectCard } from "./redux";
+import { selectData } from "@/presentation/cms/cvp_common";
 
 const CardAvaialbleDetail: FC = () => {
   const navigate = useNavigate();
   const [muted, setMuted] = useState(false);
 
   const card = useSelector(selectCard);
-  const cvpCommon = useSelector(selectCard);
   const { status } = useCardAvailableDetail();
+
+  const cvpCommon = useSelector(selectData);
+  const { cvpCommonStatus } = useCvpCommon({
+    locale: 'vi',
+    populate: 'deep,5',
+    domainCode: 'DOP',
+    cvpTitle: 'dopvj',
+    isActive: true,
+  });
 
   const handleSelect = useCallback(() => {
     navigate("/dop-intro");
   }, [navigate]);
 
   const handleShare = async () => {
-    // if (window.zalo && zalo.share) {
-    // try {
-    //   await zalo.share({
-    //     title: "Phát hành thẻ tín dụng HDBank",
-    //     content: "Khám phá ưu đãi thẻ tín dụng",
-    //     url: window.location.href,
-    //   });
-    // } catch (err) {
-    //   console.error("Share failed:", err);
-    // }
-    // } else if (navigator.share) {
     try {
       await navigator.share({
         title: "Phát hành thẻ tín dụng HDBank",
@@ -56,8 +54,8 @@ const CardAvaialbleDetail: FC = () => {
     // TODO: nếu bạn có audio/video, điều khiển mute/unmute ở đây
   };
 
-  console.log(`KhanhNHB card detail ===> ${JSON.stringify(card)}`);
-  
+  console.log(`KhanhNHB card detail ===> ${JSON.stringify(cvpCommon)}`);
+
   return (
     <Page
       className="bg-transparent"

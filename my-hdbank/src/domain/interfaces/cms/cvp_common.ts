@@ -1,6 +1,7 @@
-import { CmsPayload, CvpCommonDataRes } from "@/domain/entities/cms/cmsPayload";
-
+import { CvpCommonDataRes } from "@/domain/entities/cvp_common/cvpCommon";
+import { Command } from "@/domain/models";
+import { ApiResponse } from "@/infrastructure/network";
 
 export interface ICvpCommonRepository {
-    cvpCommon(segment: CmsPayload): Promise<CvpCommonDataRes>;
+    fetchCvpCommon<TParameter>(segment: Command<TParameter>): Promise<ApiResponse<CvpCommonDataRes[]>>;
 }

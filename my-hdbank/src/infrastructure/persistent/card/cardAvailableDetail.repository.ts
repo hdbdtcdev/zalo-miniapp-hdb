@@ -4,8 +4,8 @@ import { BaseService } from '@/infrastructure/services/base-service';
 import { injectable } from 'inversify';
 import config from '@/config/config.json';
 import { Command } from '@/domain/models';
-import { ICardAvailableDetailRepository } from '@/domain/interfaces/card-available-detail';
 import { CardAvailableDetailDataReq, CardAvailableDetailDataRes } from '@/domain/entities/card/cardAvailableDetail';
+import { ICardAvailableDetailRepository } from '@/domain/interfaces/card/card-available-detail';
 
 @injectable()
 export class CardAvailableDetailRepository extends BaseService implements ICardAvailableDetailRepository {
@@ -24,7 +24,6 @@ export class CardAvailableDetailRepository extends BaseService implements ICardA
         )
 
         console.log(`Card Available Detail: ${JSON.stringify(response)}`);
-
         return response?.data as ApiResponse<CardAvailableDetailDataRes[]>;
     }
 }

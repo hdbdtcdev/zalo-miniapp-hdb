@@ -1,28 +1,27 @@
 import {  useEffect } from 'react';
 import { useDispatch, useSelector } from '@/lib/redux';
-import { useTranslation } from '@/services/i18n';
-import { selectCvp } from '@/presentation/cvp_common';
+import { fetchCvpCommonThunk, selectData, selectStatus } from '@/presentation/cms/cvp_common';
+import { CvpCommonCommand } from '@/application/cvp_common/cvp_common_command';
 
-export const useCardAvailableList = () => {
-  const { t } = useTranslation(['ns']);
+export const useCvpCommon = (command: CvpCommonCommand) => {
   const dispatch = useDispatch();
-  const cvpData = useSelector(selectCvp);
-  const cardListStatus = useSelector(selectStatus);
+  const cvpCommonData = useSelector(selectData);
+  const cvpCommonStatus = useSelector(selectStatus);
 
-  const fetchCardAvailable = async () => {
-
-    if (!cardListData?.length) {
+  const fetchCvpCommon = async (command: CvpCommonCommand) => {
+    if (!cvpCommonData) {
       dispatch(
-        fetchCardAvailableListThunk({})
+        fetchCvpCommonThunk(command)
       );
     }
   };
 
   useEffect(() => {
-    if (!cardListData?.length) {
-      fetchCardAvailable();
+    if (!cvpCommonData) {
+      fetchCvpCommon(command);
     }
   }, []);
 
-  return { cardListStatus };
+
+  return { cvpCommonStatus };
 };

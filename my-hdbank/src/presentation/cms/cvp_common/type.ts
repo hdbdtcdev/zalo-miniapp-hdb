@@ -1,4 +1,5 @@
-import { CvpCommonAttributes } from "@/domain/entities/cms/cmsPayload";
+
+import { CvpCommonAttributes } from "@/domain/entities/cvp_common/cvpCommon";
 import { StatusResponse } from "@/infrastructure/network";
 
 export interface CvpCommonState {

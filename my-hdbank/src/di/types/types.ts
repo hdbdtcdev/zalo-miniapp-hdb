@@ -1,13 +1,13 @@
 const TYPES = {
-    ICardAvailableListRepository: Symbol.for('ICardAvailableListRepository'),
+    // Handler
+    CvpCommonHandler: Symbol.for('CvpCommonHandler'),
     CardAvailableListHandler: Symbol.for('CardAvailableListHandler'),
-
-    ICardAvailableDetailRepository: Symbol.for('ICardAvailableDetailRepository'),
     CardAvailableDetailHandler: Symbol.for('CardAvailableDetailHandler'),
 
-    // CMS
+    // Repository
     ICvpCommonRepository: Symbol.for('ICvpCommonRepository'),
-    CvpCommonHandler: Symbol.for('CvpCommonHandler'),
+    ICardAvailableListRepository: Symbol.for('ICardAvailableListRepository'),
+    ICardAvailableDetailRepository: Symbol.for('ICardAvailableDetailRepository'),
 };
 
 export { TYPES };

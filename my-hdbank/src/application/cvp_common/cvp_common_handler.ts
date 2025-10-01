@@ -1,7 +1,8 @@
 import { inject } from 'inversify';
 import { TYPES } from '@/di/types/types';
-import { CmsPayload } from '@/domain/entities/cms/cmsPayload';
 import { ICvpCommonRepository } from '@/domain/interfaces/cms/cvp_common';
+import { Command } from '@/domain/models';
+import { CvpCommonDataReq } from '@/domain/entities/cvp_common/cvpCommon';
 
 export class CvpCommonHandler {
     private readonly _repository: ICvpCommonRepository;
@@ -13,7 +14,7 @@ export class CvpCommonHandler {
         this._repository = cvpCommonRepository;
     }
 
-    handle(segment: CmsPayload) {
-        return this._repository.cvpCommon(segment);
+    handle(command: Command<CvpCommonDataReq>) {
+        return this._repository.fetchCvpCommon(command);
     }
 }
