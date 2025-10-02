@@ -22,7 +22,7 @@ import { IUploadRepository } from "@/domain/interfaces/upload-repository";
 import { UploadRepository } from "@/infrastructure/persistent/dop/upload.repository";
 import { DOPScanFrontHandler } from "@/application/dop/dop-scan-front-handler";
 import { DOPLogNFCHandler } from "@/application/dop/dop-log-nfc-handler";
-import { DOPScanLiveFaceHandler } from "@/application/dop/dop-scan-live-face";
+import { DOPScanLiveFaceHandler } from "@/application/dop/dop-scan-live-face-handler";
 import { DOPScanRearHandler } from "@/application/dop/dop-scan-rear-handler";
 
 const container = new Container();

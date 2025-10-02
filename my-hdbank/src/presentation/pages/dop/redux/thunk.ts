@@ -4,7 +4,7 @@ import { container } from "@/di/inversify.config";
 import { DOPGetAuthHandler } from "@/application/dop/dop-get-auth-handler";
 import { DOPLogNFCHandler } from "@/application/dop/dop-log-nfc-handler";
 import { DOPScanFrontHandler } from "@/application/dop/dop-scan-front-handler";
-import { DOPScanLiveFaceHandler } from "@/application/dop/dop-scan-live-face";
+import { DOPScanLiveFaceHandler } from "@/application/dop/dop-scan-live-face-handler";
 import { DOPScanRearHandler } from "@/application/dop/dop-scan-rear-handler";
 import { IdentifyNFCRequest } from "@/domain/entities";
 

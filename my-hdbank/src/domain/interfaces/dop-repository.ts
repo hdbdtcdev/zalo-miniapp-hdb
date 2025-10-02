@@ -9,6 +9,7 @@ import {
   IdentifyNFCRequest,
   IdentifyNFCResponse,
   IdentifyRearOCRRequest,
+  IdentifyRearOCRResponse,
 } from "../entities/dop";
 
 export interface IDOPRepository {
@@ -20,7 +21,7 @@ export interface IDOPRepository {
 
   identifyRearOCR(
     body: IdentifyRearOCRRequest
-  ): Promise<ApiResponse<IdentifyFrontOCRResponse> | undefined>;
+  ): Promise<ApiResponse<IdentifyRearOCRResponse> | undefined>;
 
   identifyNFC(
     body: IdentifyNFCRequest

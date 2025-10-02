@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { MoveLeft, RotateCcw } from "lucide-react";
+import { MoveLeft } from "lucide-react";
 import { Header, Page, Text, Box, useNavigate } from "zmp-ui";
 import { icCaptureButton } from "@/asset";
 import { useDispatch, useSelector } from "@/lib/redux";
@@ -21,8 +21,20 @@ export const DOPIDFrontScanScreen: React.FC<IProps> = () => {
     console.log("Photo captured:", imageDataUrl);
   };
 
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const [stream, setStream] = useState<MediaStream | null>(null);
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [facingMode, setFacingMode] = useState<FacingMode>("environment");
+
   useEffect(() => {
     if (reduxError) {
+      if (capturedImage) {
+        retakePhoto();
+      }
       alert(reduxError);
     }
   }, [reduxError]);
@@ -33,14 +45,9 @@ export const DOPIDFrontScanScreen: React.FC<IProps> = () => {
     }
   }, [front]);
 
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const [stream, setStream] = useState<MediaStream | null>(null);
-  const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [facingMode, setFacingMode] = useState<FacingMode>("environment");
+  useEffect(() => {
+    handleUsePhoto();
+  }, [capturedImage]);
 
   useEffect(() => {
     startCamera();
@@ -125,9 +132,9 @@ export const DOPIDFrontScanScreen: React.FC<IProps> = () => {
     startCamera();
   };
 
-  const switchCamera = (): void => {
+  /*const switchCamera = (): void => {
     setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
-  };
+  };*/
 
   /*const handleGoBack = (): void => {
     if (stream) {
@@ -209,7 +216,7 @@ export const DOPIDFrontScanScreen: React.FC<IProps> = () => {
           )}
 
           {/* Camera controls overlay */}
-          {!capturedImage && !isLoading && !error && (
+          {/* {!capturedImage && !isLoading && !error && (
             <div className="absolute top-4 right-4">
               <button
                 onClick={switchCamera}
@@ -218,7 +225,7 @@ export const DOPIDFrontScanScreen: React.FC<IProps> = () => {
                 <RotateCcw size={20} />
               </button>
             </div>
-          )}
+          )} */}
 
           {/* Corner guides for ID card positioning */}
           {!capturedImage && (
@@ -234,30 +241,13 @@ export const DOPIDFrontScanScreen: React.FC<IProps> = () => {
 
       {/* Bottom Action Button */}
       <div className="flex justify-center pb-8">
-        {capturedImage ? (
-          <div className="flex space-x-4">
-            <button
-              onClick={retakePhoto}
-              className="px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-medium hover:bg-gray-300 transition-colors"
-            >
-              Chụp lại
-            </button>
-            <button
-              onClick={handleUsePhoto}
-              className="px-6 py-3 bg-red-500 text-white rounded-full font-medium hover:bg-red-600 transition-colors"
-            >
-              Sử dụng
-            </button>
-          </div>
-        ) : (
-          <button
-            onClick={capturePhoto}
-            disabled={isLoading || !!error}
-            className="w-86 h-86"
-          >
-            <img src={icCaptureButton} />
-          </button>
-        )}
+        <button
+          onClick={capturePhoto}
+          disabled={!!capturedImage || isLoading || !!error}
+          className="w-86 h-86"
+        >
+          <img src={icCaptureButton} />
+        </button>
       </div>
 
       {/* Hidden canvas for photo capture */}

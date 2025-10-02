@@ -73,10 +73,10 @@ export class DOPScanFrontHandler {
 
     const { classify_general, liveness_card_front } =
       identityResponse.data.object || {};
-    const errorMessage = liveness_card_front?.response_body?.message;
+    // const errorMessage = liveness_card_front?.response_body?.message;
 
     if (classify_general !== 1) {
-      throw new Error("Ảnh không phải mặt trước CCCD");
+      throw new Error("Ảnh chụp không phải ảnh CCCD/CMND");
     }
 
     return {

@@ -71,14 +71,18 @@ export class DOPScanRearHandler {
       transaction_id: "transactionID",
     });
 
-    if (!identityResponse || !identityResponse.data) {
-      throw new Error("Có lỗi xảy ra trong quá trình nhận diện CCCD");
+    const { classify_general, liveness_card_back } =
+      identityResponse?.data?.object || {};
+    // const errorMessage = liveness_card_back?.response_body?.message;
+
+    if (classify_general !== 1) {
+      throw new Error("Ảnh chụp không phải ảnh CCCD/CMND");
     }
 
     return {
       meta: addResponse.data,
       upload: uploadResponse?.data,
-      identity: identityResponse.data,
+      identity: identityResponse?.data,
     };
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { MoveLeft, RotateCcw } from "lucide-react";
+import { MoveLeft } from "lucide-react";
 import { Header, Page, useNavigate } from "zmp-ui";
 import { icCaptureButton } from "@/asset";
 import { useDispatch, useSelector } from "@/lib/redux";
@@ -26,8 +26,21 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({}) => {
   const liveFace = useSelector(selectLiveFace);
   const reduxError = useSelector(selectError);
 
+  const onPhotoCapture = (imageDataUrl: string) => {
+    console.log("Photo captured:", imageDataUrl);
+  };
+
+  const [stream, setStream] = useState<MediaStream | null>(null);
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [facingMode, setFacingMode] = useState<FacingMode>("user"); // Default to front camera for selfie
+
   useEffect(() => {
     if (reduxError) {
+      if (capturedImage) {
+        retakePhoto();
+      }
       alert(reduxError);
     }
   }, [reduxError]);
@@ -38,15 +51,9 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({}) => {
     }
   }, [liveFace]);
 
-  const onPhotoCapture = (imageDataUrl: string) => {
-    console.log("Photo captured:", imageDataUrl);
-  };
-
-  const [stream, setStream] = useState<MediaStream | null>(null);
-  const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [facingMode, setFacingMode] = useState<FacingMode>("user"); // Default to front camera for selfie
+  useEffect(() => {
+    handleUsePhoto();
+  }, [capturedImage]);
 
   useEffect(() => {
     startCamera();
@@ -136,9 +143,9 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({}) => {
     startCamera();
   };
 
-  const switchCamera = (): void => {
+  /*const switchCamera = (): void => {
     setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
-  };
+  };*/
 
   /*const handleGoBack = (): void => {
     if (stream) {
@@ -227,14 +234,14 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({}) => {
             )}
 
             {/* Camera switch button */}
-            {!capturedImage && !isLoading && !error && (
+            {/* {!capturedImage && !isLoading && !error && (
               <button
                 onClick={switchCamera}
                 className="hidden absolute top-4 right-4 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-opacity"
               >
                 <RotateCcw size={20} />
               </button>
-            )}
+            )} */}
           </div>
 
           {/* Guide overlay for face positioning */}
@@ -258,30 +265,13 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({}) => {
 
       {/* Bottom Actions */}
       <div className="flex justify-center pb-12">
-        {capturedImage ? (
-          <div className="flex space-x-6 h-86">
-            <button
-              onClick={retakePhoto}
-              className="px-8 py-3 bg-gray-200 text-gray-700 rounded-full font-medium hover:bg-gray-300 transition-colors"
-            >
-              Chụp lại
-            </button>
-            <button
-              onClick={handleUsePhoto}
-              className="px-8 py-3 bg-red-500 text-white rounded-full font-medium hover:bg-red-600 transition-colors"
-            >
-              Sử dụng
-            </button>
-          </div>
-        ) : (
-          <button
-            onClick={capturePhoto}
-            disabled={isLoading || !!error}
-            className="w-86 h-86"
-          >
-            <img src={icCaptureButton} />
-          </button>
-        )}
+        <button
+          onClick={capturePhoto}
+          disabled={!!capturedImage || isLoading || !!error}
+          className="w-86 h-86"
+        >
+          <img src={icCaptureButton} />
+        </button>
       </div>
 
       {/* Hidden canvas for photo capture */}

@@ -62,20 +62,27 @@ export class DOPScanLiveFaceHandler {
     }
 
     const identityResponse = await this._dopRepository.compareFace({
+      token: token,
       img_front: imgFront,
       img_face: hash,
       client_session: clientSession,
       compare_type: 1,
     });
 
-    if (!identityResponse || !identityResponse.data) {
-      throw new Error("Có lỗi xảy ra trong quá trình xác thực khuôn mặt");
+    const { status_code, errors } = identityResponse?.data || {};
+    // const errorMessage = liveness_card_back?.response_body?.message;
+
+    if (status_code !== 400) {
+      throw new Error(
+        errors?.pop?.toString() ||
+          "Có lỗi xảy ra trong quá trình nhận diện khuôn mặt"
+      );
     }
 
     return {
       meta: addResponse.data,
       upload: uploadResponse?.data,
-      identity: identityResponse.data,
+      identity: identityResponse?.data,
     };
   }
 }
