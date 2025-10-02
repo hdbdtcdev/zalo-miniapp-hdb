@@ -3,8 +3,36 @@ import fetch from "node-fetch"; // Node <18 mới cần npm install node-fetch
 import cors from "cors";
 import config from "./config.js";
 import { defaultHeaders } from "./headers.js";
+import httpProxy from "http-proxy";
 
 const app = express();
+
+//#region Cấu hình proxy để xử lý CORS cho các yêu cầu đến https://biometric-uat.hdbank.com.vn
+const proxy = httpProxy.createProxyServer({ selfHandleResponse: true });
+
+proxy.on("proxyRes", (proxyRes, req, res) => {
+  let body = [];
+  proxyRes.on("data", (chunk) => body.push(chunk));
+  proxyRes.on("end", () => {
+    const responseBody = Buffer.concat(body);
+    res.writeHead(proxyRes.statusCode || 200, {
+      ...proxyRes.headers,
+      "access-control-allow-origin": req.headers.origin || "*",
+      "access-control-allow-methods": "GET,POST,PUT,DELETE,OPTIONS",
+      "access-control-allow-headers": "*",
+    });
+    res.end(responseBody);
+  });
+});
+
+app.use("/dop-proxy", (req, res) => {
+  proxy.web(req, res, {
+    target: "https://biometric-uat.hdbank.com.vn",
+    changeOrigin: true,
+    secure: false,
+  });
+});
+//#endregion
 
 // ✅ Cấu hình middleware
 app.use(cors({ origin: "*" }));
