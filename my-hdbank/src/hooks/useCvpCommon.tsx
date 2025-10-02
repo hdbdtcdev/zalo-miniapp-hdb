@@ -1,27 +1,29 @@
-import {  useEffect } from 'react';
+import {  useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from '@/lib/redux';
-import { fetchCvpCommonThunk, selectData, selectStatus } from '@/presentation/cms/cvp_common';
+import { 
+  fetchCvpCommonThunk, 
+  selectData, 
+  selectError, 
+  selectStatus 
+} from '@/presentation/cms/cvp_common';
 import { CvpCommonCommand } from '@/application/cvp_common/cvp_common_command';
 
-export const useCvpCommon = (command: CvpCommonCommand) => {
+export const useCvpCommon = (cmd: CvpCommonCommand) => {
   const dispatch = useDispatch();
   const cvpCommonData = useSelector(selectData);
-  const cvpCommonStatus = useSelector(selectStatus);
+  const cvpCommmonStatus = useSelector(selectStatus);
+  const cvpCommonError = useSelector(selectError);
 
-  const fetchCvpCommon = async (command: CvpCommonCommand) => {
+  const fetchCvpCommon =  useCallback((cmd: CvpCommonCommand) => {
     if (!cvpCommonData) {
-      dispatch(
-        fetchCvpCommonThunk(command)
-      );
+      dispatch(fetchCvpCommonThunk(cmd));
     }
-  };
+  }, [dispatch, cvpCommonData]);
 
   useEffect(() => {
-    if (!cvpCommonData) {
-      fetchCvpCommon(command);
-    }
+    fetchCvpCommon(cmd);
   }, []);
 
 
-  return { cvpCommonStatus };
+  return { cvpCommonData, cvpCommmonStatus, cvpCommonError };
 };

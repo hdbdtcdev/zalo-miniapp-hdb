@@ -8,7 +8,7 @@ export class CardAvailableDetailHandler {
     private readonly _repository: ICardAvailableDetailRepository;
 
     constructor(
-        @inject(TYPES.ICardAvailableListRepository)
+        @inject(TYPES.ICardAvailableDetailRepository)
         cardDetailAvailableRepository: ICardAvailableDetailRepository
     ) {
         this._repository = cardDetailAvailableRepository;

@@ -52,19 +52,19 @@ export interface CvpPromotionAttributes {
 }
 
 export interface CvpPromotionCard {
-    id: number;
-    order: number;
-    title: string | null;
-    description: string | null;
-    label_font: string | null;
-    label_color: string | null;
-    background_color: string | null;
-    banner_start_date: string;
-    banner_end_date: string;
-    is_active: boolean;
-    navigation_type: string;
-    destination: string | null;
-    banner_image_url: string;
+    id?: number;
+    order?: number;
+    title?: string;
+    description?: string;
+    label_font: string;
+    label_color?: string;
+    background_color?: string;
+    banner_start_date?: string;
+    banner_end_date?: string;
+    is_active?: boolean;
+    navigation_type?: string;
+    destination?: string;
+    banner_image_url?: string;
 }
 
 export interface CvpUsp {
@@ -165,17 +165,17 @@ export interface TncCommon {
 }
 
 export interface TncCommonAttributes {
-    tnc_name: string;
-    title: string;
-    content: string | null;
-    is_active: boolean;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    locale: string;
-    tnc_text: string;
-    highlight: string;
-    pdf_url: string;
+    tnc_name?: string;
+    title?: string;
+    content?: string | null;
+    is_active?: boolean;
+    createdAt?: string;
+    updatedAt?: string;
+    publishedAt?: string;
+    locale?: string;
+    tnc_text?: string;
+    highlight?: string;
+    pdf_url?: string;
 }
 
 export interface CvpCtaButton {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { MoveLeft } from "lucide-react";
 import { useNavigate, Page, Header, Text, Box } from "zmp-ui";
-import { animateCaptureId } from "@/asset";
+import { animateCaptureId } from "@/assets";
 import Lottie from "lottie-react-web";
 
 interface IProps {}

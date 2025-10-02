@@ -1,7 +1,4 @@
-import { useCardAvailableDetail, useCvpCommon } from "@/hooks";
-import { useSelector } from "@/lib/redux";
-import { MoveLeft } from "lucide-react";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useMemo, useRef, useState } from "react";
 import {
   Page,
   Header,
@@ -9,188 +6,384 @@ import {
   Button,
   Icon,
   Text,
-  Checkbox,
-  Cluster,
   useNavigate,
 } from "zmp-ui";
-import { selectCard } from "./redux";
-import { selectData } from "@/presentation/cms/cvp_common";
+import { MoveLeft } from "lucide-react";
+import {
+  CvpFaqItem,
+  CvpPromotionCard,
+  CvpUspItem,
+  TncCommonAttributes
+} from "@/domain/entities/cvp_common/cvpCommon";
+import CvpCommonMock from '@/mock/cvp_common.json';
+import UspSection from "@/presentation/components/UspSection";
+import TermAndCondition from "@/presentation/components/TermAndCondition";
+import PromotionSection from "@/presentation/components/PromotionSection";
+import { v4 as uuidv4 } from 'uuid';
+import FaqSection from "@/presentation/components/FaqSection";
 
-const CardAvaialbleDetail: FC = () => {
+type Props = {
+  onShare: () => void;
+  onSubmit: () => void;
+};
+
+// thêm 1 map để dễ kiểm soát lớp
+const Z = {
+  VIDEO: 0,
+  HEADER: 10,
+  USP: 20,
+  PILL: 30,     // pill cao hơn USP
+  FAB: 40,
+  CTA: 50,
+} as const;
+
+const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
   const navigate = useNavigate();
-  const [muted, setMuted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const card = useSelector(selectCard);
-  // const { status } = useCardAvailableDetail();
+  const [muted, setMuted] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
 
-  const cvpCommon = useSelector(selectData);
-  const { cvpCommonStatus } = useCvpCommon({
-    locale: 'vi',
-    populate: 'deep,5',
-    domainCode: 'DOP',
-    cvpTitle: 'dopvj',
-    isActive: true,
-  });
+  // ===== Gọi API 1 lần khi vào màn hình =====
+  // const { cvpCommonData, cvpCommmonStatus, cvpCommonError } = useCvpCommon({
+  //   locale: "vi",
+  //   populate: "deep,5",
+  //   domainCode: "DOP",
+  //   cvpTitle: "dopvj",
+  //   isActive: true,
+  // });
 
-  const handleSelect = useCallback(() => {
-    navigate("/dop-intro");
-  }, [navigate]);
+  const cvpCommmonStatus = 'succeeded';
 
-  const handleShare = async () => {
-    try {
-      await navigator.share({
-        title: "Phát hành thẻ tín dụng HDBank",
-        text: "Khám phá ưu đãi thẻ tín dụng",
-        url: window.location.href,
-      });
-    } catch (err) {
-      console.warn("Web share không hỗ trợ", err);
+  // ===== Extract data gọn gàng =====
+  const {
+    cvp_background_video: mediaUrl,
+    cvp_deeplink: shareDeepLinkUrl,
+    cvp_cta_button: bottomButton,
+    tnc_common,
+    cvp_usp,
+    cvp_promotion,
+    cvp_faq
+  } = CvpCommonMock.data[0].attributes || {};
+
+  const tncAttr: TncCommonAttributes = tnc_common?.data?.attributes || {};
+  const uspAttr = cvp_usp?.data?.attributes || null;
+  const cvpPromotionAttr = cvp_promotion?.data?.attributes || null;
+
+  // ===== Handlers =====
+  const toggleMute = useCallback(() => {
+    setMuted((m) => !m);
+    if (videoRef.current) videoRef.current.muted = !videoRef.current.muted;
+  }, []);
+
+  const handleShare = useCallback(async () => {
+    if (shareDeepLinkUrl) {
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: "Phát hành thẻ tín dụng HDBank",
+            text: "Khám phá ưu đãi thẻ tín dụng",
+            url: shareDeepLinkUrl,
+          });
+        } else {
+          await navigator.clipboard.writeText(shareDeepLinkUrl);
+        }
+        onShare?.();
+      } catch (e) {
+        console.warn(e);
+      }
+    } else {
+      onShare?.();
     }
+  }, [shareDeepLinkUrl, onShare]);
+
+  const scrollToMore = useCallback(() => {
+    document.getElementById("more-section")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, []);
+
+  const uspItems = useMemo<CvpUspItem[]>(() => {
+    const items = uspAttr?.cvp_usp_item;
+
+    if (Array.isArray(items) && items.length > 0) {
+      return items;
+    }
+    return [];
+  }, [uspAttr?.cvp_usp_item]);
+
+  // const promotionItems = useMemo<CvpPromotionCard[]>(() => {
+  //   const items = cvpPromotionAttr?.cvp_promotion_card;
+
+  //   if (Array.isArray(items) && items.length > 0) {
+  //     return items;
+  //   }
+  //   return [];
+  // }, [cvpPromotionAttr?.cvp_promotion_card]);
+
+  const onPressUspItem = (item: CvpUspItem) => {
+    // switch (item.navigation_type) {
+    //   case NavigationType.WEB:
+    //     if (item.destination) {
+    //       setSelectedUrlLink(item.destination);
+    //     }
+    //     return;
+    //   case NavigationType.MINI_APP:
+    //     navigateByCode(item.destination ?? '');
+    //     break;
+    //   case NavigationType.ACTION:
+    //     break;
+    //   default:
+    //     break;
     // }
   };
 
-  const toggleMute = () => {
-    setMuted((prev) => !prev);
-    // TODO: nếu bạn có audio/video, điều khiển mute/unmute ở đây
+  const onPressPromotionItem = (item: CvpPromotionCard) => { }
+  const onPressQuestionItem = (item: CvpFaqItem) => {
   };
 
-  console.log(`KhanhNHB card detail ===> ${JSON.stringify(cvpCommon)}`);
 
+  // ===== Render chính =====
   return (
     <Page
       className="bg-transparent"
       style={{
-        alignItems: "center",
-        alignContent: 'center',
-        justifyContent: 'center'
+        height: "100dvh",
+        width: "100%",
+        // overflow: "hidden",
+        // position: "relative",
+        color: "#fff",
       }}
     >
+      {/* HEADER */}
       <Header
         backIcon={<MoveLeft color="#fff" />}
         title="Phát hành thẻ tín dụng"
-        className="transparent-header flex items-center justify-between"
+        className="transparent-header"
         style={{
-          background: "transparent",
+          background: "linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,0))",
           boxShadow: "none",
           borderBottom: "none",
           color: "#fff",
-          display: "flex",
-          alignItems: "center",
-          textAlign: "center",
-          justifyContent: "space-between",
         }}
+        onBackClick={() => navigate(-1 as any)}
       />
 
-      {/* Floating Buttons */}
-      <Box
-        style={{
-          position: "absolute",
-          top: "30%",
-          right: 16,
-          display: "flex",
-          flexDirection: "column",
-          gap: 12,
-        }}
-      >
-        <Button
-          icon={<Icon icon="zi-share" />}
-          variant="secondary"
-          size="small"
-          onClick={handleShare}
-          style={{
-            background: "#fff",
-            borderRadius: "50%",
-            width: 40,
-            height: 40,
-            minWidth: 40,
-            padding: 0,
-            boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
-          }}
-        />
-        <Button
-          icon={<Icon icon="zi-share" />}
-          variant="secondary"
-          size="small"
-          onClick={toggleMute}
-          style={{
-            background: "#fff",
-            borderRadius: "50%",
-            width: 40,
-            height: 40,
-            minWidth: 40,
-            padding: 0,
-            boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
-          }}
-        />
-      </Box>
-
-      {/* Box lợi ích */}
-      <Box
-        className="p-4"
-        style={{
-          background: "#fff",
-          opacity: 0.8,
-          borderRadius: 16,
-          boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-          marginLeft: 16,
-          marginRight: 16
-        }}
-      >
-        <Cluster
-          justify={"space-around"}
-          align="center"
-          space="1rem"
-        >
-          <Box style={{ textAlign: "center" }}>
-            <Icon icon="zi-home" size={32} style={{ color: "#e02424" }} />
-            <Text size="small">Siêu ưu đãi, ngàn tiện ích</Text>
-          </Box>
-          <Box style={{ textAlign: "center" }}>
-            <Icon icon="zi-home" size={32} style={{ color: "#f59e0b" }} />
-            <Text size="small">Tài khoản số đẹp như mơ</Text>
-          </Box>
-          <Box style={{ textAlign: "center" }}>
-            <Icon icon="zi-share" size={32} style={{ color: "#3b82f6" }} />
-            <Text size="small">Tích điểm đổi quà sang</Text>
-          </Box>
-        </Cluster>
-      </Box>
-
-      <Box className="p-4">
-        {/* Button CTA */}
-        <Box className="fixed bottom-0 left-0 right-0 p-6">
-          {/* Checkbox & Chính sách */}
-          <Box className="mt-4 mb-4">
-            <Checkbox value="">
-              <span style={{ fontSize: 12 }}>
-                Tôi đã đọc, hiểu rõ và đồng ý toàn bộ nội dung{" "}
-                <a
-                  style={{ color: "#e02424", textDecoration: "underline" }}
-                >
-                  Chính sách bảo vệ, xử lý dữ liệu cá nhân
-                </a>{" "}
-                của HDBank.
-              </span>
-            </Checkbox>
-          </Box>
-          <Button
-            fullWidth
+      {/* {cvpCommmonStatus === "loading" && (
+        <Box p={4}><Text>Đang tải dữ liệu...</Text></Box>
+      )}
+      {cvpCommmonStatus === "failed" && (
+        <Box p={4}><Text>Lỗi tải dữ liệu: {cvpCommonError}</Text></Box>
+      )} */}
+      {cvpCommmonStatus === "succeeded" && (
+        <>
+          <Box
+            // className="bg-white rounded-t-3xl pt-6 px-6 mt-2"
             style={{
-              background:
-                "linear-gradient(90deg, #e02424 0%, #ff6a00 50%, #ffd166 100%)",
-              color: "#fff",
-              fontWeight: 600,
-              borderRadius: 999,
-              height: 52,
+              position: "relative",
+              height: "100vh",
+              width: "100%",
+              overflow: "hidden",
             }}
-            onClick={handleSelect}
           >
-            Mở thẻ ngay
-          </Button>
-        </Box>
-      </Box>
+            {/* BACKGROUND */}
+            {mediaUrl ? (
+              <video
+                ref={videoRef}
+                src={mediaUrl}
+                muted={muted}
+                autoPlay
+                loop
+                playsInline
+                style={{
+                  // position: "absolute",
+                  // inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  zIndex: Z.VIDEO, // <-- quan trọng
+                }}
+              />
+            ) : (
+              <Box
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  backgroundImage:
+                    "url(https://placehold.co/800x1600/jpg?text=Credit+Card+BG)",
+                  backgroundPosition: "cover",
+                  backgroundSize: "cover",
+                }}
+              />
+            )}
+
+            {/* ===== Scroll pill (Chi tiết lợi ích) — ABSOLUTE CENTER ===== */}
+            <Box
+              onClick={scrollToMore}
+              style={{
+                position: "absolute",
+                top: "40%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                zIndex: Z.PILL,
+                userSelect: "none",
+                cursor: "pointer",
+                pointerEvents: "auto",
+              }}
+            >
+              <Box
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                }}
+              >
+                <Text
+                  style={{
+                    color: "#fff",
+                    opacity: 0.8,
+                    fontWeight: 700,
+                    fontSize: 14
+                  }}
+                >
+                  Chi tiết lợi ích
+                </Text>
+                <Icon icon="zi-arrow-down" />
+              </Box>
+            </Box>
+
+            {/* USP CARD nổi phía dưới (giống mock) */}
+            <Box
+              style={{
+                position: "absolute",
+                left: 16,
+                right: 16,
+                top: "45%",
+                zIndex: Z.USP,
+                background: "rgba(255,255,255,0.95)",
+                color: "#111827",
+                borderRadius: 16,
+                boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
+                padding: 12,
+              }}
+            >
+              <UspSection
+                items={uspItems}
+                backgroundColor="transparent"
+                isActive
+                onPressUspItem={onPressUspItem}
+              />
+            </Box>
+          </Box>
+
+          {/* FLOATING ACTIONS */}
+          <Box
+            style={{
+              position: "absolute",
+              top: "25%",
+              right: 16,
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+              zIndex: Z.FAB
+            }}
+          >
+            {shareDeepLinkUrl && (
+              <Button
+                aria-label="Chia sẻ"
+                icon={<Icon icon="zi-share" />}
+                variant="secondary"
+                size="small"
+                onClick={handleShare}
+                style={fabStyle}
+              />
+            )}
+            {mediaUrl && (
+              <Button
+                aria-label={muted ? "Bật âm thanh" : "Tắt âm thanh"}
+                icon={<Icon icon="zi-share" />}
+                variant="secondary"
+                size="small"
+                onClick={toggleMute}
+                style={fabStyle}
+              />
+            )}
+          </Box>
+
+          {/* PROMOTION */}
+          <Box className="px-6 pt-6" style={{ background: '#FFF9E5FF' }}>
+            {/* <PromotionSection/> */}
+            <PromotionSection
+              title={cvp_promotion.data.attributes.title}
+              items={(cvp_promotion.data.attributes.cvp_promotion_card as unknown as CvpPromotionCard[]) ?? []}
+              onPressPromotionItem={onPressPromotionItem}
+              key={uuidv4()}
+            />
+
+            <FaqSection
+              title={cvp_faq.data.attributes.title}
+              items={(cvp_faq.data.attributes.cvp_faq_item as unknown as CvpFaqItem[]) ?? []}
+              onPressQuestionItem={onPressQuestionItem}
+              key={uuidv4()}
+            />
+          </Box>
+
+          {/* BOTTOM CTA */}
+          <Box
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 4,
+              padding: 16,
+              // backdropFilter: "blur(8px)",
+              // background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.45) 30%, rgba(0,0,0,.65) 100%)",
+            }}
+          >
+            {/* {tncAttr?.is_active && (
+              <TermAndCondition
+                title={tncAttr.title}
+                pdfUrl={tncAttr.pdf_url}
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
+              />
+            )} */}
+
+            {bottomButton?.is_active && (
+              <Button
+                fullWidth
+                disabled={tncAttr?.is_active && !isChecked}
+                onClick={onSubmit}
+                style={{
+                  background:
+                    "linear-gradient(90deg, #e02424 0%, #ff6a00 55%, #ffd166 100%)",
+                  color: "#fff",
+                  fontWeight: 700,
+                  borderRadius: 999,
+                  height: 52,
+                  boxShadow: "0 10px 24px rgba(224,36,36,.35)",
+                }}
+              >
+                {bottomButton.label || "Tiếp tục"}
+              </Button>
+            )}
+          </Box>
+        </>
+      )}
     </Page>
   );
-}
+};
 
-export default CardAvaialbleDetail;
+const fabStyle: React.CSSProperties = {
+  background: "#fff",
+  borderRadius: "50%",
+  width: 40,
+  height: 40,
+  minWidth: 40,
+  padding: 0,
+  boxShadow: "0 4px 10px rgba(0,0,0,0.18)",
+};
+
+export default CardAvailableDetail;

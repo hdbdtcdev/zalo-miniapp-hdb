@@ -6,7 +6,7 @@ import { CardAvailableDetailCommand } from '@/application/card_available_detail/
 import { CardAvailableDetailHandler } from '@/application/card_available_detail/card_available_detail_handler';
 
 export const fetchCardAvailableDetailThunk = createAsyncThunk(
-  'home/fetch_card_availableDetail',
+  'cardAvailableDetail/fetch',
   async (request: CardAvailableDetailCommand) => {
     const cardAvailableDetailHandler = container.get<CardAvailableDetailHandler>(
       TYPES.CardAvailableDetailHandler

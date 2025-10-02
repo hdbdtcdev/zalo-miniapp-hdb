@@ -2,7 +2,7 @@ import React from 'react';
 import { store } from './store';
 import { Provider } from 'react-redux';
 import { App, useTheme } from 'zmp-ui';
-import bg from '@/asset/app-background.svg'
+import { AppBackground } from '@/assets';
 
 export const AppProvider = ({ children }: React.PropsWithChildren) => {
   const [theme] = useTheme();
@@ -13,7 +13,7 @@ export const AppProvider = ({ children }: React.PropsWithChildren) => {
         <div
           style={{
             minHeight: "100vh",
-            backgroundImage: `url(${bg})`,
+            backgroundImage: `url(${AppBackground})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
           }}

@@ -20,7 +20,7 @@ const App: React.FC = () => {
     <ZMPRouter>
       <AnimationRoutes>
         <Route path="/" Component={CardAvailableList} />
-        <Route path="/card-available-detail" Component={CardAvaialbleDetail} />
+        <Route path="/card-available-detail/:productCode" Component={CardAvaialbleDetail} />
         <Route path="/dop-intro" Component={DOPIntroScanScreen} />
         <Route path="/dop-id-front-scan" Component={DOPIDFrontScanScreen} />
         <Route path="/dop-id-rear-scan" Component={DOPIDRearScanScreen} />
