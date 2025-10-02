@@ -1,6 +1,6 @@
 {
   "tags": {},
-  "BASE_URL": "http://localhost:4000/api/sdk/v1",
+  "BASE_URL": "https://hdb-zalo-proxy.onrender.com/api/sdk/v1",
   "HD_CMS_API_URL": "http://localhost:4000/api/strapi-cms/v1",
-  "BIO_BASE_URL": "http://localhost:4000/dop-proxy"
+  "BIO_BASE_URL": "https://hdb-zalo-proxy.onrender.com/dop-proxy"
 }
