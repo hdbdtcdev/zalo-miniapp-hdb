@@ -3,6 +3,7 @@ import { TYPES } from "@/di/types/types";
 import { IDOPRepository } from "@/domain/interfaces";
 import { IUploadRepository } from "@/domain/interfaces/upload-repository";
 import { AddFileRequest, UploadFileRequest } from "@/domain/entities";
+import { firstArray } from "@/utils";
 
 export class DOPScanFrontHandler {
   private readonly _uploadRepository: IUploadRepository;
@@ -71,12 +72,11 @@ export class DOPScanFrontHandler {
       throw new Error("Có lỗi xảy ra trong quá trình nhận diện CCCD");
     }
 
-    const { classify_general, liveness_card_front } =
-      identityResponse.data.object || {};
-    // const errorMessage = liveness_card_front?.response_body?.message;
+    const { classify_general, ocr } = identityResponse?.data?.object || {};
+    const errorMessage = firstArray(ocr?.rule_result ?? [])?.error_name_vn;
 
     if (classify_general !== 1) {
-      throw new Error("Ảnh chụp không phải ảnh CCCD/CMND");
+      throw new Error(errorMessage || "Ảnh chụp không phải ảnh CCCD/CMND");
     }
 
     return {

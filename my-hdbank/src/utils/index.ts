@@ -4,4 +4,5 @@ export * from "./currency";
 export * from "./datetime";
 export * from "./numeric";
 export * from "./device/device-utils";
-export * from './device';
+export * from "./device";
+export * from "./array";
