@@ -18,7 +18,12 @@ import {
   updateAddrPermanet,
   updateCustomerInfo,
 } from "./slice";
-import { extractAddressThunk, getJobThunk } from "./thunk";
+import {
+  extractAddressThunk,
+  getJobThunk,
+  validateOcr as validateOcrThunk,
+} from "./thunk";
+import { useZaloGetPhone } from "@/hooks";
 
 type InfoRowProps = {
   label: string;
@@ -134,12 +139,16 @@ export const CustomerInfoPage = () => {
     gioiTinh,
     career,
     position,
+    noiSinh,
   } = customerInfo;
   const [loading, setLoading] = useState(false);
   const [listCareer, setListCareer] = useState<ItemModel[]>();
   const [listPosition, setListPosition] = useState<ItemModel[]>();
   const { careers, positions } = useSelector(selectJobData);
+  const { error, phoneNumber, requestPhone } = useZaloGetPhone();
+
   useEffect(() => {
+    requestPhone();
     setLoading(true);
     Promise.all([
       dispatch(
@@ -194,6 +203,54 @@ export const CustomerInfoPage = () => {
       setLoading(false);
     });
   }, []);
+  const onConfirm = () => {
+    console.log("BINHPV phone", phoneNumber);
+
+    dispatch(
+      validateOcrThunk({
+        partnerId: "",
+        leadId: "",
+        phoneNumber: phoneNumber ?? "0376796309",
+        frontId: "",
+        backId: "",
+        face: "",
+        fullName: fullName ?? "",
+        dob: ngaySinh ?? "",
+        gender: gioiTinh ?? "",
+        identityNumber: cccd ?? "",
+        identityType: "",
+        issuedDate: ngayCap ?? "",
+        issuedBy: noiCap ?? "",
+        addrProvinceId: addrPermanent?.province?.id ?? "",
+        addrDistrictId: "",
+        addrWardId: addrPermanent?.ward?.id ?? "",
+        addrDetail: addrPermanent?.addressDetail ?? "",
+        contactProvinceId: addrContact?.province?.id ?? "",
+        contactDistrictId: "",
+        contactWardId: addrContact?.ward?.id ?? "",
+        contactDetail: addrContact?.addressDetail ?? "",
+        expireDate: "",
+        nationality: "",
+        biometricRate: "",
+        isFaceMatched: "",
+        ekycId: "",
+        isEkyc: "",
+        oldNationalId: "",
+        nfc: "",
+        careerId: career?.careerId ?? "",
+        careerName: career?.careerName ?? "",
+        positionId: position?.positionId ?? "",
+        positionName: position?.positionName ?? "",
+        businessId: "",
+        industryId: "",
+        placeOfOrigin: noiSinh ?? "",
+        requestCode: "",
+        biometricKey: "",
+        idCardNoOcr: "",
+        referralCode: referralCode ?? "",
+      })
+    );
+  };
 
   return (
     <>
@@ -355,6 +412,7 @@ export const CustomerInfoPage = () => {
                   boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
                 }}
                 onClick={() => {
+                  onConfirm();
                   navigate("/CreatePassword");
                 }}
               >

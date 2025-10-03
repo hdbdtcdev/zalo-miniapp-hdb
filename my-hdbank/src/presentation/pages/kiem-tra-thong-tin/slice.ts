@@ -24,6 +24,7 @@ export interface CustomerInfoModel {
   fullName?: string;
   gioiTinh?: string;
   ngaySinh?: string;
+  noiSinh?: string;
 }
 interface AddressState {
   provinceList: Province[] | null;
