@@ -9,6 +9,7 @@ import CardProduct from "@/presentation/components/CardProduct";
 import { CardAvailableListDataRes } from "@/domain/entities/card/cardAvailableList";
 import CardAvaialbleListMock from '@/mock/card_available_list.json';
 import { LogoHDBank } from "@/assets";
+import { useCardAvailableList } from "@/hooks";
 
 const CardAvailableList: FC = () => {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ const CardAvailableList: FC = () => {
     if (!productCode) return;
     navigate(`/card-available-detail/${productCode}`);
   }, [dispatch, navigate]);
+
+  // const { cardListData, cardListStatus } = useCardAvailableList();
 
   return (
     <Page className="bg-transparent">

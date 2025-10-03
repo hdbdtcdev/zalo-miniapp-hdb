@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Page,
   Header,
@@ -17,15 +17,11 @@ import {
 } from "@/domain/entities/cvp_common/cvpCommon";
 import CvpCommonMock from '@/mock/cvp_common.json';
 import UspSection from "@/presentation/components/UspSection";
-import TermAndCondition from "@/presentation/components/TermAndCondition";
 import PromotionSection from "@/presentation/components/PromotionSection";
 import { v4 as uuidv4 } from 'uuid';
 import FaqSection from "@/presentation/components/FaqSection";
 
-type Props = {
-  onShare: () => void;
-  onSubmit: () => void;
-};
+type Props = {};
 
 // thêm 1 map để dễ kiểm soát lớp
 const Z = {
@@ -37,7 +33,7 @@ const Z = {
   CTA: 50,
 } as const;
 
-const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
+const CardAvailableDetail: FC<Props> = () => {
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -71,6 +67,11 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
   const cvpPromotionAttr = cvp_promotion?.data?.attributes || null;
 
   // ===== Handlers =====
+  const onShare = () => {}
+  const onSubmit = () => {
+    navigate('/dop-intro');
+  }
+
   const toggleMute = useCallback(() => {
     setMuted((m) => !m);
     if (videoRef.current) videoRef.current.muted = !videoRef.current.muted;
@@ -310,7 +311,15 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
           </Box>
 
           {/* PROMOTION */}
-          <Box className="px-6 pt-6" style={{ background: '#FFF9E5FF' }}>
+          <Box
+            className="px-6 pt-6"
+            style={{
+              background: '#FFF9E5FF',
+              // height: "100dvh",
+              width: "100%",
+              paddingBottom: 70
+            }}
+          >
             {/* <PromotionSection/> */}
             <PromotionSection
               title={cvp_promotion.data.attributes.title}
@@ -325,8 +334,6 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
               onPressQuestionItem={onPressQuestionItem}
               key={uuidv4()}
             />
-
-            <Box style={{ marginBottom: 16 }} />
           </Box>
 
           {/* BOTTOM CTA */}
@@ -349,12 +356,14 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
                 isChecked={isChecked}
                 setIsChecked={setIsChecked}
               />
-            )} */}
+            )} 
+            bottomButton.label || 
+            */}
 
             {bottomButton?.is_active && (
               <Button
                 fullWidth
-                disabled={tncAttr?.is_active && !isChecked}
+                disabled={false}
                 onClick={onSubmit}
                 style={{
                   background:
@@ -366,7 +375,7 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
                   boxShadow: "0 10px 24px rgba(224,36,36,.35)",
                 }}
               >
-                {bottomButton.label || "Tiếp tục"}
+                {"Tiếp tục"}
               </Button>
             )}
           </Box>

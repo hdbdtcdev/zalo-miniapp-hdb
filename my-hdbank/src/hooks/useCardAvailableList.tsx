@@ -24,5 +24,5 @@ export const useCardAvailableList = () => {
     }
   }, []);
 
-  return { cardListStatus };
+  return { cardListData, cardListStatus };
 };

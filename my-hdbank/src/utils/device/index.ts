@@ -49,6 +49,7 @@ class Device {
         isCameraPresent: false, // ❌
         buildNumber: "", // ❌
         ipAddress: "", // ❌
+        platform: systemInformation.platform
       };
 
       console.log("✅ Device INFO:", this.INFO);
