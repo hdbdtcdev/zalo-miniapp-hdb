@@ -40,7 +40,7 @@ const PromotionSection: FC<Props> = ({ title, items, onPressPromotionItem }) => 
   if (!data.length) return null;
 
   return (
-    <Box>
+    <Box style={{ marginTop: 16 }}>
       <Text
         style={{
           fontWeight: 600,

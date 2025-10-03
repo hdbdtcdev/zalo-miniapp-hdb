@@ -140,9 +140,7 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
   };
 
   const onPressPromotionItem = (item: CvpPromotionCard) => { }
-  const onPressQuestionItem = (item: CvpFaqItem) => {
-  };
-
+  const onPressQuestionItem = (item: CvpFaqItem) => { };
 
   // ===== Render chính =====
   return (
@@ -327,6 +325,8 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
               onPressQuestionItem={onPressQuestionItem}
               key={uuidv4()}
             />
+
+            <Box style={{ marginBottom: 16 }} />
           </Box>
 
           {/* BOTTOM CTA */}

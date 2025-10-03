@@ -19,7 +19,7 @@ const FaqSection: FC<Props> = ({ title, items, onPressQuestionItem }) => {
   if (!data.length) return null;
 
   return (
-    <Box>
+    <Box style={{ marginTop: 40 }}>
       <Text
         style={{
           fontWeight: 600,
