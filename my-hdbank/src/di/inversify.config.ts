@@ -30,6 +30,9 @@ import { DOPScanFrontHandler } from "@/application/dop/dop-scan-front-handler";
 import { DOPLogNFCHandler } from "@/application/dop/dop-log-nfc-handler";
 import { DOPScanLiveFaceHandler } from "@/application/dop/dop-scan-live-face-handler";
 import { DOPScanRearHandler } from "@/application/dop/dop-scan-rear-handler";
+import { IValidateOcrRepository } from "@/domain/interfaces/validate-ocr";
+import { ValidateOcrRepository } from "@/infrastructure/persistent/validate_ocr/validate_ocr.repository";
+import { ValideOcrHandler } from "@/application/validate_ocr/validate_ocr_handler";
 
 const container = new Container();
 
@@ -78,5 +81,10 @@ container
   .bind<ICvpCommonRepository>(TYPES.ICvpCommonRepository)
   .to(CvpCommonRepository);
 container.bind<CvpCommonHandler>(TYPES.CvpCommonHandler).to(CvpCommonHandler);
+
+container
+  .bind<IValidateOcrRepository>(TYPES.IValidateOcrRepository)
+  .to(ValidateOcrRepository);
+container.bind<ValideOcrHandler>(TYPES.ValideOcrHandler).to(ValideOcrHandler);
 
 export { container };

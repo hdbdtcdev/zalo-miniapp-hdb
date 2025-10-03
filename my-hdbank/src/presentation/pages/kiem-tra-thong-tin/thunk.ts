@@ -9,6 +9,11 @@ import {
 import { AddressHandler } from "@/application/address/address_handler";
 import { GetJobRequest, GetJobRequestData } from "@/application/job/job_body";
 import { JobHandler } from "@/application/job/job_handler";
+import {
+  ValidateOcrRequest,
+  ValidateOcrRequestData,
+} from "@/application/validate_ocr/validate_ocr_body";
+import { ValideOcrHandler } from "@/application/validate_ocr/validate_ocr_handler";
 import { container } from "@/di/inversify.config";
 import { TYPES } from "@/di/types/types";
 import { Command } from "@/domain/models/command";
@@ -68,5 +73,20 @@ export const getJobThunk = createAsyncThunk(
     const command = new Command({ command: payloadReq });
 
     return await handler.get_job_handler(command);
+  }
+);
+
+export const validateOcr = createAsyncThunk(
+  "/v1/dop-validate-ocr",
+  async (requestPayload: ValidateOcrRequestData) => {
+    const handler = container.get<ValideOcrHandler>(TYPES.ValideOcrHandler);
+
+    const payloadReq: ValidateOcrRequest = {
+      screenName: "SDKSERVICE-DOP-VALIDATE-OCR",
+      data: requestPayload,
+    };
+    const command = new Command({ command: payloadReq });
+
+    return await handler.handle(command);
   }
 );

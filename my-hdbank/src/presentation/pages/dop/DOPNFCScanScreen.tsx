@@ -35,7 +35,7 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
 
   useEffect(() => {
     if (nfc) {
-      navigate("/CreditCardPreview");
+      navigate("/CustomerInfo");
     }
   }, [nfc]);
 

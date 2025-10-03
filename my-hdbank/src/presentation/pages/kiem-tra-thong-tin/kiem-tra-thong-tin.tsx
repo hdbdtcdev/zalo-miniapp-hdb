@@ -120,7 +120,21 @@ export const CustomerInfoPage = () => {
   const [bsVisibleJob, setBsVisibleJob] = useState(false);
   const [bsVisiblePositionJob, setBsVisiblePositionJob] = useState(false);
   const customerInfo = useSelector(selectCustomerInfo);
-  const { addrContact, addrPermanent, referralCode, cmnd } = customerInfo;
+  const {
+    addrContact,
+    addrPermanent,
+    referralCode,
+    cmnd,
+    cccd,
+    noiCap,
+    ngayCap,
+    ngayHetHan,
+    ngaySinh,
+    fullName,
+    gioiTinh,
+    career,
+    position,
+  } = customerInfo;
   const [loading, setLoading] = useState(false);
   const [listCareer, setListCareer] = useState<ItemModel[]>();
   const [listPosition, setListPosition] = useState<ItemModel[]>();
@@ -137,7 +151,6 @@ export const CustomerInfoPage = () => {
       ).then((res) => {
         const response = res.payload as ExtractAddressResponse;
         if (response.resultCode !== "00") {
-          console.log("BINHPV LOG APIS", JSON.stringify(res, null, 2));
           return;
         }
         dispatch(
@@ -223,11 +236,11 @@ export const CustomerInfoPage = () => {
             <InfoCard
               icon="https://static-cdn.hdbank.com.vn/dibank/loan/assets/images/icons/icon_id.png"
               title="Số CCCD"
-              subtitle="015092000982"
+              subtitle={cccd ?? ""}
               rows={[
-                { label: "Nơi cấp", value: "Cục CS ĐKQL cư trú-DLQG dân cư" },
-                { label: "Ngày cấp", value: "01/01/2020" },
-                { label: "Ngày hết hạn", value: "31/12/2030" },
+                { label: "Nơi cấp", value: noiCap ?? "" },
+                { label: "Ngày cấp", value: ngayCap ?? "" },
+                { label: "Ngày hết hạn", value: ngayHetHan ?? "" },
                 {
                   label: "Số CMND cũ",
                   value: cmnd ?? "",
@@ -242,10 +255,10 @@ export const CustomerInfoPage = () => {
             <InfoCard
               icon="https://static-cdn.hdbank.com.vn/dibank/loan/assets/images/icons/default_avatar.png"
               title="Họ và tên"
-              subtitle="DANG TIEN ANH"
+              subtitle={fullName ?? ""}
               rows={[
-                { label: "Ngày sinh", value: "01/01/2020" },
-                { label: "Giới tính", value: "Nam" },
+                { label: "Ngày sinh", value: ngaySinh ?? "" },
+                { label: "Giới tính", value: gioiTinh ?? "" },
                 {
                   label: "Nơi thường trú",
                   value: `${addrPermanent?.addressDetail}, ${addrPermanent?.ward?.value}, ${addrPermanent?.province?.value}`,
@@ -264,7 +277,7 @@ export const CustomerInfoPage = () => {
                 },
                 {
                   label: "Công việc",
-                  value: customerInfo.career?.careerName ?? "Nhập",
+                  value: career?.careerName ?? "Nhập",
                   withArrow: true,
                   onClick: () => {
                     setBsVisibleJob(true);
@@ -272,12 +285,12 @@ export const CustomerInfoPage = () => {
                 },
                 {
                   label: "Vị trí công việc",
-                  value: customerInfo.position?.positionName ?? "",
+                  value: position?.positionName ?? "",
                   withArrow: true,
                   onClick: () => {
                     setBsVisiblePositionJob(true);
                   },
-                  isHide: !customerInfo.career,
+                  isHide: !career,
                 },
               ]}
             />

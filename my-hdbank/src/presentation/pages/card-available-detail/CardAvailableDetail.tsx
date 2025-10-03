@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Page, Header, Box, Button, Icon, Text, useNavigate } from "zmp-ui";
 import { MoveLeft } from "lucide-react";
 import {
@@ -9,17 +9,18 @@ import {
 } from "@/domain/entities/cvp_common/cvpCommon";
 import CvpCommonMock from "@/mock/cvp_common.json";
 import UspSection from "@/presentation/components/UspSection";
-import TermAndCondition from "@/presentation/components/TermAndCondition";
 import PromotionSection from "@/presentation/components/PromotionSection";
 import { v4 as uuidv4 } from "uuid";
 import FaqSection from "@/presentation/components/FaqSection";
+import {
+  ICvpShare,
+  ICvpVolumeDown,
+  ICvpVolumeUp,
+  IScrollDown,
+} from "@/assets/icons";
 
-type Props = {
-  onShare: () => void;
-  onSubmit: () => void;
-};
+type Props = {};
 
-// thêm 1 map để dễ kiểm soát lớp
 const Z = {
   VIDEO: 0,
   HEADER: 10,
@@ -29,7 +30,7 @@ const Z = {
   CTA: 50,
 } as const;
 
-const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
+const CardAvailableDetail: FC<Props> = () => {
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -63,6 +64,11 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
   const cvpPromotionAttr = cvp_promotion?.data?.attributes || null;
 
   // ===== Handlers =====
+  const onShare = () => {};
+  const onSubmit = () => {
+    navigate("/dop-intro");
+  };
+
   const toggleMute = useCallback(() => {
     setMuted((m) => !m);
     if (videoRef.current) videoRef.current.muted = !videoRef.current.muted;
@@ -141,8 +147,6 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
       style={{
         height: "100dvh",
         width: "100%",
-        // overflow: "hidden",
-        // position: "relative",
         color: "#fff",
       }}
     >
@@ -169,7 +173,6 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
       {cvpCommmonStatus === "succeeded" && (
         <>
           <Box
-            // className="bg-white rounded-t-3xl pt-6 px-6 mt-2"
             style={{
               position: "relative",
               height: "100vh",
@@ -239,7 +242,16 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
                 >
                   Chi tiết lợi ích
                 </Text>
-                <Icon icon="zi-arrow-down" />
+                <img
+                  src={IScrollDown}
+                  alt="cvp-volume"
+                  style={{
+                    objectFit: "cover",
+                    width: 12,
+                    height: 12,
+                  }}
+                  onClick={toggleMute}
+                />
               </Box>
             </Box>
 
@@ -280,29 +292,39 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
             }}
           >
             {shareDeepLinkUrl && (
-              <Button
-                aria-label="Chia sẻ"
-                icon={<Icon icon="zi-share" />}
-                variant="secondary"
-                size="small"
+              <img
+                src={ICvpShare}
+                alt="cvp-share"
+                // className="ml-4 h-8 w-auto"
+                style={{
+                  objectFit: "cover",
+                }}
                 onClick={handleShare}
-                style={fabStyle}
               />
             )}
             {mediaUrl && (
-              <Button
-                aria-label={muted ? "Bật âm thanh" : "Tắt âm thanh"}
-                icon={<Icon icon="zi-share" />}
-                variant="secondary"
-                size="small"
+              <img
+                src={muted ? ICvpVolumeDown : ICvpVolumeUp}
+                alt="cvp-volume"
+                // className="ml-4 h-8 w-auto"
+                style={{
+                  objectFit: "cover",
+                }}
                 onClick={toggleMute}
-                style={fabStyle}
               />
             )}
           </Box>
 
           {/* PROMOTION */}
-          <Box className="px-6 pt-6" style={{ background: "#FFF9E5FF" }}>
+          <Box
+            id="more-section"
+            className="px-6 pt-6"
+            style={{
+              background: "#FFF9E5FF",
+              width: "100%",
+              paddingBottom: 70,
+            }}
+          >
             {/* <PromotionSection/> */}
             <PromotionSection
               title={cvp_promotion.data.attributes.title}
@@ -323,8 +345,6 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
               onPressQuestionItem={onPressQuestionItem}
               key={uuidv4()}
             />
-
-            <Box style={{ marginBottom: 16 }} />
           </Box>
 
           {/* BOTTOM CTA */}
@@ -347,16 +367,15 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
                 isChecked={isChecked}
                 setIsChecked={setIsChecked}
               />
-            )} */}
+            )} 
+            bottomButton.label || 
+            */}
 
             {bottomButton?.is_active && (
               <Button
                 fullWidth
-                disabled={tncAttr?.is_active && !isChecked}
-                onClick={() => {
-                  navigate("/CustomerInfo");
-                  onSubmit();
-                }}
+                disabled={false}
+                onClick={onSubmit}
                 style={{
                   background:
                     "linear-gradient(90deg, #e02424 0%, #ff6a00 55%, #ffd166 100%)",
@@ -367,7 +386,7 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
                   boxShadow: "0 10px 24px rgba(224,36,36,.35)",
                 }}
               >
-                {bottomButton.label || "Tiếp tục"}
+                {"Tiếp tục"}
               </Button>
             )}
           </Box>

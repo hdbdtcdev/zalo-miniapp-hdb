@@ -7,7 +7,9 @@ import {
   getJobThunk,
   getProvinceListThunk,
   getWardListThunk,
+  validateOcr,
 } from "./thunk";
+import { ValidateOcrResponseData } from "@/domain/entities/validateOcr";
 export interface CustomerInfoModel {
   addrPermanent?: FullAddress;
   addrContact?: FullAddress;
@@ -15,6 +17,13 @@ export interface CustomerInfoModel {
   cmnd?: string;
   career?: Career;
   position?: Position;
+  cccd?: string;
+  noiCap?: string;
+  ngayCap?: string;
+  ngayHetHan?: string;
+  fullName?: string;
+  gioiTinh?: string;
+  ngaySinh?: string;
 }
 interface AddressState {
   provinceList: Province[] | null;
@@ -24,6 +33,7 @@ interface AddressState {
   error: string | null;
   customerInfo: CustomerInfoModel;
   jobData: GetJobResponseData | null;
+  validateOcrResp: ValidateOcrResponseData | null;
 }
 const initialState: AddressState = {
   provinceList: null,
@@ -31,8 +41,18 @@ const initialState: AddressState = {
   error: null,
   addrExtractData: null,
   wardList: null,
-  customerInfo: {},
+  customerInfo: {
+    cccd: "123456789123",
+    noiCap: "Cục CS ĐKQL cư trú-DLQG dân cư",
+    ngayHetHan: "31/12/2030",
+    cmnd: "001304027098",
+    ngayCap: "01/01/2020",
+    ngaySinh: "01/01/2020",
+    fullName: "DANG TIEN ANH",
+    gioiTinh: "Nam",
+  },
   jobData: null,
+  validateOcrResp: null,
 };
 const customerInfoSlice = createSlice({
   name: "customerInfo",
@@ -106,6 +126,19 @@ const customerInfoSlice = createSlice({
         const resultcode = action.payload.resultCode;
         if (resultcode === "00") {
           state.jobData = action.payload.data ?? null;
+        }
+      })
+      .addCase(validateOcr.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(validateOcr.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(validateOcr.fulfilled, (state, action) => {
+        state.loading = false;
+        const resultcode = action.payload.resultCode;
+        if (resultcode === "00") {
+          state.validateOcrResp = action.payload.data ?? null;
         }
       });
   },

@@ -1,0 +1,45 @@
+import { BaseApiRequest } from "@/domain/models/base_api_request";
+
+export interface ValidateOcrRequestData {
+  partnerId: string;
+  leadId: string;
+  phoneNumber: string;
+  frontId: string;
+  backId: string;
+  face: string;
+  fullName: string;
+  dob: string;
+  gender: string;
+  identityNumber: string;
+  identityType: string;
+  issuedDate: string;
+  issuedBy: string;
+  addrProvinceId: string;
+  addrDistrictId: string;
+  addrWardId: string;
+  addrDetail: string;
+  contactProvinceId: string;
+  contactDistrictId: string;
+  contactWardId: string;
+  contactDetail: string;
+  expireDate: string;
+  nationality: string;
+  biometricRate: string;
+  isFaceMatched: string;
+  ekycId: string;
+  isEkyc: string;
+  oldNationalId: string;
+  nfc: string;
+  careerId: string;
+  careerName: string;
+  positionId: string;
+  positionName: string;
+  businessId: string;
+  industryId: string;
+  placeOfOrigin: string;
+  requestCode: string;
+  biometricKey: string;
+  idCardNoOcr: string;
+  referralCode: string;
+}
+export type ValidateOcrRequest = BaseApiRequest<ValidateOcrRequestData>;

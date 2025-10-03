@@ -12,7 +12,7 @@
 
 /* Padding top theo safe-area + header */
 .pt-header {
-  padding-top: calc(env(safe-area-inset-top, 0px) + 56px);
+  /* padding-top: calc(env(safe-area-inset-top, 0px) + 56px); */
 }
 
 /* Card wrapper */
@@ -21,7 +21,7 @@
   max-width: 32rem;
   margin: 0 auto;
   position: relative;
-  padding-top: 6rem;
+  /* padding-top: 6rem; */
 }
 
 /* Banner nổi */
@@ -57,7 +57,7 @@
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 1rem;
-  padding-top: 7rem;
+  /* padding-top: 7rem; */
   z-index: 10;
 }
 
@@ -65,7 +65,7 @@
   color: #b91c1c;
   font-weight: 800;
   font-size: 1.125rem;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 /* Perks */
@@ -100,7 +100,7 @@
 .swiper-wrapper {
   /* margin: 1.5rem; */
   /* position: relative; */
-  padding-bottom: 60px;
+  /* padding-bottom: 60px; */
 }
 
 /* Button */
