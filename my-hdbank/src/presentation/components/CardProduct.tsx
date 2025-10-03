@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box } from "zmp-ui";
+import { Box, Text } from "zmp-ui";
 import { CardAvailableListDataRes } from "@/domain/entities/card/cardAvailableList";
 
 type CardProductProps = {
@@ -59,11 +59,19 @@ const CardProduct: FC<CardProductProps> = ({ product, goToDetail }) => {
         <button
           className="w-full py-3 rounded-xl text-white font-semibold shadow-md transition-all duration-200"
           style={{
-            background: "linear-gradient(90deg, #FF6600 0%, #FFCC00 100%)",
+            // background: "linear-gradient(90deg, #FF6600 0%, #FFCC00 100%)",
+            background: '#F3F4F6'
           }}
           onClick={() => goToDetail(product)}
         >
-          Mở thẻ ngay
+          <Text style={{
+            color: 'black',
+            fontSize: 16,
+            fontWeight: 600
+          }}
+          >
+            Mở thẻ ngay
+          </Text>
         </button>
       </Box>
     </Box>

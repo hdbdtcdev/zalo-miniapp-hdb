@@ -4,7 +4,6 @@ import React from "react";
 import { App as ZMPApp, ZMPRouter, Route, AnimationRoutes } from "zmp-ui";
 
 import { AppProvider } from "@/lib/redux/provider";
-import HomePage from "@/presentation/pages/HomePage";
 import { CustomerInfoPage } from "../pages/kiem-tra-thong-tin/kiem-tra-thong-tin";
 import { CreatePasswordPage } from "../pages/tao-mat-khau/tao-mat-khau";
 import { CreatePinPage } from "../pages/tao-ma-pin/tao-ma-pin";
@@ -24,7 +23,6 @@ const AppRoutes: React.FC = () => (
     <ZMPApp>
       <ZMPRouter>
         <AnimationRoutes>
-          <Route path="/" Component={HomePage} />
           <Route path="/CustomerInfo" Component={CustomerInfoPage} />
           <Route path="/CreatePassword" Component={CreatePasswordPage} />
           <Route path="/CreatePin" Component={CreatePinPage} />

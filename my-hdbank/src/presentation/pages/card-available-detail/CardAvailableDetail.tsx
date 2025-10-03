@@ -323,6 +323,8 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
               onPressQuestionItem={onPressQuestionItem}
               key={uuidv4()}
             />
+
+            <Box style={{ marginBottom: 16 }} />
           </Box>
 
           {/* BOTTOM CTA */}
@@ -353,8 +355,6 @@ const CardAvailableDetail: FC<Props> = ({ onShare, onSubmit }) => {
                 disabled={tncAttr?.is_active && !isChecked}
                 onClick={() => {
                   navigate("/CustomerInfo");
-                  console.log("BINHPV CLick mo the ngay");
-
                   onSubmit();
                 }}
                 style={{
