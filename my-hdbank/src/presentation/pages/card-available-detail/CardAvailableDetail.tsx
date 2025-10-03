@@ -1,13 +1,5 @@
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import {
-  Page,
-  Header,
-  Box,
-  Button,
-  Icon,
-  Text,
-  useNavigate,
-} from "zmp-ui";
+import { Page, Header, Box, Button, Icon, Text, useNavigate } from "zmp-ui";
 import { MoveLeft } from "lucide-react";
 import {
   CvpFaqItem,
@@ -20,11 +12,11 @@ import UspSection from "@/presentation/components/UspSection";
 import PromotionSection from "@/presentation/components/PromotionSection";
 import { v4 as uuidv4 } from "uuid";
 import FaqSection from "@/presentation/components/FaqSection";
-import { 
-  ICvpShare, 
-  ICvpVolumeDown, 
-  ICvpVolumeUp, 
-  IScrollDown 
+import {
+  ICvpShare,
+  ICvpVolumeDown,
+  ICvpVolumeUp,
+  IScrollDown,
 } from "@/assets/icons";
 
 type Props = {};
@@ -72,10 +64,10 @@ const CardAvailableDetail: FC<Props> = () => {
   const cvpPromotionAttr = cvp_promotion?.data?.attributes || null;
 
   // ===== Handlers =====
-  const onShare = () => { }
+  const onShare = () => {};
   const onSubmit = () => {
-    navigate('/dop-intro');
-  }
+    navigate("/dop-intro");
+  };
 
   const toggleMute = useCallback(() => {
     setMuted((m) => !m);
@@ -145,8 +137,8 @@ const CardAvailableDetail: FC<Props> = () => {
     // }
   };
 
-  const onPressPromotionItem = (item: CvpPromotionCard) => { };
-  const onPressQuestionItem = (item: CvpFaqItem) => { };
+  const onPressPromotionItem = (item: CvpPromotionCard) => {};
+  const onPressQuestionItem = (item: CvpFaqItem) => {};
 
   // ===== Render chính =====
   return (
@@ -250,13 +242,13 @@ const CardAvailableDetail: FC<Props> = () => {
                 >
                   Chi tiết lợi ích
                 </Text>
-                 <img
+                <img
                   src={IScrollDown}
                   alt="cvp-volume"
                   style={{
-                    objectFit: 'cover',
+                    objectFit: "cover",
                     width: 12,
-                    height: 12
+                    height: 12,
                   }}
                   onClick={toggleMute}
                 />
@@ -305,23 +297,22 @@ const CardAvailableDetail: FC<Props> = () => {
                 alt="cvp-share"
                 // className="ml-4 h-8 w-auto"
                 style={{
-                  objectFit: 'cover'
+                  objectFit: "cover",
                 }}
                 onClick={handleShare}
               />
             )}
-            {mediaUrl &&
-              (
-                <img
-                  src={muted ? ICvpVolumeDown : ICvpVolumeUp}
-                  alt="cvp-volume"
-                  // className="ml-4 h-8 w-auto"
-                  style={{
-                    objectFit: 'cover'
-                  }}
-                  onClick={toggleMute}
-                />
-              )}
+            {mediaUrl && (
+              <img
+                src={muted ? ICvpVolumeDown : ICvpVolumeUp}
+                alt="cvp-volume"
+                // className="ml-4 h-8 w-auto"
+                style={{
+                  objectFit: "cover",
+                }}
+                onClick={toggleMute}
+              />
+            )}
           </Box>
 
           {/* PROMOTION */}
@@ -329,9 +320,9 @@ const CardAvailableDetail: FC<Props> = () => {
             id="more-section"
             className="px-6 pt-6"
             style={{
-              background: '#FFF9E5FF',
+              background: "#FFF9E5FF",
               width: "100%",
-              paddingBottom: 70
+              paddingBottom: 70,
             }}
           >
             {/* <PromotionSection/> */}
