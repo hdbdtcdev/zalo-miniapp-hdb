@@ -20,10 +20,15 @@ import UspSection from "@/presentation/components/UspSection";
 import PromotionSection from "@/presentation/components/PromotionSection";
 import { v4 as uuidv4 } from "uuid";
 import FaqSection from "@/presentation/components/FaqSection";
+import { 
+  ICvpShare, 
+  ICvpVolumeDown, 
+  ICvpVolumeUp, 
+  IScrollDown 
+} from "@/assets/icons";
 
 type Props = {};
 
-// thêm 1 map để dễ kiểm soát lớp
 const Z = {
   VIDEO: 0,
   HEADER: 10,
@@ -67,7 +72,7 @@ const CardAvailableDetail: FC<Props> = () => {
   const cvpPromotionAttr = cvp_promotion?.data?.attributes || null;
 
   // ===== Handlers =====
-  const onShare = () => {}
+  const onShare = () => { }
   const onSubmit = () => {
     navigate('/dop-intro');
   }
@@ -140,8 +145,8 @@ const CardAvailableDetail: FC<Props> = () => {
     // }
   };
 
-  const onPressPromotionItem = (item: CvpPromotionCard) => {};
-  const onPressQuestionItem = (item: CvpFaqItem) => {};
+  const onPressPromotionItem = (item: CvpPromotionCard) => { };
+  const onPressQuestionItem = (item: CvpFaqItem) => { };
 
   // ===== Render chính =====
   return (
@@ -150,8 +155,6 @@ const CardAvailableDetail: FC<Props> = () => {
       style={{
         height: "100dvh",
         width: "100%",
-        // overflow: "hidden",
-        // position: "relative",
         color: "#fff",
       }}
     >
@@ -178,7 +181,6 @@ const CardAvailableDetail: FC<Props> = () => {
       {cvpCommmonStatus === "succeeded" && (
         <>
           <Box
-            // className="bg-white rounded-t-3xl pt-6 px-6 mt-2"
             style={{
               position: "relative",
               height: "100vh",
@@ -248,7 +250,16 @@ const CardAvailableDetail: FC<Props> = () => {
                 >
                   Chi tiết lợi ích
                 </Text>
-                <Icon icon="zi-arrow-down" />
+                 <img
+                  src={IScrollDown}
+                  alt="cvp-volume"
+                  style={{
+                    objectFit: 'cover',
+                    width: 12,
+                    height: 12
+                  }}
+                  onClick={toggleMute}
+                />
               </Box>
             </Box>
 
@@ -289,29 +300,33 @@ const CardAvailableDetail: FC<Props> = () => {
             }}
           >
             {shareDeepLinkUrl && (
-              <Button
-                aria-label="Chia sẻ"
-                icon={<Icon icon="zi-share" />}
-                variant="secondary"
-                size="small"
+              <img
+                src={ICvpShare}
+                alt="cvp-share"
+                // className="ml-4 h-8 w-auto"
+                style={{
+                  objectFit: 'cover'
+                }}
                 onClick={handleShare}
-                style={fabStyle}
               />
             )}
-            {mediaUrl && (
-              <Button
-                aria-label={muted ? "Bật âm thanh" : "Tắt âm thanh"}
-                icon={<Icon icon="zi-share" />}
-                variant="secondary"
-                size="small"
-                onClick={toggleMute}
-                style={fabStyle}
-              />
-            )}
+            {mediaUrl &&
+              (
+                <img
+                  src={muted ? ICvpVolumeDown : ICvpVolumeUp}
+                  alt="cvp-volume"
+                  // className="ml-4 h-8 w-auto"
+                  style={{
+                    objectFit: 'cover'
+                  }}
+                  onClick={toggleMute}
+                />
+              )}
           </Box>
 
           {/* PROMOTION */}
           <Box
+            id="more-section"
             className="px-6 pt-6"
             style={{
               background: '#FFF9E5FF',
