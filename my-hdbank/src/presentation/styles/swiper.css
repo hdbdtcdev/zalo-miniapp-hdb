@@ -1,4 +1,8 @@
 .zaui-swiper {
+  padding-bottom: 4px;
+}
+
+.zaui-swiper-item {
   padding-bottom: 40px;
 }
 

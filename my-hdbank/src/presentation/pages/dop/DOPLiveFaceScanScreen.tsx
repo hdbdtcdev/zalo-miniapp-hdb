@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MoveLeft, RotateCcw } from "lucide-react";
 import { Header, Page, useNavigate } from "zmp-ui";
-import { icCaptureButton } from "@/asset";
+import { icCaptureButton } from "@/assets";
 import { useDispatch, useSelector } from "@/lib/redux";
 import {
   scanLiveFaceThunk,

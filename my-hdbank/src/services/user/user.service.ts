@@ -28,18 +28,6 @@ export class UserService {
 
   static getAuthToken(): AuthToken | null {
     try {
-      const rawData = globalDataService.get<string>(GlobalKey.USER_AUTH);
-      if (!rawData) return null;
-
-      const parsed: unknown = JSON.parse(rawData);
-      if (
-        typeof parsed === 'object' &&
-        parsed !== null &&
-        'accessToken' in parsed
-      ) {
-        return parsed as AuthToken;
-      }
-
       return null;
     } catch (error) {
       return null;

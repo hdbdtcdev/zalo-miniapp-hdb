@@ -1,7 +1,12 @@
 const TYPES = {
+  ICardAvailableListRepository: Symbol.for("ICardAvailableListRepository"),
+  CardAvailableListHandler: Symbol.for("CardAvailableListHandler"),
+  IAddressRepository: Symbol.for("IAddressRepository"),
+  AddressHandler: Symbol.for("AddressHandler"),
+  IJobRepository: Symbol.for("IJobRepository"),
+  JobHandler: Symbol.for("JobHandler"),
   // Handler
   CvpCommonHandler: Symbol.for("CvpCommonHandler"),
-  CardAvailableListHandler: Symbol.for("CardAvailableListHandler"),
   CardAvailableDetailHandler: Symbol.for("CardAvailableDetailHandler"),
 
   DOPGetAuthHandler: Symbol.for("DOPGetAuthHandler"),
@@ -12,7 +17,6 @@ const TYPES = {
 
   // Repository
   ICvpCommonRepository: Symbol.for("ICvpCommonRepository"),
-  ICardAvailableListRepository: Symbol.for("ICardAvailableListRepository"),
   ICardAvailableDetailRepository: Symbol.for("ICardAvailableDetailRepository"),
   IDOPRepository: Symbol.for("IDOPRepository"),
   IUploadRepository: Symbol.for("IUploadRepository"),

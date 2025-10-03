@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from '@/lib/redux';
-import { useTranslation } from '@/services/i18n';
-import { fetchCardAvailableDetailThunk, selectCard, selectStatus } from '@/presentation/pages/card-available-detail/redux';
+import { fetchCardAvailableDetailThunk, selectCard, selectError, selectStatus } from '@/presentation/pages/card-available-detail/redux';
 
 export const useCardAvailableDetail = (productCode: string) => {
-  const { t } = useTranslation(['ns']);
   const dispatch = useDispatch();
-  const cardData = useSelector(selectCard);
+  
+  const card = useSelector(selectCard);
   const status = useSelector(selectStatus);
+  const error = useSelector(selectError);
 
   const fetchCardAvailable = async (productCode: string) => {
-    if (!cardData) {
+    if (!card) {
       dispatch(
         fetchCardAvailableDetailThunk({
           productCode
@@ -20,10 +20,10 @@ export const useCardAvailableDetail = (productCode: string) => {
   };
 
   useEffect(() => {
-    if (!cardData) {
+    if (!card) {
       fetchCardAvailable(productCode);
     }
   }, []);
 
-  return { status };
+  return { card, status, error };
 };

@@ -1,38 +1,24 @@
-import { FC, useCallback, useEffect, useState } from "react";
-import { Page, Header, Box, Swiper, useNavigate } from "zmp-ui";
+import { FC, useCallback } from "react";
+import { Page, Box, Swiper, useNavigate } from "zmp-ui";
 import { MoveLeft } from "lucide-react";
-import { useSelector } from "@/lib/redux";
-import { selectCardList } from "./redux";
-import { useTranslation } from "react-i18next";
+import { useDispatch } from "@/lib/redux";
 
 import "@/presentation/styles/home.css";
 import "@/presentation/styles/swiper.css";
-import { useCardAvailableDetail, useCardAvailableList } from "@/hooks";
 import CardProduct from "@/presentation/components/CardProduct";
-import Logo from '@/asset/HDBank.svg';
 import { CardAvailableListDataRes } from "@/domain/entities/card/cardAvailableList";
-import { selectStatus } from "../card-available-detail/redux";
 import CardAvaialbleListMock from '@/mock/card_available_list.json';
+import { LogoHDBank } from "@/assets";
 
 const CardAvailableList: FC = () => {
   const navigate = useNavigate();
-  const [active, setActive] = useState(0);
-  const { t } = useTranslation(["ns"]);
-
-  const cardList = useSelector(selectCardList);
-  const { cardListStatus } = useCardAvailableList();
-
-  const cardDetail = useSelector(selectCardList);
-  const cardDetailStatus = useSelector(selectStatus);
+  const dispatch = useDispatch();
 
   const handleSelect = useCallback((product: CardAvailableListDataRes) => {
     const { productCode } = product;
-    if (!productCode) { return; }
-
-    // const { cardData, status } = useCardAvailableDetail(productCode);
-
-    navigate("/card-available-detail");
-  }, []);
+    if (!productCode) return;
+    navigate(`/card-available-detail/${productCode}`);
+  }, [dispatch, navigate]);
 
   return (
     <Page className="bg-transparent">
@@ -45,7 +31,7 @@ const CardAvailableList: FC = () => {
               Phát hành thẻ tín dụng
             </span> */}
             <img
-              src={Logo}
+              src={LogoHDBank}
               alt="Logo"
               className="ml-4 h-8 w-auto"
             />
@@ -59,26 +45,28 @@ const CardAvailableList: FC = () => {
             minHeight: "100vh", // body dài để scroll
           }}
         >
-          <div className="intro-text text-lg font-semibold text-black mb-4">
-            Thẻ tín dụng
-          </div>
+          <Box>
+            <div className="intro-text text-lg font-semibold text-black mb-4">
+              Thẻ tín dụng
+            </div>
 
-          <Box className="swiper-wrapper">
-            <Swiper
-              dots
-              autoplay={false}
-              loop={false}
-              style={{ width: "100%" }} // cho swiper rộng hơn
-            >
-              {CardAvaialbleListMock.map((card) => (
-                <Swiper.Slide
-                  key={card.productCode}
-                  style={{}}
-                >
-                  <CardProduct product={card} goToDetail={handleSelect} />
-                </Swiper.Slide>
-              ))}
-            </Swiper>
+            <Box className="swiper-wrapper">
+              <Swiper
+                dots
+                autoplay={false}
+                loop={false}
+                style={{ width: "100%" }} // cho swiper rộng hơn
+              >
+                {CardAvaialbleListMock.map((card) => (
+                  <Swiper.Slide
+                    key={card.productCode}
+                    style={{}}
+                  >
+                    <CardProduct product={card} goToDetail={handleSelect} />
+                  </Swiper.Slide>
+                ))}
+              </Swiper>
+            </Box>
           </Box>
         </Box>
       </Box>

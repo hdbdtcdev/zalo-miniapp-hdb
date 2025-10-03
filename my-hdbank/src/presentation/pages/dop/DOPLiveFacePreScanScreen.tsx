@@ -5,7 +5,7 @@ import {
   icLiveFaceIllustration1,
   icLiveFaceIllustration2,
   icLiveFaceIllustration3,
-} from "@/asset";
+} from "@/assets";
 import { Icon } from "zmp-ui";
 
 interface IProps {}

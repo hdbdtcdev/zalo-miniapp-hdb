@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { MoveLeft } from "lucide-react";
-import { animateCaptureId } from "@/asset";
+import { animateCaptureId } from "@/assets";
 import useNavigate from "zmp-ui/useNavigate";
 import { Page, Header, Box, Text } from "zmp-ui";
 import Lottie from "lottie-react-web";
