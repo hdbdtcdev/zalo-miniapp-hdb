@@ -13,12 +13,12 @@ import {
   CvpFaqItem,
   CvpPromotionCard,
   CvpUspItem,
-  TncCommonAttributes
+  TncCommonAttributes,
 } from "@/domain/entities/cvp_common/cvpCommon";
-import CvpCommonMock from '@/mock/cvp_common.json';
+import CvpCommonMock from "@/mock/cvp_common.json";
 import UspSection from "@/presentation/components/UspSection";
 import PromotionSection from "@/presentation/components/PromotionSection";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import FaqSection from "@/presentation/components/FaqSection";
 
 type Props = {};
@@ -28,7 +28,7 @@ const Z = {
   VIDEO: 0,
   HEADER: 10,
   USP: 20,
-  PILL: 30,     // pill cao hơn USP
+  PILL: 30, // pill cao hơn USP
   FAB: 40,
   CTA: 50,
 } as const;
@@ -38,7 +38,7 @@ const CardAvailableDetail: FC<Props> = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const [muted, setMuted] = useState(true);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
 
   // ===== Gọi API 1 lần khi vào màn hình =====
   // const { cvpCommonData, cvpCommmonStatus, cvpCommonError } = useCvpCommon({
@@ -49,7 +49,7 @@ const CardAvailableDetail: FC<Props> = () => {
   //   isActive: true,
   // });
 
-  const cvpCommmonStatus = 'succeeded';
+  const cvpCommmonStatus = "succeeded";
 
   // ===== Extract data gọn gàng =====
   const {
@@ -59,7 +59,7 @@ const CardAvailableDetail: FC<Props> = () => {
     tnc_common,
     cvp_usp,
     cvp_promotion,
-    cvp_faq
+    cvp_faq,
   } = CvpCommonMock.data[0].attributes || {};
 
   const tncAttr: TncCommonAttributes = tnc_common?.data?.attributes || {};
@@ -140,8 +140,8 @@ const CardAvailableDetail: FC<Props> = () => {
     // }
   };
 
-  const onPressPromotionItem = (item: CvpPromotionCard) => { }
-  const onPressQuestionItem = (item: CvpFaqItem) => { };
+  const onPressPromotionItem = (item: CvpPromotionCard) => {};
+  const onPressQuestionItem = (item: CvpFaqItem) => {};
 
   // ===== Render chính =====
   return (
@@ -243,7 +243,7 @@ const CardAvailableDetail: FC<Props> = () => {
                     color: "#fff",
                     opacity: 0.8,
                     fontWeight: 700,
-                    fontSize: 14
+                    fontSize: 14,
                   }}
                 >
                   Chi tiết lợi ích
@@ -285,7 +285,7 @@ const CardAvailableDetail: FC<Props> = () => {
               display: "flex",
               flexDirection: "column",
               gap: 12,
-              zIndex: Z.FAB
+              zIndex: Z.FAB,
             }}
           >
             {shareDeepLinkUrl && (
@@ -315,7 +315,6 @@ const CardAvailableDetail: FC<Props> = () => {
             className="px-6 pt-6"
             style={{
               background: '#FFF9E5FF',
-              // height: "100dvh",
               width: "100%",
               paddingBottom: 70
             }}
@@ -323,14 +322,20 @@ const CardAvailableDetail: FC<Props> = () => {
             {/* <PromotionSection/> */}
             <PromotionSection
               title={cvp_promotion.data.attributes.title}
-              items={(cvp_promotion.data.attributes.cvp_promotion_card as unknown as CvpPromotionCard[]) ?? []}
+              items={
+                (cvp_promotion.data.attributes
+                  .cvp_promotion_card as unknown as CvpPromotionCard[]) ?? []
+              }
               onPressPromotionItem={onPressPromotionItem}
               key={uuidv4()}
             />
 
             <FaqSection
               title={cvp_faq.data.attributes.title}
-              items={(cvp_faq.data.attributes.cvp_faq_item as unknown as CvpFaqItem[]) ?? []}
+              items={
+                (cvp_faq.data.attributes
+                  .cvp_faq_item as unknown as CvpFaqItem[]) ?? []
+              }
               onPressQuestionItem={onPressQuestionItem}
               key={uuidv4()}
             />

@@ -152,7 +152,6 @@ app.post("/api/sdk/v1/dop-request-telco-otp", async (req, res) => {
 app.post("/api/sdk/v1/dop-verify-telco-otp", async (req, res) => {
   try {
     const url = `${config.api.baseUrl}/sdk/v1/dop-verify-telco-otp`;
-
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -166,6 +165,159 @@ app.post("/api/sdk/v1/dop-verify-telco-otp", async (req, res) => {
     res.json(data);
   } catch (error) {
     console.error("Error dop-verify-telco-otp:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+/**
+ * Proxy: extract-address
+ */
+app.post("/api/sdk/v1/extract-address", async (req, res) => {
+  try {
+    const url = `${config.api.baseUrl}/sdk/v1/extract-address`;
+
+    const body = {
+      requestId: req.body.requestId || "auto-gen-request-id",
+      channel: config.api.defaultChannel,
+      ipRequest: "",
+      language: config.api.defaultLanguage,
+      deviceInfo: {
+        deviceId: "616504a09857c20c",
+        deviceName: "google",
+        os: "Android",
+        osVersion: "16",
+      },
+      data: req.body.command.data,
+      screenName: req.body.command.screenName,
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        ...defaultHeaders,
+        "x-request-id": body.requestId,
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error extract-address", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+/**
+ * Proxy: address-wards
+ */
+app.post("/api/sdk/v1/address-wards", async (req, res) => {
+  try {
+    const url = `${config.api.baseUrl}/sdk/v1/address-wards`;
+
+    const body = {
+      requestId: req.body.requestId || "auto-gen-request-id",
+      channel: config.api.defaultChannel,
+      ipRequest: "",
+      language: config.api.defaultLanguage,
+      deviceInfo: {
+        deviceId: "616504a09857c20c",
+        deviceName: "google",
+        os: "Android",
+        osVersion: "16",
+      },
+      data: req.body.command.data,
+      screenName: req.body.command.screenName,
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        ...defaultHeaders,
+        "x-request-id": body.requestId,
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error address-wards", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+/**
+ * Proxy: address-provinces
+ */
+app.post("/api/sdk/v1/address-provinces", async (req, res) => {
+  try {
+    const url = `${config.api.baseUrl}/sdk/v1/address-provinces`;
+
+    const body = {
+      requestId: req.body.requestId || "auto-gen-request-id",
+      channel: config.api.defaultChannel,
+      ipRequest: "",
+      language: config.api.defaultLanguage,
+      deviceInfo: {
+        deviceId: "616504a09857c20c",
+        deviceName: "google",
+        os: "Android",
+        osVersion: "16",
+      },
+      data: req.body.command.data,
+      screenName: req.body.command.screenName,
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        ...defaultHeaders,
+        "x-request-id": body.requestId,
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error address-provinces", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+/**
+ * Proxy: dop-get-careers-positions
+ */
+app.post("/api/sdk/v1/dop-get-careers-positions", async (req, res) => {
+  try {
+    const url = `${config.api.baseUrl}/sdk/v1/dop-get-careers-positions`;
+
+    const body = {
+      requestId: req.body.requestId || "auto-gen-request-id",
+      channel: config.api.defaultChannel,
+      ipRequest: "",
+      language: config.api.defaultLanguage,
+      deviceInfo: {
+        deviceId: "616504a09857c20c",
+        deviceName: "google",
+        os: "Android",
+        osVersion: "16",
+      },
+      data: req.body.command.data,
+      screenName: req.body.command.screenName,
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        ...defaultHeaders,
+        "x-request-id": body.requestId,
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error address-provinces", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
