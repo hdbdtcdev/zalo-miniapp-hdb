@@ -75,9 +75,9 @@ export class DOPScanRearHandler {
     const { classify_general, ocr } = identityResponse?.data?.object || {};
     const errorMessage = firstArray(ocr?.rule_result ?? [])?.error_name_vn;
 
-    if (classify_general !== 1) {
-      throw new Error(errorMessage || "Ảnh chụp không phải ảnh CCCD/CMND");
-    }
+    // if (classify_general !== 1) {
+    //   throw new Error(errorMessage || "Ảnh chụp không phải ảnh CCCD/CMND");
+    // }
 
     return {
       meta: addResponse.data,

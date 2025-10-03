@@ -72,12 +72,12 @@ export class DOPScanLiveFaceHandler {
     const { status_code, errors } = identityResponse?.data || {};
     // const errorMessage = liveness_card_back?.response_body?.message;
 
-    if (status_code !== 400) {
-      throw new Error(
-        errors?.pop?.toString() ||
-          "Có lỗi xảy ra trong quá trình nhận diện khuôn mặt"
-      );
-    }
+    // if (status_code !== 400) {
+    //   throw new Error(
+    //     errors?.pop?.toString() ||
+    //       "Có lỗi xảy ra trong quá trình nhận diện khuôn mặt"
+    //   );
+    // }
 
     return {
       meta: addResponse.data,

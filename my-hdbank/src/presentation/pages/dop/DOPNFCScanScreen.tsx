@@ -73,6 +73,9 @@ export const DOPNFCScanScreen: React.FC<IProps> = () => {
         alert("Lỗi quét NFC: " + JSON.stringify(err));
       },
     });
+    setTimeout(() => {
+      navigate("/CustomerInfo");
+    }, 1000);
   };
 
   /*const getStepTile = (step: number) => {
