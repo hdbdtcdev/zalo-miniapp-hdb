@@ -31,6 +31,7 @@
     "inversify": "^7.10.0",
     "jotai": "^2.12.1",
     "lodash": "^4.17.21",
+    "lottie-react-web": "^2.2.2",
     "lucide-react": "^0.544.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

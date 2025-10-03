@@ -25,27 +25,27 @@ export class AddressRepository
   }
   async getProvince<TParameter>(
     command: Command<TParameter>
-  ): Promise<ApiResponse<ProvinceResponse>> {
+  ): Promise<ProvinceResponse> {
     const request = command as unknown as ProvinceRequest;
     const url = "/address-provinces";
     const response = await this.post(url, request);
-    return response.data as ApiResponse<ProvinceResponse>;
+    return response.data as ProvinceResponse;
   }
   async getWard<TParameter>(
     command: Command<TParameter>
-  ): Promise<ApiResponse<WardResponse>> {
+  ): Promise<WardResponse> {
     const request = command as unknown as WardRequest;
     const url = "/address-wards";
     const response = await this.post(url, request);
-    return response.data as ApiResponse<WardResponse>;
+    return response.data as WardResponse;
   }
   async extractAddress<TParameter>(
     command: Command<TParameter>
-  ): Promise<ApiResponse<ExtractAddressResponse>> {
+  ): Promise<ExtractAddressResponse> {
     const request = command as unknown as ExtractAddressRequest;
     const url = "/extract-address";
     const response = await this.post(url, request);
 
-    return response.data as ApiResponse<ExtractAddressResponse>;
+    return response.data as ExtractAddressResponse;
   }
 }

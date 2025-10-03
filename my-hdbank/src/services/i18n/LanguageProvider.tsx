@@ -6,12 +6,11 @@ import {
   useState,
 } from 'react';
 import {
-  DEFAULT_LANGUAGE,
   initializeI18n,
-  LANGUAGE_PREFERENCE_KEY,
 } from './initializeI18n';
 import i18n, { type InitOptions } from 'i18next';
 import { WebStorage } from '../storage';
+import { DEFAULT_LANGUAGE, LANGUAGE_PREFERENCE_KEY } from '@/constants';
 
 export interface LanguageContextType {
   i18n: typeof i18n;

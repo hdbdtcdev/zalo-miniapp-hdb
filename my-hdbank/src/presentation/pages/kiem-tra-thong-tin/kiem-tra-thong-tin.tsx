@@ -1,5 +1,6 @@
-import { IMAGE_PNG } from "@/asset/png";
-import { useFriendPicker } from "@/hooks/useFriendPicker";
+import { IMAGE_PNG } from "@/assets/images/png";
+import { ExtractAddressResponse } from "@/domain/entities/address";
+import { GetJobResponse } from "@/domain/entities/job";
 import { useDispatch } from "@/lib/redux";
 import { BottomSheetInput } from "@/presentation/bottomSheet/BottomSheetInput";
 import {
@@ -9,19 +10,15 @@ import {
 import { BottomSheetEditAddress } from "@/presentation/bottomSheet/dia-chi";
 import { MoveLeft } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Box, Header, Page, Text, useNavigate } from "zmp-ui";
-import { extractAddressThunk, getJobThunk } from "./thunk";
 import { useSelector } from "react-redux";
+import { Box, Header, Page, Text, useNavigate } from "zmp-ui";
 import { selectCustomerInfo, selectJobData } from "./selector";
-import { AddressData, ExtractAddressResponse } from "@/domain/entities/address";
 import {
-  CustomerInfoModel,
   updateAddrContact,
   updateAddrPermanet,
   updateCustomerInfo,
 } from "./slice";
-import { flatten } from "lodash";
-import { GetJobResponse } from "@/domain/entities/job";
+import { extractAddressThunk, getJobThunk } from "./thunk";
 
 type InfoRowProps = {
   label: string;

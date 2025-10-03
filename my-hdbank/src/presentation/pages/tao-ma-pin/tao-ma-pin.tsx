@@ -10,8 +10,8 @@ import {
   useNavigate,
   useLocation,
 } from "zmp-ui";
-import ic_notice from "@/asset/icon-notice.svg";
-import ic_scan_face from "@/asset/icon-face-scan.svg";
+import ic_notice from "@/assets/images/icon-notice.svg";
+import ic_scan_face from "@/assets/images/icon-face-scan.svg";
 
 export const CreatePinPage = () => {
   const navigate = useNavigate();

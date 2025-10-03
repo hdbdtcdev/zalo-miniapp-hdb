@@ -5,7 +5,8 @@ import { API_TIMEOUT } from '../constants';
 import type { AuthToken } from '../../../interfaces';
 import { debounce } from 'lodash';
 import { UserService } from '@/services/user';
-import { LANGUAGE_PREFERENCE_KEY, WebStorage } from '@/services/storage';
+import { WebStorage } from '@/services/storage';
+import { LANGUAGE_PREFERENCE_KEY } from '@/constants';
 
 const REFRESH_THRESHOLD = 3 * 60 * 1000; // 3 minutes in miliseconds
 

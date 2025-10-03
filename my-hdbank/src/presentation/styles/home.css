@@ -98,9 +98,9 @@
 
 /* Swiper wrapper */
 .swiper-wrapper {
-  margin: 1.5rem;
-  position: relative;
-  padding-bottom: 40px;
+  /* margin: 1.5rem; */
+  /* position: relative; */
+  padding-bottom: 60px;
 }
 
 /* Button */

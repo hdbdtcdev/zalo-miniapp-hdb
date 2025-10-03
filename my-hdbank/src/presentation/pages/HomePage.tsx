@@ -1,12 +1,10 @@
 import { FC, useState } from "react";
 import { Page, Header, Box, Swiper, useNavigate, Button } from "zmp-ui";
 import { MoveLeft } from "lucide-react";
-import { useSelector } from "@/lib/redux";
+// import { useSelector } from "@/lib/redux";
 
 import "@/presentation/styles/swiper.css";
 import "@/presentation/styles/home.css"; // 👈 thêm file css gom style
-import { useCardAvailable } from "./home/hooks";
-import { selectCardList } from "./home/redux";
 import { useTranslation } from "react-i18next";
 
 const products = [
@@ -83,13 +81,13 @@ const HomePage: FC = () => {
   const [active, setActive] = useState(0);
   const { t } = useTranslation(["ns"]);
 
-  const cardList = useSelector(selectCardList);
-  const { cardListStatus } = useCardAvailable();
+  // const cardList = useSelector(selectCardList);
+  // const { cardListStatus } = useCardAvailable();
 
   const handleSelect = () => {
     const selected = products[active];
     console.log("Chọn sản phẩm:", selected.id);
-    navigate("/CustomerInfo");
+    navigate("/dop-intro");
   };
 
   return (

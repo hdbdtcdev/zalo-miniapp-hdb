@@ -1,0 +1,9 @@
+import { ReduxState } from "@/lib/redux";
+
+export const selectStatus = (state: ReduxState) => state?.dop?.status;
+export const selectError = (state: ReduxState) => state?.dop?.error;
+export const selectAuth = (state: ReduxState) => state?.dop?.auth;
+export const selectFront = (state: ReduxState) => state?.dop?.front;
+export const selectRear = (state: ReduxState) => state?.dop?.rear;
+export const selectLiveFace = (state: ReduxState) => state?.dop?.liveFace;
+export const selectNFC = (state: ReduxState) => state?.dop?.nfc;

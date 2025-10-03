@@ -1,5 +1,5 @@
 import { Box, Button, Sheet, Text } from "zmp-ui";
-import ic_done from "@/asset/icon-done-yellow.svg";
+import ic_done from "@/assets/images/icon-done-yellow.svg";
 
 type BottomSheetTncProps = {
   visible: boolean;

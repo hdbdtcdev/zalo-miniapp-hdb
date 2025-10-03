@@ -50,19 +50,61 @@ app.post("/api/sdk/v1/dop-card-list-available", async (req, res) => {
 });
 
 /**
+ * Proxy: dop-card-details
+ */
+app.post("/api/sdk/v1/dop-card-details", async (req, res) => {
+  try {
+    const url = `${config.api.baseUrl}/sdk/v1/dop-card-details`;
+
+    const body = {
+      requestId: req.body.requestId || "auto-gen-request-id",
+      channel: config.api.defaultChannel,
+      ipRequest: "",
+      language: config.api.defaultLanguage,
+      deviceInfo: {
+        deviceId: "616504a09857c20c",
+        deviceName: "google",
+        os: "Android",
+        osVersion: "16",
+      },
+      data: {},
+      screenName: "MFE-DOP-CVPScreen",
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        ...defaultHeaders,
+        "x-request-id": body.requestId,
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error dop-card-list-available:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+/**
  * Proxy: cvp-commons
  */
 app.get("/api/strapi-cms/v1/cvp-commons", async (req, res) => {
   try {
     const locale = req.query.locale || config.api.defaultLanguage;
     const populate = req.query.populate || "deep,5";
+    const domainCode = req.query.domainCode || "DOP";
+    const cvpTitle = req.query.cvpTitle || "dopvj";
+    const isActive = req.query.isActive || true;
 
     const url =
       `${config.api.baseUrl}/strapi-cms/v1/cvp-commons` +
       `?locale=${locale}&populate=${[populate]}` +
-      `&filters[domain_code][$eq]=DOP` +
-      `&filters[cvp_title][$eq]=dopvj` +
-      `&filters[is_active][$eq]=true`;
+      `&filters[domain_code][$eq]=${domainCode}` +
+      `&filters[cvp_title][$eq]=${cvpTitle}` +
+      `&filters[is_active][$eq]=${isActive}`;
 
     const response = await fetch(url, {
       method: "GET",

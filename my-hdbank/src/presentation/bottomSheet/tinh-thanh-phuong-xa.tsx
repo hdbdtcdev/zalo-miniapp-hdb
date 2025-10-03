@@ -1,9 +1,9 @@
 import { Box, Input, Text } from "zmp-ui";
 import { BottomSheetBase } from "./BottomSheetBase";
-import ic_search from "@/asset/icon-search.svg";
+import ic_search from "@/assets/images/icon-search.svg";
 import { useEffect, useMemo, useState } from "react";
-import ic_location from "@/asset/icon-location.svg";
-import ic_close from "@/asset/icon-close.svg";
+import ic_location from "@/assets/images/icon-location.svg";
+import ic_close from "@/assets/images/icon-close.svg";
 import {
   getProvinceListThunk,
   getWardListThunk,

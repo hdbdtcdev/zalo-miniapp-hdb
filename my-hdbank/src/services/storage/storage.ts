@@ -1,5 +1,3 @@
-export const LANGUAGE_PREFERENCE_KEY = 'LANGUAGE_PREFERENCE';
-
 export const WebStorage = {
   async getItem(key: string): Promise<string | null> {
     try {

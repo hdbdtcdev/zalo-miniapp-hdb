@@ -9,8 +9,8 @@ import {
   BottomSheetList,
   ItemModel,
 } from "@/presentation/bottomSheet/BottomSheetList";
-import ic_check from "@/asset/icon-check-box.svg";
-import ic_uncheck from "@/asset/icon-uncheck-box.svg";
+import ic_check from "@/assets/images/icon-check-box.svg";
+import ic_uncheck from "@/assets/images/icon-uncheck-box.svg";
 
 export const AddInfoCustomerPage = () => {
   const dispatch = useDispatch();

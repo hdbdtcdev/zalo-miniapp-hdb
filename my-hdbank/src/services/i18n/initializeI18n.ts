@@ -2,9 +2,7 @@ import i18n, { type InitOptions } from 'i18next';
 import { initReactI18next, setI18n } from 'react-i18next';
 import { merge } from 'lodash';
 import { WebStorage } from '../storage';
-
-export const LANGUAGE_PREFERENCE_KEY = 'LANGUAGE_PREFERENCE';
-export const DEFAULT_LANGUAGE = 'vi';
+import { DEFAULT_LANGUAGE, LANGUAGE_PREFERENCE_KEY } from '@/constants';
 
 export async function initializeI18n<T>(options: InitOptions<T>) {
   const mergedOptions = merge({}, i18n.options, options);

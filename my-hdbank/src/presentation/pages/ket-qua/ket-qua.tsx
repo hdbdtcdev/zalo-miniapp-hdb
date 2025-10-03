@@ -1,7 +1,7 @@
 import { MoveLeft } from "lucide-react";
 import { Box, Header, Page, Text } from "zmp-ui";
-import gif_success from "@/asset/gifs/success.gif";
-import ic_info from "@/asset/icon-info-yellow.svg";
+import gif_success from "@/assets/images/gifs/success.gif";
+import ic_info from "@/assets/images/icon-info-yellow.svg";
 
 export const ResultPage = () => {
   return (

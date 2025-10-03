@@ -1,6 +1,6 @@
 import { ReactNode, useState, CSSProperties } from "react";
 import { Box, Sheet, Text } from "zmp-ui";
-import ic_clear from "@/asset/icon-clear-text.svg";
+import ic_clear from "@/assets/images/icon-clear-text.svg";
 
 type BottomSheetInputProps = {
   visible: boolean;

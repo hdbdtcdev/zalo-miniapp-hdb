@@ -1,4 +1,4 @@
-import ic_chevron_down from "@/asset/ic-chevron-down.svg";
+import ic_chevron_down from "@/assets/images/ic-chevron-down.svg";
 import { useSelector } from "@/lib/redux";
 import { MoveLeft } from "lucide-react";
 import { useState } from "react";
