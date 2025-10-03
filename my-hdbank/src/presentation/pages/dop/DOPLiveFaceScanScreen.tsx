@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { MoveLeft } from "lucide-react";
+import { MoveLeft, RotateCcw } from "lucide-react";
 import { Header, Page, useNavigate } from "zmp-ui";
 import { icCaptureButton } from "@/asset";
 import { useDispatch, useSelector } from "@/lib/redux";
@@ -44,6 +44,12 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({}) => {
       alert(reduxError);
     }
   }, [reduxError]);
+
+  useEffect(() => {
+    if (error) {
+      startCamera();
+    }
+  }, [error]);
 
   useEffect(() => {
     if (liveFace) {
@@ -143,9 +149,9 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({}) => {
     startCamera();
   };
 
-  /*const switchCamera = (): void => {
+  const switchCamera = (): void => {
     setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
-  };*/
+  };
 
   /*const handleGoBack = (): void => {
     if (stream) {
@@ -234,14 +240,14 @@ export const DOPLiveFaceScanScreen: React.FC<IProps> = ({}) => {
             )}
 
             {/* Camera switch button */}
-            {/* {!capturedImage && !isLoading && !error && (
+            {!capturedImage && !isLoading && !error && (
               <button
                 onClick={switchCamera}
                 className="hidden absolute top-4 right-4 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-opacity"
               >
                 <RotateCcw size={20} />
               </button>
-            )} */}
+            )}
           </div>
 
           {/* Guide overlay for face positioning */}

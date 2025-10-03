@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { MoveLeft } from "lucide-react";
+import { MoveLeft, RotateCcw } from "lucide-react";
 import { Header, Page, Text, Box, useNavigate } from "zmp-ui";
 import { icCaptureButton } from "@/asset";
 import { useDispatch, useSelector } from "@/lib/redux";
@@ -44,6 +44,12 @@ export const DOPIDRearScanScreen: React.FC<IProps> = () => {
       alert(reduxError);
     }
   }, [reduxError]);
+
+  useEffect(() => {
+    if (error) {
+      startCamera();
+    }
+  }, [error]);
 
   useEffect(() => {
     if (rear) {
@@ -138,9 +144,9 @@ export const DOPIDRearScanScreen: React.FC<IProps> = () => {
     startCamera();
   };
 
-  /*const switchCamera = (): void => {
+  const switchCamera = (): void => {
     setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
-  };*/
+  };
 
   /*const handleGoBack = (): void => {
     if (stream) {
@@ -223,7 +229,7 @@ export const DOPIDRearScanScreen: React.FC<IProps> = () => {
           )}
 
           {/* Camera controls overlay */}
-          {/* {!capturedImage && !isLoading && !error && (
+          {!capturedImage && !isLoading && !error && (
             <div className="absolute top-4 right-4">
               <button
                 onClick={switchCamera}
@@ -232,7 +238,7 @@ export const DOPIDRearScanScreen: React.FC<IProps> = () => {
                 <RotateCcw size={20} />
               </button>
             </div>
-          )} */}
+          )}
 
           {/* Corner guides for ID card positioning */}
           {!capturedImage && (
